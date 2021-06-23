@@ -19,9 +19,9 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 521}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -46,7 +46,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 521}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -119,10 +119,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 709, y: 492}
-  m_MaxSize: {x: 18004, y: 14042}
+  m_MinSize: {x: 707, y: 471}
+  m_MaxSize: {x: 18002, y: 14021}
   vertical: 0
-  controlID: 15850
+  controlID: 4606
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,10 +144,10 @@ MonoBehaviour:
     y: 0
     width: 1482
     height: 947
-  m_MinSize: {x: 433, y: 492}
-  m_MaxSize: {x: 14003, y: 14042}
+  m_MinSize: {x: 431, y: 471}
+  m_MaxSize: {x: 14001, y: 14021}
   vertical: 1
-  controlID: 15792
+  controlID: 4607
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 15793
+  controlID: 4608
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -247,10 +247,10 @@ MonoBehaviour:
     y: 573
     width: 1482
     height: 374
-  m_MinSize: {x: 433, y: 271}
-  m_MaxSize: {x: 14003, y: 10021}
+  m_MinSize: {x: 431, y: 250}
+  m_MaxSize: {x: 14001, y: 10000}
   vertical: 0
-  controlID: 15771
+  controlID: 4554
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -455,9 +455,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 59.466812, y: 5.1487703, z: 329.68478}
+    m_Target: {x: 71.360794, y: 10.415188, z: 330.7417}
     speed: 2
-    m_Value: {x: 59.466812, y: 5.1487703, z: 329.68478}
+    m_Value: {x: 71.360794, y: 10.415188, z: 330.7417}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -504,13 +504,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.0035333661, y: -0.99157727, z: 0.1274299, w: 0.027383305}
+    m_Target: {x: 0.048557837, y: -0.9452285, z: 0.1649768, w: 0.27787587}
     speed: 2
-    m_Value: {x: -0.0035333661, y: 0.99157727, z: -0.1274299, w: -0.027383307}
+    m_Value: {x: 0.04996571, y: -0.9431796, z: 0.16607715, w: 0.28343257}
   m_Size:
-    m_Target: 6.8666544
+    m_Target: 6.1553235
     speed: 2
-    m_Value: 6.8666544
+    m_Value: 6.1553564
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -626,7 +626,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 50fbffff
       m_LastClickedID: -1200
-      m_ExpandedIDs: 1c2af9ff52fbffff123a0000
+      m_ExpandedIDs: 9a97feffd4cbffff3cfbffff42fbffff52fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -688,7 +688,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Audio/Western Demo Audio Assets/Player
+    - Assets/Animations
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 0
@@ -702,7 +702,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 063d0000
     m_LastClickedID: 15622
-    m_ExpandedIDs: ffffffff000000001a3a0000223a00008a3c0000903c0000d03c0000284c00002a4c00002c4c00003470000052700000947000009e7000004487000046870000
+    m_ExpandedIDs: ffffffff00000000483b0000523b0000a43b0000a63b0000aa3b0000ac3b0000ae3b0000b03b0000b23b0000b43b0000b63b0000b83b0000ba3b0000e83b00000e3c0000a2400000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -727,10 +727,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 105}
+    scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000001a3a0000223a00008a3c0000903c0000d03c0000284c00002a4c00002c4c00003470000052700000947000009e7000004487000046870000
+    m_ExpandedIDs: ffffffff00000000483b0000523b0000a43b0000a63b0000aa3b0000ac3b0000ae3b0000b03b0000b23b0000b43b0000b63b0000b83b0000ba3b0000e83b00000e3c0000a240000046470000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
