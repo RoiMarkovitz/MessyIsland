@@ -1,20 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PickWeapon : MonoBehaviour
 {
-    [SerializeField] GameObject fireCrosshair;
-    [SerializeField] GameObject actionCrosshair;
+    
     [SerializeField] GameObject playerCamera;
     [SerializeField] GameObject playerPistol;
     [SerializeField] GameObject playerGrenade;
+    [SerializeField] GameObject canvas;
+    GameObject fireCrosshair;
+    GameObject actionCrosshair;
+    GameObject grenadePlaceholderImage;
+    GameObject pistolPlaceholderImage;
+    GameObject activePistolImage;
+    GameObject activeGrenadeImage;
+    
+    
+
     bool isTriggerHit;
 
 
     void Start()
     {
         isTriggerHit = false;
+        fireCrosshair = canvas.transform.GetChild(0).gameObject;
+        actionCrosshair = canvas.transform.GetChild(1).gameObject;
+        grenadePlaceholderImage = canvas.transform.GetChild(2).gameObject;
+        pistolPlaceholderImage = canvas.transform.GetChild(3).gameObject;
+        activePistolImage = canvas.transform.GetChild(4).gameObject;
+        activeGrenadeImage = canvas.transform.GetChild(5).gameObject;
+
     }
 
     
@@ -47,10 +64,14 @@ public class PickWeapon : MonoBehaviour
                     if (this.gameObject.tag == playerPistol.tag)
                     {             
                         playerPistol.SetActive(true);
+                        pistolPlaceholderImage.SetActive(false);
+                        activePistolImage.SetActive(true);
                     }
                     else // its the grenade
                     {                 
                         playerGrenade.SetActive(true);
+                        grenadePlaceholderImage.SetActive(false);
+                        activeGrenadeImage.SetActive(true);
                     }
 
                     this.gameObject.SetActive(false);

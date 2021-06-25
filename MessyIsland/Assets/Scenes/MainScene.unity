@@ -771,11 +771,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &177999473
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1528,6 +1527,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 456414, guid: 41a9e4f2924047e498f822fc54a2e08f, type: 3}
   m_PrefabInstance: {fileID: 97288545}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &327747142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327747143}
+  - component: {fileID: 327747145}
+  - component: {fileID: 327747144}
+  m_Layer: 5
+  m_Name: Pistol
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &327747143
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327747142}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1398125697}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -350, y: -150}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &327747144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327747142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300010, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &327747145
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327747142}
+  m_CullTransparentMesh: 1
 --- !u!1 &347694584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1882703754142348, guid: 86c76b659a09cb046816a6c4ed2188fa, type: 3}
@@ -1741,11 +1815,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &372969585
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2602,11 +2675,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &516587803
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2770,11 +2842,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &529573834
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2888,11 +2959,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &542352740
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3265,11 +3335,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &566679490
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3521,11 +3590,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &622870761
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3836,7 +3904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7330e8a1e4bd6d439e928cb251ebe0a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.93
+      value: 1.87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7330e8a1e4bd6d439e928cb251ebe0a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5379,11 +5447,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &917885916
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5443,6 +5510,101 @@ Transform:
   m_Father: {fileID: 521990028}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &934370590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 934370591}
+  - component: {fileID: 934370594}
+  - component: {fileID: 934370593}
+  - component: {fileID: 934370592}
+  m_Layer: 0
+  m_Name: PistolEnd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &934370591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934370590}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.00019, y: 0.0635, z: -0.1325}
+  m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
+  m_Children: []
+  m_Father: {fileID: 1332068912}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &934370592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934370590}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &934370593
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934370590}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &934370594
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934370590}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &946808847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 426230, guid: d6c1b1c4c00b08c4d84c7adc9668a6fb, type: 3}
@@ -5730,11 +5892,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &1023922388
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6017,11 +6178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &1068253721
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6130,11 +6290,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &1075042006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6466,11 +6625,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &1174059105
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6672,11 +6830,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &1231549193
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6737,6 +6894,81 @@ Transform:
   m_Father: {fileID: 1199997721}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1250492734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1250492735}
+  - component: {fileID: 1250492737}
+  - component: {fileID: 1250492736}
+  m_Layer: 5
+  m_Name: PistolPlaceHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1250492735
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250492734}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1398125697}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -350, y: -150}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1250492736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250492734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300010, guid: 6674e8c43c63e4f4184cbd009379498d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1250492737
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250492734}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1256782683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6832,11 +7064,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &1256782686
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6950,11 +7181,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &1261076064
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7211,11 +7441,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &1290924379
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7889,11 +8118,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &1351881927
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8002,11 +8230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &1358774017
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8020,6 +8247,81 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.2}
   m_Center: {x: 0, y: 0, z: -0.03}
+--- !u!1 &1392420534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1392420535}
+  - component: {fileID: 1392420537}
+  - component: {fileID: 1392420536}
+  m_Layer: 5
+  m_Name: GrenadePlaceHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1392420535
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392420534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1398125697}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -150}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1392420536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392420534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9528302, g: 0.9483357, b: 0.9483357, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300020, guid: 5163ae49a0de665458bba61cd20c99b1, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1392420537
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392420534}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1394157051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8107,7 +8409,7 @@ GameObject:
   - component: {fileID: 1398125695}
   - component: {fileID: 1398125694}
   m_Layer: 5
-  m_Name: CanvasCrosshairs
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8187,6 +8489,10 @@ RectTransform:
   m_Children:
   - {fileID: 1926856998}
   - {fileID: 218572974}
+  - {fileID: 1392420535}
+  - {fileID: 1250492735}
+  - {fileID: 327747143}
+  - {fileID: 1762812226}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8290,11 +8596,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &1402436616
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8403,11 +8708,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &1421591376
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8619,11 +8923,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &1478975372
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8759,11 +9062,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &1490681481
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9119,11 +9421,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!4 &1581299806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011048348644, guid: 84147b87204d0a0478bae9558d656ea2, type: 3}
@@ -9671,11 +9972,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &1649903375
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9922,11 +10222,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &1671885561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10142,6 +10441,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4536840068220992, guid: 86c76b659a09cb046816a6c4ed2188fa, type: 3}
   m_PrefabInstance: {fileID: 1838569666}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1762812225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1762812226}
+  - component: {fileID: 1762812228}
+  - component: {fileID: 1762812227}
+  m_Layer: 5
+  m_Name: Grenade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1762812226
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762812225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1398125697}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -150}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1762812227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762812225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300020, guid: 309ac3eb4cc441349b63128366ca98b6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1762812228
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762812225}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1775371797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10485,11 +10859,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &1826771279
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10598,11 +10971,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &1838569669
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10811,11 +11183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!65 &1859988581
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11448,11 +11819,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &2003732045
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11647,11 +12017,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCrosshair: {fileID: 1926856997}
-  actionCrosshair: {fileID: 218572973}
   playerCamera: {fileID: 963194225}
   playerPistol: {fileID: 347694584}
   playerGrenade: {fileID: 1867435058}
+  canvas: {fileID: 1398125693}
 --- !u!135 &2099458587
 SphereCollider:
   m_ObjectHideFlags: 0
