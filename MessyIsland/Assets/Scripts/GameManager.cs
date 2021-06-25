@@ -6,8 +6,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     const float ACTIVATED_WEAPONS_PERCENTAGE = 0.5f;
+
     [SerializeField] GameObject[] grenades;
     [SerializeField] GameObject[] pistols;
+    [SerializeField] GameObject[] team1;
+    [SerializeField] GameObject[] team2;
 
 
     void Start()

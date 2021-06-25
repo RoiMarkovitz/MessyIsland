@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class PlayerMotion : MonoBehaviour
 { 
-    private CharacterController controller;
-    [SerializeField] private float speed;
-    [SerializeField] private float angularSpeed;
-    private float rx=0f,ry;
-    [SerializeField] private GameObject playerCamera;
-    private AudioSource footStep;
+    CharacterController controller;
+    Animator animator;
+    [SerializeField] float speed;
+    [SerializeField] float angularSpeed;
+    float rx=0f,ry;
+    [SerializeField] GameObject playerCamera;
+    [SerializeField] GameObject pistol;
+    [SerializeField] GameObject grenade;
+    AudioSource footStep;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
         footStep = GetComponent<AudioSource>();
     }
 
@@ -38,10 +42,117 @@ public class PlayerMotion : MonoBehaviour
         Vector3 motion = new Vector3(dx, -1, dz);
         motion = transform.TransformDirection(motion); // now in Global coordinates
         controller.Move(motion);
+        
+        playFootStepSound();
+        movementAnimations();
+    
+    }
+
+    void playFootStepSound()
+    {
         if (!footStep.isPlaying && controller.velocity.magnitude > 0.1)
         {
             footStep.Play();
         }
+    }
 
+    void movementAnimations()
+    {
+        if (pistol.activeSelf)
+        {
+            pistolMovementAnimations();
+        }
+        else
+        {
+            generalMovementAnimations();
+        }
+    }
+
+    void generalMovementAnimations()
+    {
+        if (controller.velocity.magnitude > 0.1)
+        {
+            animator.SetInteger("idle", -1);
+            if (Input.GetKey("a"))
+            {
+                animator.SetInteger("left", 2);
+            }
+            else
+            {
+                animator.SetInteger("left", -1);
+            }
+            if (Input.GetKey("d"))
+            {
+                animator.SetInteger("right", 3);
+            }
+            else
+            {
+                animator.SetInteger("right", -1);
+            }
+            if (Input.GetKey("w"))
+            {
+                animator.SetInteger("forward", 1);
+            }
+            else
+            {
+                animator.SetInteger("forward", -1);
+            }
+            if (Input.GetKey("s"))
+            {
+                animator.SetInteger("backward", 4);
+            }
+            else
+            {
+                animator.SetInteger("backward", -1);
+            }
+        }
+        else
+        {
+            animator.SetInteger("idle", 0);         
+        }
+    }
+
+    void pistolMovementAnimations()
+    {
+        if (controller.velocity.magnitude > 0.1)
+        {
+            animator.SetInteger("idle", -1);
+            if (Input.GetKey("a"))
+            {
+                animator.SetInteger("left", 2);
+            }
+            else
+            {
+                animator.SetInteger("left", -1);
+            }
+            if (Input.GetKey("d"))
+            {
+                animator.SetInteger("right", 3);
+            }
+            else
+            {
+                animator.SetInteger("right", -1);
+            }
+            if (Input.GetKey("w"))
+            {
+                animator.SetInteger("forward", 1);
+            }
+            else
+            {
+                animator.SetInteger("forward", -1);
+            }
+            if (Input.GetKey("s"))
+            {
+                animator.SetInteger("backward", 4);
+            }
+            else
+            {
+                animator.SetInteger("backward", -1);
+            }
+        }
+        else
+        {
+            animator.SetInteger("idle", 0);
+        }
     }
 }
