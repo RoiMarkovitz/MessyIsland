@@ -60,6 +60,7 @@ public class PlayerMotion : MonoBehaviour
     {
         if (pistol.activeSelf)
         {
+            animator.SetBool("isPistolActive", true);
             pistolMovementAnimations();
         }
         else
@@ -72,43 +73,43 @@ public class PlayerMotion : MonoBehaviour
     {
         if (controller.velocity.magnitude > 0.1)
         {
-            animator.SetInteger("idle", -1);
+            animator.SetBool("idle", false);
             if (Input.GetKey("a"))
             {
-                animator.SetInteger("left", 2);
+                animator.SetBool("left", true);
             }
             else
             {
-                animator.SetInteger("left", -1);
+                animator.SetBool("left", false);
             }
             if (Input.GetKey("d"))
             {
-                animator.SetInteger("right", 3);
+                animator.SetBool("right", true);
             }
             else
             {
-                animator.SetInteger("right", -1);
+                animator.SetBool("right", false);
             }
             if (Input.GetKey("w"))
             {
-                animator.SetInteger("forward", 1);
+                animator.SetBool("forward", true);
             }
             else
             {
-                animator.SetInteger("forward", -1);
+                animator.SetBool("forward", false);
             }
             if (Input.GetKey("s"))
             {
-                animator.SetInteger("backward", 4);
+                animator.SetBool("backward", true);
             }
             else
             {
-                animator.SetInteger("backward", -1);
+                animator.SetBool("backward", false);
             }
         }
         else
         {
-            animator.SetInteger("idle", 0);         
+            animator.SetBool("idle", true);         
         }
     }
 
@@ -116,43 +117,43 @@ public class PlayerMotion : MonoBehaviour
     {
         if (controller.velocity.magnitude > 0.1)
         {
-            animator.SetInteger("idle", -1);
+            animator.SetBool("idlePistol", false);
             if (Input.GetKey("a"))
             {
-                animator.SetInteger("left", 2);
+                animator.SetBool("leftPistol", true);
             }
             else
             {
-                animator.SetInteger("left", -1);
+                animator.SetBool("leftPistol", false);
             }
             if (Input.GetKey("d"))
             {
-                animator.SetInteger("right", 3);
+                animator.SetBool("rightPistol", true);
             }
             else
             {
-                animator.SetInteger("right", -1);
+                animator.SetBool("rightPistol", false);
             }
             if (Input.GetKey("w"))
             {
-                animator.SetInteger("forward", 1);
+                animator.SetBool("forwardPistol", true);
             }
             else
             {
-                animator.SetInteger("forward", -1);
+                animator.SetBool("forwardPistol", false);
             }
             if (Input.GetKey("s"))
             {
-                animator.SetInteger("backward", 4);
+                animator.SetBool("backwardPistol", true);
             }
             else
             {
-                animator.SetInteger("backward", -1);
+                animator.SetBool("backwardPistol", false);
             }
         }
         else
         {
-            animator.SetInteger("idle", 0);
+            animator.SetBool("idlePistol", true);
         }
     }
 }

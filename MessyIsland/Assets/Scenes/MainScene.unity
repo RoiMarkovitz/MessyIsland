@@ -2231,11 +2231,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 426230, guid: d6c1b1c4c00b08c4d84c7adc9668a6fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.94399977
+      value: 0.052000046
       objectReference: {fileID: 0}
     - target: {fileID: 426230, guid: d6c1b1c4c00b08c4d84c7adc9668a6fb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2760004
+      value: -1.6200007
       objectReference: {fileID: 0}
     - target: {fileID: 426230, guid: d6c1b1c4c00b08c4d84c7adc9668a6fb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5525,7 +5525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.021, y: 1.856, z: 0.167}
+  m_LocalPosition: {x: -0.021, y: 1.607, z: 0.253}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 1332068912}
@@ -9107,6 +9107,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.2}
   m_Center: {x: 0, y: 0, z: -0.03}
+--- !u!114 &1572297293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572297291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5683eb4b6004a74baa064a3cba00a4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireCrosshair: {fileID: 1926856997}
+  actionCrosshair: {fileID: 218572973}
+  playerCamera: {fileID: 963194225}
+  playerPistol: {fileID: 347694584}
+  playerGrenade: {fileID: 1867435058}
 --- !u!4 &1581299806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011048348644, guid: 84147b87204d0a0478bae9558d656ea2, type: 3}
@@ -10923,15 +10940,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4536840068220992, guid: 86c76b659a09cb046816a6c4ed2188fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.18799627
+      value: 0.25199926
       objectReference: {fileID: 0}
     - target: {fileID: 4536840068220992, guid: 86c76b659a09cb046816a6c4ed2188fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.8040004
+      value: -0.5040002
       objectReference: {fileID: 0}
     - target: {fileID: 4536840068220992, guid: 86c76b659a09cb046816a6c4ed2188fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.98
+      value: 1.6099998
       objectReference: {fileID: 0}
     - target: {fileID: 4536840068220992, guid: 86c76b659a09cb046816a6c4ed2188fa, type: 3}
       propertyPath: m_LocalRotation.w
