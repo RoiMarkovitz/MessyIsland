@@ -17,10 +17,7 @@ public class PickWeapon : MonoBehaviour
     GameObject activePistolImage;
     GameObject activeGrenadeImage;
     
-    
-
     bool isTriggerHit;
-
 
     void Start()
     {
@@ -31,7 +28,6 @@ public class PickWeapon : MonoBehaviour
         pistolPlaceholderImage = canvas.transform.GetChild(3).gameObject;
         activePistolImage = canvas.transform.GetChild(4).gameObject;
         activeGrenadeImage = canvas.transform.GetChild(5).gameObject;
-
     }
 
     

@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject[] grenades;
     [SerializeField] GameObject[] pistols;
-    [SerializeField] GameObject[] team1;
-    [SerializeField] GameObject[] team2;
+    [SerializeField] GameObject[] swatTeam;
+    [SerializeField] GameObject[] ninjaTeam;
 
 
     void Start()
@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 

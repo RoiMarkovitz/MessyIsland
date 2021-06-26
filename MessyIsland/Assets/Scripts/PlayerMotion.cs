@@ -14,7 +14,6 @@ public class PlayerMotion : MonoBehaviour
     [SerializeField] GameObject grenade;
     AudioSource footStep;
 
-    // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -22,7 +21,6 @@ public class PlayerMotion : MonoBehaviour
         footStep = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float dx, dz;
