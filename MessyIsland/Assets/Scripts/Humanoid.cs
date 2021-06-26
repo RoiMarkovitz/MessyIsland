@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Humanoid : MonoBehaviour
 {
+    const int HEALTH = 100;
 
-    string nickname;
-    int health;
+    [SerializeField] string nickname;
+    protected int health;
 
     void Start()
     {
-        
+        health = HEALTH;
     }
 
     void Update()

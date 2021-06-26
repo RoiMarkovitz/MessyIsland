@@ -44,7 +44,7 @@ public class PistolShot : MonoBehaviour
         yield return new WaitForSeconds(SHOOT_DELAY);
 
         isShootingAllowed = true;
-        // need to destroy the bullet after it hits later, need to think when and where
+        
     }
 
 }

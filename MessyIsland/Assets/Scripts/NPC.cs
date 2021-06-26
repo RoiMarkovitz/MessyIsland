@@ -9,6 +9,7 @@ public class NPC : Humanoid
     void Start()
     {
         animator = GetComponent<Animator>();
+        
     }
 
  
