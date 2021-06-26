@@ -19,6 +19,7 @@ public class PlayerMotion : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         footStep = GetComponent<AudioSource>();
+      
     }
 
     void Update()
@@ -43,7 +44,7 @@ public class PlayerMotion : MonoBehaviour
         
         playFootStepSound();
         movementAnimations();
-    
+        
     }
 
     void playFootStepSound()
@@ -60,6 +61,7 @@ public class PlayerMotion : MonoBehaviour
         {
             animator.SetBool("isPistolActive", true);
             pistolMovementAnimations();
+            
         }
         else
         {
