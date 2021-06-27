@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PistolBullet : MonoBehaviour
 {
+    public const int DAMAGE = 20;
     
     void Start()
     {

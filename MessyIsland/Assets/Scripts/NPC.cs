@@ -5,11 +5,13 @@ using UnityEngine;
 public class NPC : Humanoid
 {
     Animator animator;
+    
+    NPC npcScript;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        
+        npcScript = this.GetComponent<NPC>();
     }
 
  
@@ -20,13 +22,33 @@ public class NPC : Humanoid
 
     void OnTriggerEnter(Collider other)
     {
-
-        if (this.tag == "Ninja" && other.tag == "Swat")
+        
+        if (this.tag == "Ninja") // will be also "Swat"
         {
-            Debug.Log("hit");
-            animator.SetBool("isAlive", false);
+  
+            if (other.tag == "SwatBullet") // will be also "SwatGrenade"
+            {
+                Debug.Log("hit by bullet");
+                npcScript.reduceHealth(PistolBullet.DAMAGE);
+                Debug.Log(npcScript.getHealth().ToString());
+            }
+
+            isNpcDead();
+               
         }
     }
+
+    public void isNpcDead()
+    {       
+      if(!getIsAlive())
+        { 
+            animator.SetBool("isAlive", false);
+        }
+
+    }
+
+    
+   
 
    
 }

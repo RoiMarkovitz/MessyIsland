@@ -8,6 +8,8 @@ TagManager:
   - Grenade
   - Swat
   - Ninja
+  - SwatBullet
+  - SwatGrenade
   layers:
   - Default
   - TransparentFX

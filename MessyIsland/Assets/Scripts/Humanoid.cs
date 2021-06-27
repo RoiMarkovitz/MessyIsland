@@ -10,12 +10,19 @@ public class Humanoid : MonoBehaviour
     protected int health;
     protected bool hasPistol;
     protected bool hasGrenade;
+    protected bool isAlive;
 
-    void Start()
+    public Humanoid()
     {
         health = HEALTH;
         hasPistol = false;
         hasGrenade = false;
+        isAlive = true;
+    }
+
+    void Start()
+    {
+        
     }
 
     void Update()
@@ -61,5 +68,15 @@ public class Humanoid : MonoBehaviour
     public string getNickname()
     {
         return nickname;
+    }
+
+    public bool getIsAlive()
+    {
+        if (health <= 0)
+        {
+            isAlive = false;
+        }
+
+        return isAlive;
     }
 }

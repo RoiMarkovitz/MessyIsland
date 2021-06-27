@@ -7,6 +7,7 @@ public class GrenadeThrow : MonoBehaviour
     const float THROW_AFTER_DELAY = 3.0f;
     const float THROW_BEFORE_DELAY = 1.2f;
     const float THROW_SPEED = 27.5f;
+    const int DAMAGE = 70;
     
 
     [SerializeField] GameObject player;
@@ -15,8 +16,10 @@ public class GrenadeThrow : MonoBehaviour
     GameObject grenade;
     GameObject pistol;
     Player playerScript;
-    
-    
+    NPC npcScript;
+
+
+
     bool isThrowingAllowed;
 
     void Start()
@@ -83,13 +86,18 @@ public class GrenadeThrow : MonoBehaviour
         {
             if (objectsCollider[i] != null)
             {
-                if (objectsCollider[i].tag == "Ninja" && this.tag == "Swat")
+                if (objectsCollider[i].tag == "Ninja" && this.tag == "SwatGrenade")
                 {
-                    Debug.Log("hit");
-                    Animator anim = objectsCollider[i].GetComponent<Animator>();
-                    anim.SetBool("isAlive", false);
+                    npcScript = objectsCollider[i].gameObject.GetComponent<NPC>();
+                    Debug.Log("hit by grenade");
+                    npcScript.reduceHealth(DAMAGE);
+                    Debug.Log(npcScript.getHealth().ToString());
+
+                    npcScript.isNpcDead();
+                    
                 }
 
+                                     
                 //Rigidbody rbo = objectsCollider[i].GetComponent<Rigidbody>();
                 //if (rbo!= null)
                 //{ 

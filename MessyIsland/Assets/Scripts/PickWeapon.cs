@@ -9,13 +9,15 @@ public class PickWeapon : MonoBehaviour
     [SerializeField] GameObject playerCamera;
     [SerializeField] GameObject playerPistol;
     [SerializeField] GameObject playerGrenade;
-    [SerializeField] GameObject canvas;
+    [SerializeField] GameObject gameCanvas;
     GameObject fireCrosshair;
     GameObject actionCrosshair;
     GameObject grenadePlaceholderImage;
     GameObject pistolPlaceholderImage;
     GameObject activePistolImage;
     GameObject activeGrenadeImage;
+
+    AudioSource pickupSound;
 
     [SerializeField] GameObject player;
     Player playerScript;
@@ -25,14 +27,16 @@ public class PickWeapon : MonoBehaviour
     void Start()
     {
         isTriggerHit = false;
-        fireCrosshair = canvas.transform.GetChild(0).gameObject;
-        actionCrosshair = canvas.transform.GetChild(1).gameObject;
-        grenadePlaceholderImage = canvas.transform.GetChild(2).gameObject;
-        pistolPlaceholderImage = canvas.transform.GetChild(3).gameObject;
-        activePistolImage = canvas.transform.GetChild(4).gameObject;
-        activeGrenadeImage = canvas.transform.GetChild(5).gameObject;
+        fireCrosshair = gameCanvas.transform.GetChild(0).gameObject;
+        actionCrosshair = gameCanvas.transform.GetChild(1).gameObject;
+        grenadePlaceholderImage = gameCanvas.transform.GetChild(2).gameObject;
+        pistolPlaceholderImage = gameCanvas.transform.GetChild(3).gameObject;
+        activePistolImage = gameCanvas.transform.GetChild(4).gameObject;
+        activeGrenadeImage = gameCanvas.transform.GetChild(5).gameObject;
         
         playerScript = player.GetComponent<Player>();
+        pickupSound = GetComponent<AudioSource>();
+        
     }
 
     
@@ -62,24 +66,33 @@ public class PickWeapon : MonoBehaviour
 
                 if (Input.GetButtonDown("Action"))
                 {
+                    pickupSound.Play();
+
                     if (this.gameObject.tag == playerPistol.tag)
-                    {             
-                        playerPistol.SetActive(true);
-                        pistolPlaceholderImage.SetActive(false);
-                        activePistolImage.SetActive(true);
-                        playerScript.setHasPistol(true);
+                    {
+                        Invoke("pickPistol", 0.5f);
+                        //playerPistol.SetActive(true);
+                        //pistolPlaceholderImage.SetActive(false);
+                        //activePistolImage.SetActive(true);
+                        //playerScript.setHasPistol(true);
+                        
                     }
                     else // its the grenade
                     {
                         // playerGrenade.SetActive(true);
-                        playerScript.setHasGrenade(true);
-                        grenadePlaceholderImage.SetActive(false);
-                        activeGrenadeImage.SetActive(true);
+                        Invoke("pickGrenade", 0.5f);
+                        //playerScript.setHasGrenade(true);
+                        //grenadePlaceholderImage.SetActive(false);
+                        //activeGrenadeImage.SetActive(true);
+                        
                     }
 
-                    this.gameObject.SetActive(false);
-                    fireCrosshair.SetActive(true);
-                    actionCrosshair.SetActive(false);
+
+                    Invoke("hideWeapon", 0.5f);
+
+                    //fireCrosshair.SetActive(true);
+                    //actionCrosshair.SetActive(false);
+                    //this.gameObject.SetActive(false);
                 }
                 
             }
@@ -111,5 +124,28 @@ public class PickWeapon : MonoBehaviour
 
         return false;
         
+    }
+
+    void pickPistol()
+    {
+        playerPistol.SetActive(true);
+        pistolPlaceholderImage.SetActive(false);
+        activePistolImage.SetActive(true);
+        playerScript.setHasPistol(true);    
+    }
+
+    void pickGrenade()
+    {
+        playerScript.setHasGrenade(true);
+        grenadePlaceholderImage.SetActive(false);
+        activeGrenadeImage.SetActive(true);
+        
+    }
+
+    void hideWeapon()
+    {
+        fireCrosshair.SetActive(true);
+        actionCrosshair.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 }
