@@ -10,8 +10,11 @@ public class GrenadeThrow : MonoBehaviour
     
 
     [SerializeField] GameObject player;
+    [SerializeField] GameObject playerCamera;
     AudioSource explosionSound;
     GameObject grenade;
+    GameObject pistol;
+    Player playerScript;
     
     
     bool isThrowingAllowed;
@@ -21,7 +24,8 @@ public class GrenadeThrow : MonoBehaviour
         isThrowingAllowed = true;
         grenade = this.transform.GetChild(0).gameObject;
         explosionSound = GetComponent<AudioSource>();
-
+        playerScript = player.GetComponent<Player>();
+        pistol = playerCamera.transform.GetChild(0).gameObject;
 
 
     }
@@ -29,8 +33,8 @@ public class GrenadeThrow : MonoBehaviour
     
     void Update()
     {
-        // need to add here that player has grenade check
-        if (Input.GetKey("q") && isThrowingAllowed)
+        
+        if (Input.GetKey("q") && isThrowingAllowed && playerScript.getHasGrenade())
         {
             StartCoroutine(throwGrenade());
         }
@@ -38,19 +42,31 @@ public class GrenadeThrow : MonoBehaviour
 
     IEnumerator throwGrenade()
     {
+        bool hasPistol = playerScript.getHasPistol();
+        if (hasPistol)
+        {
+            pistol.SetActive(false);
+        }
+
         isThrowingAllowed = false;
-        
+        Vector3 velocity = playerCamera.transform.forward * THROW_SPEED;
         Animator animator = player.GetComponent<Animator>();
         animator.SetBool("isThrown", true);
         
         yield return new WaitForSeconds(THROW_BEFORE_DELAY);
+
+        if (hasPistol)
+        {
+            pistol.SetActive(true);
+        }
+
         animator.SetBool("isThrown", false);
         GameObject clonedGrenade = Instantiate(grenade, grenade.transform.position, grenade.transform.rotation);
         clonedGrenade.SetActive(true);
 
         Rigidbody rbClonedGrenade = clonedGrenade.GetComponent<Rigidbody>();
         rbClonedGrenade.useGravity = true;
-        rbClonedGrenade.AddForce(clonedGrenade.transform.forward * THROW_SPEED, ForceMode.Impulse);
+        rbClonedGrenade.AddForce(velocity, ForceMode.Impulse);
         
         yield return new WaitForSeconds(THROW_AFTER_DELAY);
 
@@ -60,6 +76,28 @@ public class GrenadeThrow : MonoBehaviour
             
         GameObject explosion = clonedGrenade.transform.GetChild(4).gameObject;
         explosion.SetActive(true);
+
+        Collider[] objectsCollider = Physics.OverlapSphere(explosion.transform.position, 10.0f);
+
+        for (int i = 0; i < objectsCollider.Length; i++)
+        {
+            if (objectsCollider[i] != null)
+            {
+                if (objectsCollider[i].tag == "Ninja" && this.tag == "Swat")
+                {
+                    Debug.Log("hit");
+                    Animator anim = objectsCollider[i].GetComponent<Animator>();
+                    anim.SetBool("isAlive", false);
+                }
+
+                //Rigidbody rbo = objectsCollider[i].GetComponent<Rigidbody>();
+                //if (rbo!= null)
+                //{ 
+                //rbo.AddExplosionForce(1500.0f, explosion.transform.position, 10.0f);
+                //}
+            }
+        }
+
         
         isThrowingAllowed = true;
         

@@ -20,9 +20,13 @@ public class NPC : Humanoid
 
     void OnTriggerEnter(Collider other)
     {
+
         if (this.tag == "Ninja" && other.tag == "Swat")
         {
+            Debug.Log("hit");
             animator.SetBool("isAlive", false);
         }
     }
+
+   
 }

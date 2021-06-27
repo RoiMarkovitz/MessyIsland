@@ -16,6 +16,9 @@ public class PickWeapon : MonoBehaviour
     GameObject pistolPlaceholderImage;
     GameObject activePistolImage;
     GameObject activeGrenadeImage;
+
+    [SerializeField] GameObject player;
+    Player playerScript;
     
     bool isTriggerHit;
 
@@ -28,6 +31,8 @@ public class PickWeapon : MonoBehaviour
         pistolPlaceholderImage = canvas.transform.GetChild(3).gameObject;
         activePistolImage = canvas.transform.GetChild(4).gameObject;
         activeGrenadeImage = canvas.transform.GetChild(5).gameObject;
+        
+        playerScript = player.GetComponent<Player>();
     }
 
     
@@ -38,13 +43,13 @@ public class PickWeapon : MonoBehaviour
         // the info of GameObject that was hit by the ray is written to hit
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit))
         {
-            // not allow player to pick more than one weapon of a type
-            if (isWeaponAlreadyPickedByPlayer(playerPistol, hit) || 
-                isWeaponAlreadyPickedByPlayer(playerGrenade, hit))
+            //not allow player to pick more than one weapon of a type
+            if (isWeaponAlreadyPickedByPlayer(hit) ||
+                isWeaponAlreadyPickedByPlayer(hit))
             {
                 return;
             }
-                         
+
             // check if "this" is the GameObject that was hit
             if (hit.transform.gameObject.name == this.gameObject.name && hit.distance < 10)
             {
@@ -62,10 +67,12 @@ public class PickWeapon : MonoBehaviour
                         playerPistol.SetActive(true);
                         pistolPlaceholderImage.SetActive(false);
                         activePistolImage.SetActive(true);
+                        playerScript.setHasPistol(true);
                     }
                     else // its the grenade
-                    {                 
-                        playerGrenade.SetActive(true);
+                    {
+                        // playerGrenade.SetActive(true);
+                        playerScript.setHasGrenade(true);
                         grenadePlaceholderImage.SetActive(false);
                         activeGrenadeImage.SetActive(true);
                     }
@@ -90,8 +97,19 @@ public class PickWeapon : MonoBehaviour
     }
 
 
-    bool isWeaponAlreadyPickedByPlayer(GameObject weapon, RaycastHit hit)
+    bool isWeaponAlreadyPickedByPlayer(RaycastHit hit)
     {
-        return weapon.activeSelf && hit.transform.gameObject.tag == weapon.tag;        
+        if (hit.transform.gameObject.tag == "Pistol" && playerScript.getHasPistol())
+        {
+            return true;
+        }
+
+        if (hit.transform.gameObject.tag == "Grenade" && playerScript.getHasGrenade())
+        {
+            return true;
+        }
+
+        return false;
+        
     }
 }
