@@ -41,7 +41,9 @@ public class NPC : Humanoid
     public void isNpcDead()
     {       
       if(!getIsAlive())
-        { 
+        {
+            this.gameObject.tag = "Dead";
+           
             animator.SetBool("isAlive", false);
         }
 

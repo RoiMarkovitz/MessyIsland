@@ -5,19 +5,22 @@ using UnityEngine.UI;
 
 public class NicknameInput : MonoBehaviour
 {
-    string nickname;
+    
     TMPro.TMP_InputField inputField;
-    [SerializeField] TMPro.TextMeshProUGUI placeholderNickname;
+ 
+    [SerializeField] GameObject gameManager;
+    GameManager gameManagerScript;
 
     public void updateNickname()
-    {
-        nickname = inputField.text;     
+    {     
+        gameManagerScript.setNickname(inputField.text);             
     }
 
     void Start()
     {
+        gameManagerScript = gameManager.GetComponent<GameManager>();
         inputField = GetComponent<TMPro.TMP_InputField>();
-        nickname = placeholderNickname.text;     
+
     }
 
     
@@ -26,8 +29,4 @@ public class NicknameInput : MonoBehaviour
         
     }
 
-    public string getNickname()
-    {
-        return nickname;
-    }
 }

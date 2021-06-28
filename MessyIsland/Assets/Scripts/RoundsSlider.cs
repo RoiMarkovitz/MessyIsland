@@ -5,30 +5,38 @@ using UnityEngine.UI;
 
 public class RoundsSlider : MonoBehaviour
 {
+    readonly int[] numberOfRounds = { 1, 3, 5 };
     int roundNumber;
     [SerializeField] TMPro.TextMeshProUGUI roundsText;
     Slider slider;
+
+    [SerializeField] GameObject gameManager;
+    GameManager gameManagerScript;
 
     public void updateRoundNumber()
     {
         if (slider.value == 1)
         {
-            roundNumber = 1;
+            roundNumber = numberOfRounds[0];
         }
         else if (slider.value == 2)
         {
-            roundNumber = 3;
+            roundNumber = numberOfRounds[1];
         }
         else
         {
-            roundNumber = 5;
+            roundNumber = numberOfRounds[2];
         }
         roundsText.text = "Rounds: " + roundNumber;
+
+        gameManagerScript.setNumberOfRounds(roundNumber);
     }
 
     void Start()
     {
         slider = GetComponent<Slider>();
+        gameManagerScript = gameManager.GetComponent<GameManager>();
+        
     }
 
     
@@ -37,8 +45,5 @@ public class RoundsSlider : MonoBehaviour
         
     }
 
-    public int getRoundsNumber()
-    {
-        return roundNumber;
-    }
+    
 }

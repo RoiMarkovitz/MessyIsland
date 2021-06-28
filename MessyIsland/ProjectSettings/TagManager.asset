@@ -10,6 +10,7 @@ TagManager:
   - Ninja
   - SwatBullet
   - SwatGrenade
+  - Dead
   layers:
   - Default
   - TransparentFX
