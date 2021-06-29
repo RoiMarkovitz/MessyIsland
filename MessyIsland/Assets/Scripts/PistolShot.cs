@@ -9,7 +9,8 @@ public class PistolShot : MonoBehaviour
 
     [SerializeField] GameObject player;
     GameObject bullet;
-    
+    ParticleSystem muzzleFlashParticles;
+
     AudioSource bulletSound;
     Animator animator;
 
@@ -23,6 +24,7 @@ public class PistolShot : MonoBehaviour
     {
         bulletSound = GetComponent<AudioSource>();
         bullet = this.transform.GetChild(2).gameObject;
+        muzzleFlashParticles = this.transform.GetChild(3).GetComponent<ParticleSystem>(); ;
         playerScript = player.GetComponent<Player>();
         animator = player.GetComponent<Animator>();
         isShootingAllowed = true;
@@ -48,7 +50,9 @@ public class PistolShot : MonoBehaviour
 
         Rigidbody rbClonedBullet = clonedBullet.GetComponent<Rigidbody>();
         rbClonedBullet.AddForce(playerCamera.transform.forward * BULLET_SPEED, ForceMode.Impulse);
-        
+
+        muzzleFlashParticles.Play();
+       
         yield return new WaitForSeconds(SHOOT_DELAY);
 
         isShootingAllowed = true;
