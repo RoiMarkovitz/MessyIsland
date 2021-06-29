@@ -19,9 +19,9 @@ public class RoundManager : MonoBehaviour
     [SerializeField] GameObject[] swatTeam;
     [SerializeField] GameObject[] ninjaTeam;
 
-  
-    // audio clips "Ninjas win the game", "Ninjas win the round"
-    // , "Swat win the game", "Swat win the round"
+    [SerializeField] AudioClip ninjasWonRoundSound;
+    [SerializeField] AudioClip swatWonRoundSound;
+    AudioSource audioPlayer;
 
     Player playerScript;
 
@@ -33,6 +33,8 @@ public class RoundManager : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager");
         gameCanvas = GameObject.Find("CanvasGame");
+
+        audioPlayer = GetComponent<AudioSource>();
 
         isTeamWonTheRound = false;
         gameManagerScript = gameManager.GetComponent<GameManager>();
@@ -86,14 +88,16 @@ public class RoundManager : MonoBehaviour
             if (isSwatTeam)
             {
                 gameManagerScript.givePointToSwatTeam();
+                audioPlayer.PlayOneShot(swatWonRoundSound);
+
             }
             else
             {
                 gameManagerScript.givePointToNinjaTeam();
+                audioPlayer.PlayOneShot(ninjasWonRoundSound);         
             }
 
-
-            // play audio
+ 
             roundEndMessage.text = winMessage;
             roundEndMessage.gameObject.SetActive(true);
        

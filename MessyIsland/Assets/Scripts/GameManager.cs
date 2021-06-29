@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     const string SWAT_WON_GAME = "Swat Won The Game";
 
     string nickname = "Player";
-    int numberOfRounds = 3;
+    int numberOfRounds = 1;
     int currentRound = 1;
     int ninjaTeamRoundsWon = 0;
     int swatTeamRoundsWon = 0;
@@ -27,8 +27,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI ninjaScoreText;
     [SerializeField] TMPro.TextMeshProUGUI swatScoreText;
 
+    AudioSource audioPlayer;
+    [SerializeField] AudioClip ninjasWonGameSound;
+    [SerializeField] AudioClip swatWonGameSound;
+
     void Start()
-    {     
+    {
+        audioPlayer = GetComponent<AudioSource>();
+
         roundCounterText = gameCanvas.transform.GetChild(0).gameObject.GetComponent<Text>();
         winsCountText = gameCanvas.transform.GetChild(1).gameObject.GetComponent<Text>();
      
@@ -83,16 +89,16 @@ public class GameManager : MonoBehaviour
             if (ninjaTeamRoundsWon > swatTeamRoundsWon)
             {
                 gameEndMessageText.text = NINJAS_WON_GAME;
+                audioPlayer.PlayOneShot(ninjasWonGameSound);
             }
             else
             {
                 gameEndMessageText.text = SWAT_WON_GAME;
+                audioPlayer.PlayOneShot(swatWonGameSound);
             }
             ninjaScoreText.text = "Ninja Score: " + ninjaTeamRoundsWon;
             swatScoreText.text = "Swat Score: " + swatTeamRoundsWon;
-            // play audio
-
-           
+              
             Invoke("reloadScene", 4.0f);         
         }
         else
