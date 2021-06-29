@@ -1,21 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Humanoid : MonoBehaviour
 {
-    const int MAX_HEALTH = 100;
-    const int MIN_HEALTH = 0;
+    const float MAX_HEALTH = 100.0f;
+    const float MIN_HEALTH = 0.0f;
 
     [SerializeField] string nickname;
-    protected int health;
+    protected float startHealth;
+    protected float currentHealth;
     protected bool hasPistol;
     protected bool hasGrenade;
     protected bool isAlive;
 
+    [SerializeField] Image healthBar;
+
     public Humanoid()
     {
-        health = MAX_HEALTH;
+        startHealth = MAX_HEALTH;
+        currentHealth = startHealth;
         hasPistol = false;
         hasGrenade = false;
         isAlive = true;
@@ -51,20 +56,23 @@ public abstract class Humanoid : MonoBehaviour
         return hasGrenade;
     }
 
-    public int getHealth()
+    public float getCurrentHealth()
     {
-        return health;
+        return currentHealth;
     }
 
-    public void reduceHealth(int reduction)
+    public void takeDamage(float reduction)
     {
-        if (MAX_HEALTH >= health && health > MIN_HEALTH)
-        { 
-            health -= reduction;
+        if (MAX_HEALTH >= currentHealth && currentHealth > MIN_HEALTH)
+        {
+            currentHealth -= reduction;
+            healthBar.fillAmount = currentHealth / startHealth;
 
-            if (health < 0)
+            if (currentHealth <= 0)
             {
-                health = MIN_HEALTH;
+                currentHealth = MIN_HEALTH;          
+                healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
+               
             }
         }
 
@@ -82,7 +90,7 @@ public abstract class Humanoid : MonoBehaviour
 
     public bool getIsAlive()
     {
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             isAlive = false;
         }

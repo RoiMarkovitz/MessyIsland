@@ -53,7 +53,7 @@ public class RoundManager : MonoBehaviour
 
     void Update()
     {
-        healthText.text = playerScript.getHealth().ToString();
+        healthText.text = playerScript.getCurrentHealth().ToString();
         
 
         isRoundFinished();

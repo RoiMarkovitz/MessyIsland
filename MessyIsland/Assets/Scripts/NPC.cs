@@ -29,8 +29,8 @@ public class NPC : Humanoid
             if (other.tag == "SwatBullet") // will be also "SwatGrenade"
             {
                 Debug.Log("hit by bullet");
-                npcScript.reduceHealth(PistolBullet.DAMAGE);
-                Debug.Log(npcScript.getHealth().ToString());
+                npcScript.takeDamage(PistolBullet.DAMAGE);
+                Debug.Log(npcScript.getCurrentHealth().ToString());
             }
 
             isNpcDead();

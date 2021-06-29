@@ -7,7 +7,7 @@ public class GrenadeThrow : MonoBehaviour
     const float THROW_AFTER_DELAY = 3.0f;
     const float THROW_BEFORE_DELAY = 1.2f;
     const float THROW_SPEED = 27.5f;
-    const int DAMAGE = 70;
+    const float DAMAGE = 70.0f;
     
 
     [SerializeField] GameObject player;
@@ -90,8 +90,8 @@ public class GrenadeThrow : MonoBehaviour
                 {
                     npcScript = objectsCollider[i].gameObject.GetComponent<NPC>();
                     Debug.Log("hit by grenade");
-                    npcScript.reduceHealth(DAMAGE);
-                    Debug.Log(npcScript.getHealth().ToString());
+                    npcScript.takeDamage(DAMAGE);
+                    Debug.Log(npcScript.getCurrentHealth().ToString());
 
                     npcScript.isNpcDead();
                     
