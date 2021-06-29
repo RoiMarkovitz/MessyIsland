@@ -9,7 +9,7 @@ public class PickWeapon : MonoBehaviour
     [SerializeField] GameObject playerCamera;
     [SerializeField] GameObject playerPistol;
     [SerializeField] GameObject playerGrenade;
-    [SerializeField] GameObject gameCanvas;
+    GameObject gameCanvas;
     GameObject fireCrosshair;
     GameObject actionCrosshair;
     GameObject grenadePlaceholderImage;
@@ -26,6 +26,9 @@ public class PickWeapon : MonoBehaviour
 
     void Start()
     {
+
+        gameCanvas = GameObject.Find("CanvasGame");
+
         isTriggerHit = false;
         fireCrosshair = gameCanvas.transform.GetChild(0).gameObject;
         actionCrosshair = gameCanvas.transform.GetChild(1).gameObject;

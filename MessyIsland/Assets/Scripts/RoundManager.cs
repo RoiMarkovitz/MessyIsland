@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public class RoundManager : MonoBehaviour
 {
-    const string NINJAS_WON = "Ninjas Won The Round";
-    const string SWAT_WON = "Swat Won The Round";
+    const string NINJAS_WON_ROUND = "Ninjas Won The Round";
+    const string SWAT_WON_ROUND = "Swat Won The Round";
 
     bool isTeamWonTheRound;
 
-    [SerializeField] GameObject gameManager;
+    GameObject gameManager;
     GameManager gameManagerScript;
 
-    [SerializeField] GameObject gameCanvas;
+    GameObject gameCanvas;
 
     [SerializeField] GameObject[] swatTeam;
     [SerializeField] GameObject[] ninjaTeam;
@@ -31,11 +31,14 @@ public class RoundManager : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager");
+        gameCanvas = GameObject.Find("CanvasGame");
+
         isTeamWonTheRound = false;
         gameManagerScript = gameManager.GetComponent<GameManager>();
 
         healthText = gameCanvas.transform.GetChild(7).gameObject.GetComponent<Text>();
-        roundEndMessage = gameCanvas.transform.GetChild(10).gameObject.GetComponent<Text>();
+        roundEndMessage = gameCanvas.transform.GetChild(8).gameObject.GetComponent<Text>();
 
         playerScript = swatTeam[0].GetComponent<Player>();
         playerScript.setNickname(gameManagerScript.getNickname());
@@ -49,6 +52,7 @@ public class RoundManager : MonoBehaviour
     void Update()
     {
         healthText.text = playerScript.getHealth().ToString();
+        
 
         isRoundFinished();
 
@@ -58,8 +62,8 @@ public class RoundManager : MonoBehaviour
     {
         if (!isTeamWonTheRound)
         { 
-        isAllTeamDead(ninjaTeam, SWAT_WON, true);
-        isAllTeamDead(swatTeam, NINJAS_WON, false);
+        isAllTeamDead(ninjaTeam, SWAT_WON_ROUND, true);
+        isAllTeamDead(swatTeam, NINJAS_WON_ROUND, false);
         }
     }
 
@@ -92,12 +96,25 @@ public class RoundManager : MonoBehaviour
             // play audio
             roundEndMessage.text = winMessage;
             roundEndMessage.gameObject.SetActive(true);
-
-            // wait 3 seconds and start a new round if game is not finished
-
-            // gameManagerScript.isGameFinished();
+       
+            Invoke("isGameFinished", 4.0f);
 
         }
+    }
+
+    void isGameFinished()
+    {
+        setGameCanvasToDefault();
+        gameManagerScript.isGameFinished(this.gameObject);      
+    }
+
+    public void setGameCanvasToDefault()
+    {
+        gameCanvas.transform.GetChild(8).gameObject.SetActive(false);
+        gameCanvas.transform.GetChild(2).gameObject.SetActive(true);
+        gameCanvas.transform.GetChild(3).gameObject.SetActive(true);
+        gameCanvas.transform.GetChild(4).gameObject.SetActive(false);
+        gameCanvas.transform.GetChild(5).gameObject.SetActive(false);
     }
 
     

@@ -6,29 +6,32 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {   
-    const string GAME_WON = "Game Won";
-    const string GAME_LOST = "Game Lost";
+    const string NINJAS_WON_GAME = "Ninjas Won The Game";
+    const string SWAT_WON_GAME = "Swat Won The Game";
 
     string nickname = "Player";
-    int numberOfRounds = 1;
+    int numberOfRounds = 3;
     int currentRound = 1;
     int ninjaTeamRoundsWon = 0;
     int swatTeamRoundsWon = 0;
 
-    [SerializeField] GameObject canvasMainMenu;
+    [SerializeField] GameObject round;
+
     [SerializeField] GameObject gameCanvas;
-    
     Text roundCounterText;
     Text winsCountText;
-    Text gameEndMessage;
+
+    [SerializeField] GameObject gameEndScreen;
+    
+    [SerializeField] TMPro.TextMeshProUGUI gameEndMessageText;
+    [SerializeField] TMPro.TextMeshProUGUI ninjaScoreText;
+    [SerializeField] TMPro.TextMeshProUGUI swatScoreText;
 
     void Start()
-    {
-        
-        roundCounterText = gameCanvas.transform.GetChild(8).gameObject.GetComponent<Text>();
-        winsCountText = gameCanvas.transform.GetChild(9).gameObject.GetComponent<Text>();
-        gameEndMessage = gameCanvas.transform.GetChild(10).gameObject.GetComponent<Text>();
-        
+    {     
+        roundCounterText = gameCanvas.transform.GetChild(0).gameObject.GetComponent<Text>();
+        winsCountText = gameCanvas.transform.GetChild(1).gameObject.GetComponent<Text>();
+     
     }
 
    
@@ -36,14 +39,7 @@ public class GameManager : MonoBehaviour
     {
         roundCounterText.text = "Round " + currentRound + " / " + numberOfRounds;
         winsCountText.text = "Rounds Won: " + swatTeamRoundsWon;
-
-       
-        //if (Input.GetKey("t"))
-        //{
-        //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-
-        //}
+        
     }
 
     public void setNickname(string newNickname)
@@ -77,9 +73,42 @@ public class GameManager : MonoBehaviour
         ninjaTeamRoundsWon++;
     }
 
-    public void isGameFinished()
-    {
+    public void isGameFinished(GameObject roundObject)
+    {        
+        if (currentRound == numberOfRounds)
+        {
+            
+            gameCanvas.SetActive(false);
+            gameEndScreen.SetActive(true);
+            if (ninjaTeamRoundsWon > swatTeamRoundsWon)
+            {
+                gameEndMessageText.text = NINJAS_WON_GAME;
+            }
+            else
+            {
+                gameEndMessageText.text = SWAT_WON_GAME;
+            }
+            ninjaScoreText.text = "Ninja Score: " + ninjaTeamRoundsWon;
+            swatScoreText.text = "Swat Score: " + swatTeamRoundsWon;
+            // play audio
+
+           
+            Invoke("reloadScene", 4.0f);         
+        }
+        else
+        {
+            currentRound++;          
+            GameObject newRound = Instantiate(round, round.transform.position, round.transform.rotation);
+            newRound.SetActive(true);
+            
+            Destroy(roundObject);
+        }
         
+    }
+
+    void reloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

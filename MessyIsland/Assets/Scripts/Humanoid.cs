@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Humanoid : MonoBehaviour
+public abstract class Humanoid : MonoBehaviour
 {
-    const int HEALTH = 100;
+    const int MAX_HEALTH = 100;
+    const int MIN_HEALTH = 0;
 
     [SerializeField] string nickname;
     protected int health;
@@ -14,7 +15,7 @@ public class Humanoid : MonoBehaviour
 
     public Humanoid()
     {
-        health = HEALTH;
+        health = MAX_HEALTH;
         hasPistol = false;
         hasGrenade = false;
         isAlive = true;
@@ -57,7 +58,16 @@ public class Humanoid : MonoBehaviour
 
     public void reduceHealth(int reduction)
     {
-        health -= reduction;
+        if (MAX_HEALTH >= health && health > MIN_HEALTH)
+        { 
+            health -= reduction;
+
+            if (health < 0)
+            {
+                health = MIN_HEALTH;
+            }
+        }
+
     }
 
     public void setNickname(string newNickname)

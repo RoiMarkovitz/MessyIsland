@@ -23,7 +23,7 @@ public class NPC : Humanoid
     void OnTriggerEnter(Collider other)
     {
         
-        if (this.tag == "Ninja") // will be also "Swat"
+        if (this.tag == "Ninja" && isAlive) // will be also "Swat"
         {
   
             if (other.tag == "SwatBullet") // will be also "SwatGrenade"
@@ -36,6 +36,7 @@ public class NPC : Humanoid
             isNpcDead();
                
         }
+        
     }
 
     public void isNpcDead()
@@ -43,7 +44,7 @@ public class NPC : Humanoid
       if(!getIsAlive())
         {
             this.gameObject.tag = "Dead";
-           
+            isAlive = false;
             animator.SetBool("isAlive", false);
         }
 
