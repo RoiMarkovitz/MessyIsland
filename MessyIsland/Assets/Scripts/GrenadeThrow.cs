@@ -90,7 +90,7 @@ public class GrenadeThrow : MonoBehaviour
                 {
                     npcScript = objectsCollider[i].gameObject.GetComponent<NPC>();
                     Debug.Log("hit by grenade");
-                    npcScript.takeDamage(DAMAGE);
+                    npcScript.takeDamage(DAMAGE, playerScript.getNickname());
                     Debug.Log(npcScript.getCurrentHealth().ToString());
 
                     npcScript.isNpcDead();

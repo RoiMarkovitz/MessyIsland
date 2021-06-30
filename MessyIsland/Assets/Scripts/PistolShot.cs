@@ -47,6 +47,7 @@ public class PistolShot : MonoBehaviour
         bulletSound.Play();
         GameObject clonedBullet = Instantiate(bullet, bullet.transform.position, bullet.transform.rotation);
         clonedBullet.SetActive(true);
+        clonedBullet.GetComponent<PistolBullet>().setOwner(playerScript.getNickname());
 
         Rigidbody rbClonedBullet = clonedBullet.GetComponent<Rigidbody>();
         rbClonedBullet.AddForce(playerCamera.transform.forward * BULLET_SPEED, ForceMode.Impulse);

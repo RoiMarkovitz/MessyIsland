@@ -28,8 +28,8 @@ public class NPC : Humanoid
   
             if (other.tag == "SwatBullet") // will be also "SwatGrenade"
             {
-                Debug.Log("hit by bullet");
-                npcScript.takeDamage(PistolBullet.DAMAGE);
+                Debug.Log("hit by bullet");          
+                npcScript.takeDamage(PistolBullet.DAMAGE, other.GetComponent<PistolBullet>().getOwner());
                 Debug.Log(npcScript.getCurrentHealth().ToString());
             }
 

@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     int currentRound = 1;
     int ninjaTeamRoundsWon = 0;
     int swatTeamRoundsWon = 0;
+          
+    public static GameManager instance = null;
 
     [SerializeField] GameObject round;
 
@@ -27,12 +29,28 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI ninjaScoreText;
     [SerializeField] TMPro.TextMeshProUGUI swatScoreText;
 
+    [SerializeField] Text killMessageText;
+
     AudioSource audioPlayer;
     [SerializeField] AudioClip ninjasWonGameSound;
     [SerializeField] AudioClip swatWonGameSound;
 
-    void Start()
+   
+    void Awake()
     {
+        if (instance == null)
+        {
+            instance = this; // asign instance to this instance of the class
+        }
+        else if(instance != this) // Determine if instance is alerady assigned to something else
+        {
+            Destroy(gameObject); // do not allow duplicates
+        }
+       
+    }
+
+    void Start()
+    {      
         audioPlayer = GetComponent<AudioSource>();
 
         roundCounterText = gameCanvas.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -79,6 +97,13 @@ public class GameManager : MonoBehaviour
         ninjaTeamRoundsWon++;
     }
 
+    public void showKillText(string killer, string victim)
+    {
+        killMessageText.gameObject.SetActive(true);
+        killMessageText.text = killer + " Killed " + victim;
+        Invoke("hideKillText", 3.0f);
+    }
+
     public void isGameFinished(GameObject roundObject)
     {        
         if (currentRound == numberOfRounds)
@@ -115,6 +140,11 @@ public class GameManager : MonoBehaviour
     void reloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void hideKillText()
+    {
+        killMessageText.gameObject.SetActive(false);
     }
 
 }

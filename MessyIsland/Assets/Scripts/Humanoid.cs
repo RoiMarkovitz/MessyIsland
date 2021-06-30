@@ -16,7 +16,7 @@ public abstract class Humanoid : MonoBehaviour
     protected bool isAlive;
 
     [SerializeField] Image healthBar;
-
+    
     public Humanoid()
     {
         startHealth = MAX_HEALTH;
@@ -28,7 +28,7 @@ public abstract class Humanoid : MonoBehaviour
 
     void Start()
     {
-        
+       
     }
 
     void Update()
@@ -61,7 +61,7 @@ public abstract class Humanoid : MonoBehaviour
         return currentHealth;
     }
 
-    public void takeDamage(float reduction)
+    public void takeDamage(float reduction, string enemyNickname)
     {
         if (MAX_HEALTH >= currentHealth && currentHealth > MIN_HEALTH)
         {
@@ -72,7 +72,7 @@ public abstract class Humanoid : MonoBehaviour
             {
                 currentHealth = MIN_HEALTH;          
                 healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
-               
+                GameManager.instance.showKillText(enemyNickname, this.nickname);             
             }
         }
 
