@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI swatScoreText;
 
     [SerializeField] Text killMessageText;
+    Queue<Text> killMessagesQueue = new Queue<Text>();
+    Text lastItemInQueue;
 
     AudioSource audioPlayer;
     [SerializeField] AudioClip ninjasWonGameSound;
@@ -99,9 +101,10 @@ public class GameManager : MonoBehaviour
 
     public void showKillText(string killer, string victim)
     {
-        killMessageText.gameObject.SetActive(true);
-        killMessageText.text = killer + " Killed " + victim;
-        Invoke("hideKillText", 3.0f);
+        //killMessageText.gameObject.SetActive(true);
+        //killMessageText.text = killer + " Killed " + victim;
+        StartCoroutine(playkillText(killer, victim));
+       // Invoke("hideKillText", 3.0f);
     }
 
     public void isGameFinished(GameObject roundObject)
@@ -142,9 +145,33 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void hideKillText()
+    IEnumerator playkillText(string killer, string victim)
     {
-        killMessageText.gameObject.SetActive(false);
+        Text cloneKillMessageText = null;
+
+        if (killMessagesQueue.Count == 0)
+        {
+            cloneKillMessageText = Instantiate(killMessageText, killMessageText.transform.position, killMessageText.transform.rotation);
+        }
+                  
+        if (killMessagesQueue.Count > 0)
+        {
+            Vector3 newPosition = new Vector3(lastItemInQueue.transform.position.x, lastItemInQueue.transform.position.y - 100.0f, lastItemInQueue.transform.position.z);
+            cloneKillMessageText = Instantiate(lastItemInQueue, lastItemInQueue.transform.position, lastItemInQueue.transform.rotation);
+            cloneKillMessageText.transform.position = newPosition;
+        }
+
+        cloneKillMessageText.transform.SetParent(gameCanvas.transform);
+
+        killMessagesQueue.Enqueue(cloneKillMessageText);
+        lastItemInQueue = cloneKillMessageText; // better be a copy maybe (lastItemInQueue) in-case destroyed
+
+        cloneKillMessageText.gameObject.SetActive(true);
+        cloneKillMessageText.text = killer + " Killed " + victim;
+
+        yield return new WaitForSeconds(3.0f);
+        // destroy the highest message onscreen
+        Destroy(killMessagesQueue.Dequeue().gameObject);
     }
 
 }
