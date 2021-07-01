@@ -27,7 +27,7 @@ public class PickWeapon : MonoBehaviour
     void Start()
     {
 
-        gameCanvas = GameObject.Find("CanvasGame");
+        gameCanvas = GameObject.Find("CanvasRound");
 
         isTriggerHit = false;
         fireCrosshair = gameCanvas.transform.GetChild(0).gameObject;

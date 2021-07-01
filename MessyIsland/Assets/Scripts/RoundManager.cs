@@ -11,10 +11,7 @@ public class RoundManager : MonoBehaviour
 
     bool isTeamWonTheRound;
 
-    GameObject gameManager;
-    GameManager gameManagerScript;
-
-    GameObject gameCanvas;
+    GameObject roundCanvas;
 
     [SerializeField] GameObject[] swatTeam;
     [SerializeField] GameObject[] ninjaTeam;
@@ -30,32 +27,25 @@ public class RoundManager : MonoBehaviour
 
 
     void Start()
-    {
-        gameManager = GameObject.Find("GameManager");
-        gameCanvas = GameObject.Find("CanvasGame");
+    {     
+        roundCanvas = GameObject.Find("CanvasRound");
 
         audioPlayer = GetComponent<AudioSource>();
 
         isTeamWonTheRound = false;
-        gameManagerScript = gameManager.GetComponent<GameManager>();
-
-        healthText = gameCanvas.transform.GetChild(7).gameObject.GetComponent<Text>();
-        roundEndMessage = gameCanvas.transform.GetChild(8).gameObject.GetComponent<Text>();
+      
+        healthText = roundCanvas.transform.GetChild(7).gameObject.GetComponent<Text>();
+        roundEndMessage = roundCanvas.transform.GetChild(8).gameObject.GetComponent<Text>();
 
         playerScript = swatTeam[0].GetComponent<Player>();
-        playerScript.setNickname(gameManagerScript.getNickname());
-       // Debug.Log(playerScript.getNickname());
-
-        
-       // Debug.Log("" + gameManagerScript.getNumberOfRounds());
-        
+        playerScript.setNickname(GameManager.instance.getNickname());
+            
     }
 
     void Update()
     {
         healthText.text = playerScript.getCurrentHealth().ToString();
         
-
         isRoundFinished();
 
     }
@@ -64,8 +54,8 @@ public class RoundManager : MonoBehaviour
     {
         if (!isTeamWonTheRound)
         { 
-        isAllTeamDead(ninjaTeam, SWAT_WON_ROUND, true);
-        isAllTeamDead(swatTeam, NINJAS_WON_ROUND, false);
+            isAllTeamDead(ninjaTeam, SWAT_WON_ROUND, true);
+            isAllTeamDead(swatTeam, NINJAS_WON_ROUND, false);
         }
     }
 
@@ -87,13 +77,13 @@ public class RoundManager : MonoBehaviour
 
             if (isSwatTeam)
             {
-                gameManagerScript.givePointToSwatTeam();
+                GameManager.instance.givePointToSwatTeam();
                 audioPlayer.PlayOneShot(swatWonRoundSound);
 
             }
             else
             {
-                gameManagerScript.givePointToNinjaTeam();
+                GameManager.instance.givePointToNinjaTeam();
                 audioPlayer.PlayOneShot(ninjasWonRoundSound);         
             }
 
@@ -108,17 +98,17 @@ public class RoundManager : MonoBehaviour
 
     void isGameFinished()
     {
-        setGameCanvasToDefault();
-        gameManagerScript.isGameFinished(this.gameObject);      
+        setRoundCanvasToDefault();
+        GameManager.instance.isGameFinished(this.gameObject);      
     }
 
-    public void setGameCanvasToDefault()
+    public void setRoundCanvasToDefault()
     {
-        gameCanvas.transform.GetChild(8).gameObject.SetActive(false);
-        gameCanvas.transform.GetChild(2).gameObject.SetActive(true);
-        gameCanvas.transform.GetChild(3).gameObject.SetActive(true);
-        gameCanvas.transform.GetChild(4).gameObject.SetActive(false);
-        gameCanvas.transform.GetChild(5).gameObject.SetActive(false);
+        roundCanvas.transform.GetChild(8).gameObject.SetActive(false);
+        roundCanvas.transform.GetChild(2).gameObject.SetActive(true);
+        roundCanvas.transform.GetChild(3).gameObject.SetActive(true);
+        roundCanvas.transform.GetChild(4).gameObject.SetActive(false);
+        roundCanvas.transform.GetChild(5).gameObject.SetActive(false);
     }
 
     
