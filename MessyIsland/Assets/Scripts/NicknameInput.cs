@@ -8,19 +8,27 @@ public class NicknameInput : MonoBehaviour
     
     TMPro.TMP_InputField inputField;
  
-    [SerializeField] GameObject gameManager;
-    GameManager gameManagerScript;
-
     public void updateNickname()
-    {     
-        gameManagerScript.setNickname(inputField.text);             
+    {
+
+        if (inputField.text.Length == 0)
+        {
+            GameManager.instance.setNickname(GameManager.DEFAULT_NICKNAME);
+        }
+        else if (inputField.text.Length > 10)
+        {
+            GameManager.instance.setNickname(inputField.text.Substring(0, 10));
+        }
+        else
+        {
+            GameManager.instance.setNickname(inputField.text);
+        }
+
     }
 
     void Start()
-    {
-        gameManagerScript = gameManager.GetComponent<GameManager>();
+    {     
         inputField = GetComponent<TMPro.TMP_InputField>();
-
     }
 
     

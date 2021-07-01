@@ -2268,7 +2268,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundsText: {fileID: 201682289}
-  gameManager: {fileID: 792816614}
 --- !u!1 &790873733
 GameObject:
   m_ObjectHideFlags: 0
@@ -3358,7 +3357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a8e1492c14cd64f914a3431ea82636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 792816614}
 --- !u!1 &919444547
 GameObject:
   m_ObjectHideFlags: 0

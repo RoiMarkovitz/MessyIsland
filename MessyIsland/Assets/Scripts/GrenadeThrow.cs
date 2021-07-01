@@ -37,6 +37,14 @@ public class GrenadeThrow : MonoBehaviour
     void Update()
     {
         
+        //if (Input.GetKey("q") && isThrowingAllowed && playerScript.getHasGrenade())
+        //{
+        //    StartCoroutine(throwGrenade());
+        //}
+    }
+
+    void FixedUpdate()
+    {
         if (Input.GetKey("q") && isThrowingAllowed && playerScript.getHasGrenade())
         {
             StartCoroutine(throwGrenade());

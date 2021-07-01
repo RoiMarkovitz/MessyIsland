@@ -33,10 +33,20 @@ public class PistolShot : MonoBehaviour
     
     void Update()
     {
+        //if (Input.GetMouseButtonDown(0) && this.gameObject.activeSelf
+        //    && isShootingAllowed && playerScript.getHasPistol()
+        //    && animator.GetInteger("status") != (int)PlayerMotion.PlayerAnimStatus.GrenadeThrow)
+        //{       
+        //    StartCoroutine(shoot());
+        //}
+    }
+
+    void FixedUpdate()
+    {
         if (Input.GetMouseButtonDown(0) && this.gameObject.activeSelf
-            && isShootingAllowed && playerScript.getHasPistol()
-            && animator.GetInteger("status") != (int)PlayerMotion.PlayerAnimStatus.GrenadeThrow)
-        {       
+          && isShootingAllowed && playerScript.getHasPistol()
+          && animator.GetInteger("status") != (int)PlayerMotion.PlayerAnimStatus.GrenadeThrow)
+        {
             StartCoroutine(shoot());
         }
     }

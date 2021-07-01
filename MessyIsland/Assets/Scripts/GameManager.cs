@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
     const string NINJAS_WON_GAME = "Ninjas Won The Game";
     const string SWAT_WON_GAME = "Swat Won The Game";
 
-    string nickname = "Player";
+    public const string DEFAULT_NICKNAME = "Player";
+
+    string nickname = DEFAULT_NICKNAME;
     int numberOfRounds = 1;
     int currentRound = 1;
     int ninjaTeamRoundsWon = 0;

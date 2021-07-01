@@ -10,9 +10,6 @@ public class RoundsSlider : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI roundsText;
     Slider slider;
 
-    [SerializeField] GameObject gameManager;
-    GameManager gameManagerScript;
-
     public void updateRoundNumber()
     {
         if (slider.value == 1)
@@ -29,14 +26,13 @@ public class RoundsSlider : MonoBehaviour
         }
         roundsText.text = "Rounds: " + roundNumber;
 
-        gameManagerScript.setNumberOfRounds(roundNumber);
+        GameManager.instance.setNumberOfRounds(roundNumber);
     }
 
     void Start()
     {
         slider = GetComponent<Slider>();
-        gameManagerScript = gameManager.GetComponent<GameManager>();
-        
+          
     }
 
     
