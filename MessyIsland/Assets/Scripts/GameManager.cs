@@ -100,11 +100,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void showKillText(string killer, string victim)
-    {
-        //killMessageText.gameObject.SetActive(true);
-        //killMessageText.text = killer + " Killed " + victim;
-        StartCoroutine(playkillText(killer, victim));
-       // Invoke("hideKillText", 3.0f);
+    {      
+        StartCoroutine(playkillText(killer, victim)); 
     }
 
     public void isGameFinished(GameObject roundObject)

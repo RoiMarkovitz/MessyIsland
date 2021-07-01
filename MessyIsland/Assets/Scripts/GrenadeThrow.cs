@@ -16,9 +16,8 @@ public class GrenadeThrow : MonoBehaviour
     GameObject grenade;
     GameObject pistol;
     Player playerScript;
+    PlayerMotion playerMotionScript;
     NPC npcScript;
-
-
 
     bool isThrowingAllowed;
 
@@ -28,6 +27,7 @@ public class GrenadeThrow : MonoBehaviour
         grenade = this.transform.GetChild(0).gameObject;
         explosionSound = GetComponent<AudioSource>();
         playerScript = player.GetComponent<Player>();
+        playerMotionScript = player.GetComponent<PlayerMotion>();
         pistol = playerCamera.transform.GetChild(0).gameObject;
 
 
@@ -52,9 +52,10 @@ public class GrenadeThrow : MonoBehaviour
         }
 
         isThrowingAllowed = false;
+        playerMotionScript.setIsThrowingGrenade(true);
         Vector3 velocity = playerCamera.transform.forward * THROW_SPEED;
         Animator animator = player.GetComponent<Animator>();
-        animator.SetBool("isThrown", true);
+        animator.SetInteger("status", (int)PlayerMotion.PlayerAnimStatus.GrenadeThrow);
         
         yield return new WaitForSeconds(THROW_BEFORE_DELAY);
 
@@ -63,7 +64,10 @@ public class GrenadeThrow : MonoBehaviour
             pistol.SetActive(true);
         }
 
-        animator.SetBool("isThrown", false);
+        playerMotionScript.setIsThrowingGrenade(false);
+
+
+        //  animator.SetInteger("status", (int)PlayerMotion.PlayerAnimStatus.Idle);
         GameObject clonedGrenade = Instantiate(grenade, grenade.transform.position, grenade.transform.rotation);
         clonedGrenade.SetActive(true);
 

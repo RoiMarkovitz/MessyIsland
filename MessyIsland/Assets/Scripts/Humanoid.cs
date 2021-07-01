@@ -72,7 +72,8 @@ public abstract class Humanoid : MonoBehaviour
             {
                 currentHealth = MIN_HEALTH;          
                 healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
-                GameManager.instance.showKillText(enemyNickname, this.nickname);             
+                GameManager.instance.showKillText(enemyNickname, this.nickname);    
+                // play death animation here in general
             }
         }
 

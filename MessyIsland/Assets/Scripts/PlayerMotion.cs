@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMotion : MonoBehaviour
 { 
+    public enum PlayerAnimStatus { Idle, ForwardWalk, RightWalk, LeftWalk, BackwardWalk, IdlePistol, ForwardPistolWalk,
+    RightPistolWalk, LeftPistolWalk, BackwardPistolWalk, GrenadeThrow, Die}
+
     CharacterController controller;
     Animator animator;
     [SerializeField] float speed;
@@ -13,6 +16,8 @@ public class PlayerMotion : MonoBehaviour
     [SerializeField] GameObject pistol;
     [SerializeField] GameObject grenade;
     AudioSource footStep;
+
+    bool isThrowingGrenade;
 
     void Start()
     {
@@ -57,103 +62,78 @@ public class PlayerMotion : MonoBehaviour
 
     void movementAnimations()
     {
-        if (pistol.activeSelf)
-        {
-            animator.SetBool("isPistolActive", true);
-            pistolMovementAnimations();
+        if (!isThrowingGrenade)
+        { 
+            if (pistol.activeSelf)
+            {
+                animator.SetBool("isPistolActive", true);
+                pistolMovementAnimations();
             
-        }
-        else
-        {
-            generalMovementAnimations();
+            }
+            else
+            {
+                generalMovementAnimations();
+            }
         }
     }
 
     void generalMovementAnimations()
     {
         if (controller.velocity.magnitude > 0.1)
-        {
-            animator.SetBool("idle", false);
+        {          
             if (Input.GetKey("a"))
             {
-                animator.SetBool("left", true);
-            }
-            else
-            {
-                animator.SetBool("left", false);
-            }
+                animator.SetInteger("status", (int)PlayerAnimStatus.LeftWalk);
+            }         
             if (Input.GetKey("d"))
             {
-                animator.SetBool("right", true);
-            }
-            else
-            {
-                animator.SetBool("right", false);
-            }
+                animator.SetInteger("status", (int)PlayerAnimStatus.RightWalk);
+            }    
             if (Input.GetKey("w"))
             {
-                animator.SetBool("forward", true);
-            }
-            else
-            {
-                animator.SetBool("forward", false);
-            }
+                animator.SetInteger("status", (int)PlayerAnimStatus.ForwardWalk);
+            }          
             if (Input.GetKey("s"))
             {
-                animator.SetBool("backward", true);
+                animator.SetInteger("status", (int)PlayerAnimStatus.BackwardWalk);
             }
-            else
-            {
-                animator.SetBool("backward", false);
-            }
+        
         }
         else
         {
-            animator.SetBool("idle", true);         
+            animator.SetInteger("status", (int)PlayerAnimStatus.Idle);         
         }
     }
 
     void pistolMovementAnimations()
     {
         if (controller.velocity.magnitude > 0.1)
-        {
-            animator.SetBool("idlePistol", false);
+        {        
             if (Input.GetKey("a"))
             {
-                animator.SetBool("leftPistol", true);
-            }
-            else
-            {
-                animator.SetBool("leftPistol", false);
-            }
+                animator.SetInteger("status", (int)PlayerAnimStatus.LeftPistolWalk);
+            }         
             if (Input.GetKey("d"))
             {
-                animator.SetBool("rightPistol", true);
-            }
-            else
-            {
-                animator.SetBool("rightPistol", false);
+                animator.SetInteger("status", (int)PlayerAnimStatus.RightPistolWalk);
             }
             if (Input.GetKey("w"))
             {
-                animator.SetBool("forwardPistol", true);
-            }
-            else
-            {
-                animator.SetBool("forwardPistol", false);
-            }
+                animator.SetInteger("status", (int)PlayerAnimStatus.ForwardPistolWalk);
+            }      
             if (Input.GetKey("s"))
             {
-                animator.SetBool("backwardPistol", true);
-            }
-            else
-            {
-                animator.SetBool("backwardPistol", false);
-            }
+                animator.SetInteger("status", (int)PlayerAnimStatus.BackwardPistolWalk);
+            }     
         }
         else
         {
-            animator.SetBool("idlePistol", true);
+            animator.SetInteger("status", (int)PlayerAnimStatus.IdlePistol);
         }
+    }
+
+    public void setIsThrowingGrenade(bool value)     
+    {
+        isThrowingGrenade = value;
     }
 }
