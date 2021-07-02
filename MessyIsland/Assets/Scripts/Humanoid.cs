@@ -76,9 +76,17 @@ public abstract class Humanoid : MonoBehaviour
                 currentHealth = MIN_HEALTH;          
                 healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
                 GameManager.instance.showKillText(enemyNickname, this.nickname);
+                
+                if (this.tag == "Ninja")
+                {
+                    animator.SetBool("isAlive", false);
+                   
+                    this.GetComponent<NPC>().getNavMeshAgent().enabled = false;
+                }
+
                 this.gameObject.tag = "Dead";
                 isAlive = false;
-                animator.SetBool("isAlive", false);              
+
             }
         }
 

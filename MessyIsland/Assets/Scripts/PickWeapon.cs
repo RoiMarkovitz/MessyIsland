@@ -58,7 +58,7 @@ public class PickWeapon : MonoBehaviour
             }
 
             // check if "this" is the GameObject that was hit
-            if (hit.transform.gameObject.name == this.gameObject.name && hit.distance < 6)
+            if (hit.transform.gameObject.name == this.gameObject.name && hit.distance < 8)
             {
                 if (!isTriggerHit)
                 {

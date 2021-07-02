@@ -108,8 +108,8 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
-    agentSlope: 45
-    agentClimb: 0.4
+    agentSlope: 60
+    agentClimb: 1
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 6623da27a0bbaaa4387c211ae38c4e26, type: 2}
 --- !u!1 &46681964
 GameObject:
   m_ObjectHideFlags: 0
@@ -3953,11 +3953,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919444547}
   m_CullTransparentMesh: 1
---- !u!1 &947844017 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1956199726778801919, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
-  m_PrefabInstance: {fileID: 1955513345086131501}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &948226288
 GameObject:
   m_ObjectHideFlags: 0
@@ -6618,10 +6613,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round
       objectReference: {fileID: 0}
-    - target: {fileID: 1955513344195294111, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
-      propertyPath: pistol
-      value: 
-      objectReference: {fileID: 947844017}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
 --- !u!222 &2076855506633573506
