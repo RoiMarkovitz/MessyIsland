@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
         {
-            instance = this; // asign instance to this instance of the class
+            instance = this; // assign instance to this instance of the class
         }
         else if(instance != this) // Determine if instance is alerady assigned to something else
         {
@@ -58,16 +58,14 @@ public class GameManager : MonoBehaviour
         audioPlayer = GetComponent<AudioSource>();
 
         roundCounterText = gameCanvas.transform.GetChild(0).gameObject.GetComponent<Text>();
-        winsCountText = gameCanvas.transform.GetChild(1).gameObject.GetComponent<Text>();
-     
+        winsCountText = gameCanvas.transform.GetChild(1).gameObject.GetComponent<Text>();   
     }
 
    
     void Update()
     {
         roundCounterText.text = "Round " + currentRound + " / " + numberOfRounds;
-        winsCountText.text = "Rounds Won: " + swatTeamRoundsWon;
-        
+        winsCountText.text = "Rounds Won: " + swatTeamRoundsWon;       
     }
 
     public void setNickname(string newNickname)
@@ -92,8 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void givePointToSwatTeam()
     {
-        swatTeamRoundsWon++;
-        
+        swatTeamRoundsWon++;      
     }
 
     public void givePointToNinjaTeam()
@@ -107,10 +104,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void isGameFinished(GameObject roundObject)
-    {        
+    {
+        
         if (currentRound == numberOfRounds)
-        {
-            
+        {         
             gameCanvas.SetActive(false);
             gameEndScreen.SetActive(true);
             if (ninjaTeamRoundsWon > swatTeamRoundsWon)
@@ -133,7 +130,6 @@ public class GameManager : MonoBehaviour
             currentRound++;          
             GameObject newRound = Instantiate(round, round.transform.position, round.transform.rotation);
             newRound.SetActive(true);
-            
             Destroy(roundObject);
         }
         

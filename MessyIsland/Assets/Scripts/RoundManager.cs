@@ -6,53 +6,50 @@ using UnityEngine.UI;
 
 public class RoundManager : MonoBehaviour
 {
+    const float ACTIVATED_WEAPONS_PERCENTAGE = 0.5f;
     const string NINJAS_WON_ROUND = "Ninjas Won The Round";
     const string SWAT_WON_ROUND = "Swat Won The Round";
 
-    bool isTeamWonTheRound;
+    bool hasTeamWonTheRound;
 
     GameObject roundCanvas;
+    Text healthText;
+    Text roundEndMessage;
+    Player playerScript;
 
     [SerializeField] GameObject[] swatTeam;
     [SerializeField] GameObject[] ninjaTeam;
 
+    [SerializeField] GameObject grenades;
+    [SerializeField] GameObject pistols;
+
+    AudioSource audioPlayer;
     [SerializeField] AudioClip ninjasWonRoundSound;
     [SerializeField] AudioClip swatWonRoundSound;
-    AudioSource audioPlayer;
-
-    Player playerScript;
-
-    Text healthText;
-    Text roundEndMessage;
-
-
+     
     void Start()
     {     
-        roundCanvas = GameObject.Find("CanvasRound");
+        scatterWeaponsRandomly(grenades, pistols);
 
         audioPlayer = GetComponent<AudioSource>();
 
-        isTeamWonTheRound = false;
-      
+        roundCanvas = GameObject.Find("CanvasRound");
         healthText = roundCanvas.transform.GetChild(7).gameObject.GetComponent<Text>();
         roundEndMessage = roundCanvas.transform.GetChild(8).gameObject.GetComponent<Text>();
 
         playerScript = swatTeam[0].GetComponent<Player>();
-        playerScript.setNickname(GameManager.instance.getNickname());
-            
+        playerScript.setNickname(GameManager.instance.getNickname());         
     }
 
     void Update()
     {
-        healthText.text = playerScript.getCurrentHealth().ToString();
-        
+        healthText.text = playerScript.getCurrentHealth().ToString();      
         isRoundFinished();
-
     }
 
     void isRoundFinished()
     {
-        if (!isTeamWonTheRound)
+        if (!hasTeamWonTheRound)
         { 
             isAllTeamDead(ninjaTeam, SWAT_WON_ROUND, true);
             isAllTeamDead(swatTeam, NINJAS_WON_ROUND, false);
@@ -73,7 +70,7 @@ public class RoundManager : MonoBehaviour
 
         if (deadCount == team.Length)
         {
-            isTeamWonTheRound = true;
+            hasTeamWonTheRound = true;
 
             if (isSwatTeam)
             {
@@ -87,12 +84,10 @@ public class RoundManager : MonoBehaviour
                 audioPlayer.PlayOneShot(ninjasWonRoundSound);         
             }
 
- 
             roundEndMessage.text = winMessage;
             roundEndMessage.gameObject.SetActive(true);
        
             Invoke("isGameFinished", 4.0f);
-
         }
     }
 
@@ -103,13 +98,60 @@ public class RoundManager : MonoBehaviour
     }
 
     public void setRoundCanvasToDefault()
-    {
-        roundCanvas.transform.GetChild(8).gameObject.SetActive(false);
+    {      
         roundCanvas.transform.GetChild(2).gameObject.SetActive(true);
         roundCanvas.transform.GetChild(3).gameObject.SetActive(true);
         roundCanvas.transform.GetChild(4).gameObject.SetActive(false);
         roundCanvas.transform.GetChild(5).gameObject.SetActive(false);
+        roundCanvas.transform.GetChild(8).gameObject.SetActive(false);
     }
 
-    
+    void scatterWeaponsRandomly(GameObject grenades, GameObject pistols)
+    {
+        GameObject[] grenadesArray = new GameObject[grenades.transform.childCount];
+        for (int i = 0; i < grenadesArray.Length; i++)
+            grenadesArray[i] = grenades.transform.GetChild(i).gameObject;
+
+        GameObject[] pistolsArray = new GameObject[pistols.transform.childCount];
+        for (int i = 0; i < pistolsArray.Length; i++)
+            pistolsArray[i] = pistols.transform.GetChild(i).gameObject;
+
+        bool[] isActivatedGrenades = new bool[grenadesArray.Length];
+        bool[] isActivatedPistols = new bool[pistolsArray.Length];
+
+        setActivatedWeapons(isActivatedGrenades, grenadesArray);
+        setActivatedWeapons(isActivatedPistols, pistolsArray);
+    }
+
+    void setActivatedWeapons(bool[] isActivatedWeaponsArray, GameObject[] weapons)
+    {
+        int numOfActivatedWeapon = (int)(isActivatedWeaponsArray.Length * ACTIVATED_WEAPONS_PERCENTAGE);
+
+        for (int i = 0; i < numOfActivatedWeapon; i++)
+        {
+            isActivatedWeaponsArray[i] = true;
+        }
+
+        shuffleWeapons(isActivatedWeaponsArray);
+
+        for (int i = 0; i < isActivatedWeaponsArray.Length; i++)
+        {
+            if (isActivatedWeaponsArray[i])
+            {
+                weapons[i].SetActive(true);
+            }
+        }
+    }
+
+    void shuffleWeapons(bool[] isActivatedWeaponsArray)
+    {
+        for (int i = 0; i < isActivatedWeaponsArray.Length; i++)
+        {
+            int random = Random.Range(0, isActivatedWeaponsArray.Length);
+            bool temp = isActivatedWeaponsArray[random];
+            isActivatedWeaponsArray[random] = isActivatedWeaponsArray[i];
+            isActivatedWeaponsArray[i] = temp;
+        }
+    }
+
 }

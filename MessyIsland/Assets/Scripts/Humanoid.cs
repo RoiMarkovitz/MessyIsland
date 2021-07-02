@@ -16,14 +16,17 @@ public abstract class Humanoid : MonoBehaviour
     protected bool isAlive;
 
     [SerializeField] Image healthBar;
-    
-    public Humanoid()
+
+    protected Animator animator;
+
+    void Awake()
     {
         startHealth = MAX_HEALTH;
         currentHealth = startHealth;
         hasPistol = false;
         hasGrenade = false;
         isAlive = true;
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -72,8 +75,10 @@ public abstract class Humanoid : MonoBehaviour
             {
                 currentHealth = MIN_HEALTH;          
                 healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
-                GameManager.instance.showKillText(enemyNickname, this.nickname);    
-                // play death animation here in general
+                GameManager.instance.showKillText(enemyNickname, this.nickname);
+                this.gameObject.tag = "Dead";
+                isAlive = false;
+                animator.SetBool("isAlive", false);              
             }
         }
 

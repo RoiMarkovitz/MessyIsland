@@ -24,7 +24,7 @@ public class PistolShot : MonoBehaviour
     {
         bulletSound = GetComponent<AudioSource>();
         bullet = this.transform.GetChild(2).gameObject;
-        muzzleFlashParticles = this.transform.GetChild(3).GetComponent<ParticleSystem>(); ;
+        muzzleFlashParticles = this.transform.GetChild(3).GetComponent<ParticleSystem>(); 
         playerScript = player.GetComponent<Player>();
         animator = player.GetComponent<Animator>();
         isShootingAllowed = true;
@@ -33,12 +33,7 @@ public class PistolShot : MonoBehaviour
     
     void Update()
     {
-        //if (Input.GetMouseButtonDown(0) && this.gameObject.activeSelf
-        //    && isShootingAllowed && playerScript.getHasPistol()
-        //    && animator.GetInteger("status") != (int)PlayerMotion.PlayerAnimStatus.GrenadeThrow)
-        //{       
-        //    StartCoroutine(shoot());
-        //}
+      
     }
 
     void FixedUpdate()

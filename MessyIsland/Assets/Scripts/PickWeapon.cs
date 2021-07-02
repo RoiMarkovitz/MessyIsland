@@ -58,7 +58,7 @@ public class PickWeapon : MonoBehaviour
             }
 
             // check if "this" is the GameObject that was hit
-            if (hit.transform.gameObject.name == this.gameObject.name && hit.distance < 10)
+            if (hit.transform.gameObject.name == this.gameObject.name && hit.distance < 6)
             {
                 if (!isTriggerHit)
                 {
@@ -73,29 +73,15 @@ public class PickWeapon : MonoBehaviour
 
                     if (this.gameObject.tag == playerPistol.tag)
                     {
-                        Invoke("pickPistol", 0.5f);
-                        //playerPistol.SetActive(true);
-                        //pistolPlaceholderImage.SetActive(false);
-                        //activePistolImage.SetActive(true);
-                        //playerScript.setHasPistol(true);
-                        
+                        Invoke("pickPistol", 0.5f);                                            
                     }
                     else // its the grenade
-                    {
-                        // playerGrenade.SetActive(true);
-                        Invoke("pickGrenade", 0.5f);
-                        //playerScript.setHasGrenade(true);
-                        //grenadePlaceholderImage.SetActive(false);
-                        //activeGrenadeImage.SetActive(true);
-                        
+                    {                       
+                        Invoke("pickGrenade", 0.5f);                                           
                     }
 
 
-                    Invoke("hideWeapon", 0.5f);
-
-                    //fireCrosshair.SetActive(true);
-                    //actionCrosshair.SetActive(false);
-                    //this.gameObject.SetActive(false);
+                    Invoke("hideWeapon", 0.5f);                 
                 }
                 
             }
@@ -111,7 +97,6 @@ public class PickWeapon : MonoBehaviour
         }
 
     }
-
 
     bool isWeaponAlreadyPickedByPlayer(RaycastHit hit)
     {

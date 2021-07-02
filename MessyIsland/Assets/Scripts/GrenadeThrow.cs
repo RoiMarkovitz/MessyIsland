@@ -10,11 +10,10 @@ public class GrenadeThrow : MonoBehaviour
     const float DAMAGE = 70.0f;
     
 
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject playerCamera;
+    [SerializeField] GameObject player;  
     AudioSource explosionSound;
     GameObject grenade;
-    GameObject pistol;
+    [SerializeField] GameObject pistol;
     Player playerScript;
     PlayerMotion playerMotionScript;
     NPC npcScript;
@@ -27,20 +26,14 @@ public class GrenadeThrow : MonoBehaviour
         grenade = this.transform.GetChild(0).gameObject;
         explosionSound = GetComponent<AudioSource>();
         playerScript = player.GetComponent<Player>();
-        playerMotionScript = player.GetComponent<PlayerMotion>();
-        pistol = playerCamera.transform.GetChild(0).gameObject;
-
+        playerMotionScript = player.GetComponent<PlayerMotion>(); 
 
     }
 
     
     void Update()
     {
-        
-        //if (Input.GetKey("q") && isThrowingAllowed && playerScript.getHasGrenade())
-        //{
-        //    StartCoroutine(throwGrenade());
-        //}
+          
     }
 
     void FixedUpdate()
@@ -53,17 +46,19 @@ public class GrenadeThrow : MonoBehaviour
 
     IEnumerator throwGrenade()
     {
+        isThrowingAllowed = false;
+
         bool hasPistol = playerScript.getHasPistol();
         if (hasPistol)
         {
             pistol.SetActive(false);
         }
-
-        isThrowingAllowed = false;
-        playerMotionScript.setIsThrowingGrenade(true);
-        Vector3 velocity = playerCamera.transform.forward * THROW_SPEED;
+    
+        playerMotionScript.setIsThrowingGrenade(true);      
         Animator animator = player.GetComponent<Animator>();
         animator.SetInteger("status", (int)PlayerMotion.PlayerAnimStatus.GrenadeThrow);
+   
+        Vector3 velocity = transform.forward * THROW_SPEED;
         
         yield return new WaitForSeconds(THROW_BEFORE_DELAY);
 
@@ -71,11 +66,9 @@ public class GrenadeThrow : MonoBehaviour
         {
             pistol.SetActive(true);
         }
-
+      
         playerMotionScript.setIsThrowingGrenade(false);
 
-
-        //  animator.SetInteger("status", (int)PlayerMotion.PlayerAnimStatus.Idle);
         GameObject clonedGrenade = Instantiate(grenade, grenade.transform.position, grenade.transform.rotation);
         clonedGrenade.SetActive(true);
 
@@ -100,15 +93,10 @@ public class GrenadeThrow : MonoBehaviour
             {
                 if (objectsCollider[i].tag == "Ninja" && this.tag == "SwatGrenade")
                 {
-                    npcScript = objectsCollider[i].gameObject.GetComponent<NPC>();
-                    Debug.Log("hit by grenade");
+                    npcScript = objectsCollider[i].gameObject.GetComponent<NPC>();      
                     npcScript.takeDamage(DAMAGE, playerScript.getNickname());
-                    Debug.Log(npcScript.getCurrentHealth().ToString());
-
-                    npcScript.isNpcDead();
-                    
+                                                     
                 }
-
                                      
                 //Rigidbody rbo = objectsCollider[i].GetComponent<Rigidbody>();
                 //if (rbo!= null)
@@ -124,7 +112,6 @@ public class GrenadeThrow : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         Destroy(clonedGrenade);
         
-
     }
 
     void hideClonedGrenadeMeshParts(GameObject clonedGrenade)

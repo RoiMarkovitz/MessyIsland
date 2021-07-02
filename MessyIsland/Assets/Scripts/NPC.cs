@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class NPC : Humanoid
 {
-    Animator animator;
     
-    NPC npcScript;
-
     void Start()
     {
-        animator = GetComponent<Animator>();
-        npcScript = this.GetComponent<NPC>();
+             
     }
 
  
@@ -25,33 +21,12 @@ public class NPC : Humanoid
         
         if (this.tag == "Ninja" && isAlive) // will be also "Swat"
         {
-  
-            if (other.tag == "SwatBullet") // will be also "SwatGrenade"
-            {
-                Debug.Log("hit by bullet");          
-                npcScript.takeDamage(PistolBullet.DAMAGE, other.GetComponent<PistolBullet>().getOwner());
-                Debug.Log(npcScript.getCurrentHealth().ToString());
-            }
-
-            isNpcDead();
-               
+            if (other.tag == "SwatBullet") 
+            {                     
+                takeDamage(PistolBullet.DAMAGE, other.GetComponent<PistolBullet>().getOwner());             
+            }              
         }
         
     }
-
-    public void isNpcDead()
-    {       
-      if(!getIsAlive())
-        {
-            this.gameObject.tag = "Dead";
-            isAlive = false;
-            animator.SetBool("isAlive", false);
-        }
-
-    }
-
-    
-   
-
    
 }
