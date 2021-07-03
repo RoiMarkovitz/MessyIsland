@@ -6,8 +6,8 @@ public class Player : Humanoid
 {
     
     void Start()
-    {     
-        
+    {
+        isNPC = false;
     }
 
     

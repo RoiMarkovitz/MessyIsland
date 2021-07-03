@@ -14,7 +14,7 @@ public class PlayerMotion : MonoBehaviour
     float rx=0f,ry;
     [SerializeField] GameObject playerCamera;
     [SerializeField] GameObject pistol;
-    [SerializeField] GameObject grenade;
+    
     AudioSource footStep;
 
     bool isThrowingGrenade;
@@ -30,21 +30,20 @@ public class PlayerMotion : MonoBehaviour
     void Update()
     {
         float dx, dz;
-        // simple motion
-        // transform.Translate(new Vector3(0, 0, 0.1f));
-
+        
         // mouse input
         rx -= Input.GetAxis("Mouse Y") * angularSpeed * Time.deltaTime; // vertical rotation
+        // use Clampf to limit the sight angles
         playerCamera.transform.localEulerAngles = new Vector3(rx, 0, 0);
 
-        ry = transform.localEulerAngles.y+ Input.GetAxis("Mouse X") * angularSpeed * Time.deltaTime;
+        ry = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * angularSpeed * Time.deltaTime;
 
         transform.localEulerAngles = new Vector3(0, ry, 0); // runs on this (Player)
         // keyboard input
-        dx = Input.GetAxis("Horizontal")*speed * Time.deltaTime;
-        dz = Input.GetAxis("Vertical")*speed * Time.deltaTime;
-        Vector3 motion = new Vector3(dx, -1, dz);
-        motion = transform.TransformDirection(motion); // now in Global coordinates
+        dx = Input.GetAxis("Horizontal") *speed * Time.deltaTime; // Horizontal means 'A' or 'D'
+        dz = Input.GetAxis("Vertical") * speed * Time.deltaTime; // Verticalal means 'W' or 'S'
+        Vector3 motion = new Vector3(dx, -1, dz); // in local coordinates
+        motion = transform.TransformDirection(motion); // in Global coordinates
         controller.Move(motion);
         
         playFootStepSound();

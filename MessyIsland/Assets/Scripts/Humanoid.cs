@@ -14,6 +14,7 @@ public abstract class Humanoid : MonoBehaviour
     protected bool hasPistol;
     protected bool hasGrenade;
     protected bool isAlive;
+    protected bool isNPC;
 
     [SerializeField] Image healthBar;
 
@@ -79,7 +80,7 @@ public abstract class Humanoid : MonoBehaviour
                 
                 if (this.tag == "Ninja")
                 {
-                    animator.SetBool("isAlive", false);
+                    animator.SetInteger("status", (int)NPC.NPCAnimStatus.Die);
                    
                     this.GetComponent<NPC>().getNavMeshAgent().enabled = false;
                 }

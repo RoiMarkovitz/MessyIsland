@@ -14,7 +14,6 @@ public class PistolShot : MonoBehaviour
     AudioSource bulletSound;
     Animator animator;
 
-    [SerializeField] GameObject playerCamera;
     Player playerScript;
 
     bool isShootingAllowed;
@@ -45,7 +44,7 @@ public class PistolShot : MonoBehaviour
             StartCoroutine(shoot());
         }
     }
-
+    
     IEnumerator shoot()
     {
         isShootingAllowed = false;
@@ -54,8 +53,10 @@ public class PistolShot : MonoBehaviour
         clonedBullet.SetActive(true);
         clonedBullet.GetComponent<PistolBullet>().setOwner(playerScript.getNickname());
 
+        Vector3 velocity = (transform.forward * BULLET_SPEED) * -1;
+
         Rigidbody rbClonedBullet = clonedBullet.GetComponent<Rigidbody>();
-        rbClonedBullet.AddForce(playerCamera.transform.forward * BULLET_SPEED, ForceMode.Impulse);
+        rbClonedBullet.AddForce(velocity, ForceMode.Impulse);
 
         muzzleFlashParticles.Play();
        

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class RoundManager : MonoBehaviour
 {
+    public enum TeamName { Swat, Ninja };
     const float ACTIVATED_WEAPONS_PERCENTAGE = 0.5f;
     const string NINJAS_WON_ROUND = "Ninjas Won The Round";
     const string SWAT_WON_ROUND = "Swat Won The Round";
@@ -22,13 +23,14 @@ public class RoundManager : MonoBehaviour
 
     [SerializeField] GameObject grenades;
     [SerializeField] GameObject pistols;
+    GameObject[] weapons;
 
     AudioSource audioPlayer;
     [SerializeField] AudioClip ninjasWonRoundSound;
     [SerializeField] AudioClip swatWonRoundSound;
      
     void Start()
-    {     
+    {      
         scatterWeaponsRandomly(grenades, pistols);
 
         audioPlayer = GetComponent<AudioSource>();
@@ -108,13 +110,24 @@ public class RoundManager : MonoBehaviour
 
     void scatterWeaponsRandomly(GameObject grenades, GameObject pistols)
     {
+        weapons = new GameObject[pistols.transform.childCount + grenades.transform.childCount];
+        int k = 0;
+
         GameObject[] grenadesArray = new GameObject[grenades.transform.childCount];
         for (int i = 0; i < grenadesArray.Length; i++)
+        { 
             grenadesArray[i] = grenades.transform.GetChild(i).gameObject;
+            weapons[k] = grenadesArray[i];
+            k++;
+        }
 
         GameObject[] pistolsArray = new GameObject[pistols.transform.childCount];
         for (int i = 0; i < pistolsArray.Length; i++)
+        { 
             pistolsArray[i] = pistols.transform.GetChild(i).gameObject;
+            weapons[k] = pistolsArray[i];
+            k++;
+        }
 
         bool[] isActivatedGrenades = new bool[grenadesArray.Length];
         bool[] isActivatedPistols = new bool[pistolsArray.Length];
@@ -153,5 +166,45 @@ public class RoundManager : MonoBehaviour
             isActivatedWeaponsArray[i] = temp;
         }
     }
+
+    public bool teamHasMissingWeapons(TeamName name)
+    {
+        if (name == TeamName.Ninja)
+        { 
+            for (int i = 0; i < ninjaTeam.Length; i++)
+            {    
+                if (ninjaTeam[i].tag != "Dead")
+                {
+                    NPC npcScript = ninjaTeam[i].GetComponent<NPC>();
+                    if (!npcScript.getHasGrenade() || !npcScript.getHasPistol())
+                    {
+                        return true;
+                    }
+                }              
+            }
+        }
+
+        return false; // no missing weapons
+    }
+
+    public GameObject[] getWeapons()
+    {     
+        return weapons;
+    }
+
+    public GameObject getNinjaLeader()
+    {
+        if (ninjaTeam[0].tag == "Dead")
+        {
+            return null;
+        }
+        else
+        {
+            return ninjaTeam[0];
+        }
+       
+    }
+
+
 
 }
