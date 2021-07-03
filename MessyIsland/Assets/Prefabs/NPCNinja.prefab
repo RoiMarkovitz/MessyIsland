@@ -2214,7 +2214,6 @@ MonoBehaviour:
   nickname: Ninja Leader
   healthBar: {fileID: 701003991526694340}
   isLeader: 0
-  target: {fileID: 0}
   pistol: {fileID: 0}
   round: {fileID: 1955513343959141439, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
 --- !u!82 &2348613302346403352

@@ -8,15 +8,20 @@ public class NPC : Humanoid
     public enum NPCAnimStatus { Idle, ForwardWalk, IdlePistol, ForwardPistolWalk, GrenadeThrow, Die };
 
     bool isThrowingGrenade;
+    bool isWeaponTargetFound;
 
     NavMeshAgent agent;
 
     [SerializeField] bool isLeader;
-    [SerializeField] GameObject target;
+
+    [SerializeField] GameObject randomTarget;
+    Transform weaponTarget = null;
     [SerializeField] GameObject pistol;
     [SerializeField] GameObject round;
     RoundManager roundManagerScript;
-
+    GameObject[] weapons;
+    bool[] isWeaponTargeted;
+  
     AudioSource footStep;
 
     void Start()
@@ -24,12 +29,13 @@ public class NPC : Humanoid
         isNPC = true;
 
         roundManagerScript = round.GetComponent<RoundManager>();
+        weapons = roundManagerScript.getWeapons();
+        isWeaponTargeted = new bool[weapons.Length];
 
         agent = GetComponent<NavMeshAgent>();
         footStep = GetComponent<AudioSource>();
         // agent.Raycast
-        // agent.stoppingDistance = 5; // Stop within this distance from the target position.
-        // remainingDistance // The distance between the agent's position and the destination on the current path. (Read Only)
+           
     }
 
 
@@ -39,6 +45,7 @@ public class NPC : Humanoid
        {         
             followerLeader();
             findNearestWeapon();
+            findEnemy();
             
             // playFootStepSound();
             // movementAnimations();
@@ -67,7 +74,8 @@ public class NPC : Humanoid
             GameObject ninjaLeader = roundManagerScript.getNinjaLeader();
             if (ninjaLeader != null)
             {
-                agent.stoppingDistance = 3;
+                // stoppingDistance stops within this distance from the target position.
+                agent.stoppingDistance = 5;
                 agent.SetDestination(ninjaLeader.transform.position);
             }
             else
@@ -79,33 +87,56 @@ public class NPC : Humanoid
     }
 
     void findNearestWeapon()
-    {
+    {       
         if (isLeader)
         {
-            if (roundManagerScript.teamHasMissingWeapons(RoundManager.TeamName.Ninja))
+            isWeaponTargetReached();
+            if (roundManagerScript.teamHasMissingWeapons(RoundManager.TeamName.Ninja) && weaponTarget == null)
             {
-                agent.stoppingDistance = 0;
-                GameObject[] weapons = roundManagerScript.getWeapons();
-                Transform newTarget = null;
+                int targetIndex = -1;
                 float currentMinDistance = 10000.0f;
                 for (int i = 0; i< weapons.Length; i++)
                 {
-                    if (weapons[i].activeSelf)
+                    if (weapons[i].activeSelf && !isWeaponTargeted[i])
                     {
                         float distanceToTarget = Vector3.Distance(transform.position, weapons[i].transform.position);
                         if (distanceToTarget < currentMinDistance)
                         {
                             currentMinDistance = distanceToTarget;
-                            newTarget = weapons[i].transform;
+                            weaponTarget = weapons[i].transform;
+                            targetIndex = i;
                         }
                     }
                 }
-                if (newTarget != null)
-                { 
-                agent.SetDestination(newTarget.position);
+                if (weaponTarget != null)
+                {
+                    isWeaponTargeted[targetIndex] = true;
+                    agent.SetDestination(weaponTarget.position);             
                 }
             }
         }
+    }
+
+    void isWeaponTargetReached()
+    {
+        // remainingDistance is the distance between the agent's position and the destination on the current path. (Read Only)
+        if (weaponTarget != null && agent.remainingDistance < 2)
+        {
+            weaponTarget = null;
+        }
+    }
+
+    void findEnemy()
+    {
+        if (isLeader)
+        {
+            if (!roundManagerScript.teamHasMissingWeapons(RoundManager.TeamName.Ninja))
+            {
+                // Team has all weapons
+                agent.SetDestination(randomTarget.transform.position);
+            }
+        }
+        
     }
 
     public NavMeshAgent getNavMeshAgent()
@@ -166,6 +197,20 @@ public class NPC : Humanoid
     public void setIsThrowingGrenade(bool value)
     {
         isThrowingGrenade = value;
+    }
+
+    public bool isTargetReachable(Vector3 targetPosition)
+    {
+        NavMeshPath path = new NavMeshPath();
+        agent.CalculatePath(targetPosition, path);
+        if (path.status == NavMeshPathStatus.PathPartial)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
 }

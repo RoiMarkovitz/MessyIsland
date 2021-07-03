@@ -112,4 +112,9 @@ public abstract class Humanoid : MonoBehaviour
 
         return isAlive;
     }
+
+    public bool getIsNPC()
+    {
+        return isNPC;
+    }
 }
