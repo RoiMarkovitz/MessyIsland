@@ -14,7 +14,7 @@ public class GrenadeThrow : MonoBehaviour
     AudioSource explosionSound;
     GameObject grenade;
     [SerializeField] GameObject pistol;
-    Player playerScript;
+    Humanoid humanoidScript;
     PlayerMotion playerMotionScript;
     NPC npcScript;
 
@@ -22,11 +22,21 @@ public class GrenadeThrow : MonoBehaviour
 
     void Start()
     {
+        humanoidScript = player.GetComponent<Humanoid>();
         isThrowingAllowed = true;
         grenade = this.transform.GetChild(0).gameObject;
         explosionSound = GetComponent<AudioSource>();
-        playerScript = player.GetComponent<Player>();
-        playerMotionScript = player.GetComponent<PlayerMotion>(); 
+        if (humanoidScript.getIsNPC())
+        {
+            humanoidScript = player.GetComponent<NPC>();
+        }
+        else
+        {
+            humanoidScript = player.GetComponent<Player>();
+            playerMotionScript = player.GetComponent<PlayerMotion>();
+        }
+      
+        
 
     }
 
@@ -38,17 +48,21 @@ public class GrenadeThrow : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey("q") && isThrowingAllowed && playerScript.getHasGrenade())
+        if (!humanoidScript.getIsNPC())
         {
-            StartCoroutine(throwGrenade());
+            if (Input.GetKey("q") && isThrowingAllowed && humanoidScript.getHasGrenade())
+            {
+                StartCoroutine(throwGrenade());
+            }
         }
+        
     }
 
     IEnumerator throwGrenade()
     {
         isThrowingAllowed = false;
 
-        bool hasPistol = playerScript.getHasPistol();
+        bool hasPistol = humanoidScript.getHasPistol();
         if (hasPistol)
         {
             pistol.SetActive(false);
@@ -94,7 +108,7 @@ public class GrenadeThrow : MonoBehaviour
                 if (objectsCollider[i].tag == "Ninja" && this.tag == "SwatGrenade")
                 {
                     npcScript = objectsCollider[i].gameObject.GetComponent<NPC>();      
-                    npcScript.takeDamage(DAMAGE, playerScript.getNickname());
+                    npcScript.takeDamage(DAMAGE, humanoidScript.getNickname());
                                                      
                 }
                                      

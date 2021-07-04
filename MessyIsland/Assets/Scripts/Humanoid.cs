@@ -75,14 +75,28 @@ public abstract class Humanoid : MonoBehaviour
             if (currentHealth <= 0)
             {
                 currentHealth = MIN_HEALTH;          
-                healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
+                
                 GameManager.instance.showKillText(enemyNickname, this.nickname);
                 
                 if (this.tag == "Ninja")
                 {
-                    animator.SetInteger("status", (int)NPC.NPCAnimStatus.Die);
-                   
+                    animator.SetInteger("status", (int)NPC.NPCAnimStatus.Die);                  
                     this.GetComponent<NPC>().getNavMeshAgent().enabled = false;
+                }
+                else if (this.tag == "Swat")
+                {
+                    Humanoid script = this.gameObject.GetComponent<Humanoid>();
+                    if (script.getIsNPC())
+                    {
+                        animator.SetInteger("status", (int)NPC.NPCAnimStatus.Die);
+                        this.GetComponent<NPC>().getNavMeshAgent().enabled = false;
+                    }
+                    else // its the player
+                    {
+                        healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
+                        animator.SetInteger("status", (int)PlayerMotion.PlayerAnimStatus.Die);
+                    }
+                                              
                 }
 
                 this.gameObject.tag = "Dead";
@@ -92,6 +106,12 @@ public abstract class Humanoid : MonoBehaviour
         }
 
     }
+
+    //void killNPC()
+    //{
+    //    animator.SetInteger("status", (int)NPC.NPCAnimStatus.Die);
+    //    this.GetComponent<NPC>().getNavMeshAgent().enabled = false;
+    //}
 
     public void setNickname(string newNickname)
     {

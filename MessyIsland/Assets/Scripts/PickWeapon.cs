@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PickWeapon : MonoBehaviour
-{
-    
+{   
     [SerializeField] GameObject playerCamera;
     [SerializeField] GameObject playerPistol;
     [SerializeField] GameObject playerGrenade;
@@ -58,7 +57,7 @@ public class PickWeapon : MonoBehaviour
             }
 
             // check if "this" is the GameObject that was hit
-            if (hit.transform.gameObject.name == this.gameObject.name && hit.distance < 8)
+            if (hit.transform.gameObject.name == this.gameObject.name && hit.distance < 10)
             {
                 if (!isTriggerHit)
                 {
@@ -69,6 +68,7 @@ public class PickWeapon : MonoBehaviour
 
                 if (Input.GetButtonDown("Action"))
                 {
+                    
                     pickupSound.Play();
 
                     if (this.gameObject.tag == playerPistol.tag)
@@ -79,7 +79,6 @@ public class PickWeapon : MonoBehaviour
                     {                       
                         Invoke("pickGrenade", 0.5f);                                           
                     }
-
 
                     Invoke("hideWeapon", 0.5f);                 
                 }

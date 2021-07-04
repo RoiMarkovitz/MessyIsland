@@ -15,4 +15,18 @@ public class Player : Humanoid
     {
         
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+
+        if (this.tag == "Swat" && isAlive)
+        {
+            if (other.tag == "NinjaBullet")
+            {
+                takeDamage(PistolBullet.DAMAGE, other.GetComponent<PistolBullet>().getOwner());
+                // red canvas
+            }
+        }
+
+    }
 }

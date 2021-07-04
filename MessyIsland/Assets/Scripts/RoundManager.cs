@@ -31,6 +31,7 @@ public class RoundManager : MonoBehaviour
      
     void Start()
     {      
+       
         scatterWeaponsRandomly(grenades, pistols);
 
         audioPlayer = GetComponent<AudioSource>();

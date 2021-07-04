@@ -7,7 +7,7 @@ public class NPC : Humanoid
 {
     public enum NPCAnimStatus { Idle, ForwardWalk, IdlePistol, ForwardPistolWalk, GrenadeThrow, Die };
 
-    bool isThrowingGrenade;
+    bool isThrowingGrenade = false;
     bool isWeaponTargetFound;
 
     NavMeshAgent agent;
@@ -27,7 +27,7 @@ public class NPC : Humanoid
     void Start()
     {
         isNPC = true;
-
+        
         roundManagerScript = round.GetComponent<RoundManager>();
         weapons = roundManagerScript.getWeapons();
         isWeaponTargeted = new bool[weapons.Length];
@@ -41,15 +41,17 @@ public class NPC : Humanoid
 
     void Update()
     {
-       if (agent.enabled && this.tag != "Dead")
-       {         
+        
+
+        if (agent.enabled && this.tag != "Dead")
+       {
+            movementAnimations();
             followerLeader();
             findNearestWeapon();
             findEnemy();
             
             // playFootStepSound();
-            // movementAnimations();
-            generalMovementAnimations();
+                 
         }
 
     }
@@ -57,7 +59,7 @@ public class NPC : Humanoid
     void OnTriggerEnter(Collider other)
     {
         
-        if (this.tag == "Ninja" && isAlive) // will be also "Swat"
+        if (this.tag == "Ninja" && isAlive) 
         {
             if (other.tag == "SwatBullet") 
             {                     
@@ -152,22 +154,20 @@ public class NPC : Humanoid
         }
     }
 
-    //void movementAnimations()
-    //{
-    //    if (!isThrowingGrenade)
-    //    {
-    //        if (pistol.activeSelf)
-    //        {
-    //            animator.SetBool("isPistolActive", true);
-    //            pistolMovementAnimations();
-
-    //        }
-    //        else
-    //        {
-    //            generalMovementAnimations();
-    //        }
-    //    }
-    //}
+    void movementAnimations()
+    {
+        if (!isThrowingGrenade)
+        {
+            if (pistol.activeSelf)
+            {                         
+                pistolMovementAnimations();
+            }
+            else
+            {
+                generalMovementAnimations();
+            }
+        }
+    }
 
     void generalMovementAnimations()
     {
@@ -213,4 +213,18 @@ public class NPC : Humanoid
         }
     }
 
+    public void pickPistol()
+    {
+        setHasPistol(true);
+        pistol.SetActive(true);
+        animator.SetBool("isPistolActive", true);
+        Debug.Log(this.name + "has pistol " + getHasPistol());
+    }
+
+    public void pickGrenade()
+    {
+        setHasGrenade(true);
+        Debug.Log(this.name + "has grenade " + getHasGrenade());
+        
+    }
 }

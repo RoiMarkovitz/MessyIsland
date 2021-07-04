@@ -62,17 +62,18 @@ public class PlayerMotion : MonoBehaviour
     void movementAnimations()
     {
         if (!isThrowingGrenade)
-        { 
-            if (pistol.activeSelf)
-            {
-                animator.SetBool("isPistolActive", true);
-                pistolMovementAnimations();
-            
-            }
-            else
-            {
-                generalMovementAnimations();
-            }
+        {
+            generalMovementAnimations();
+            //if (pistol.activeSelf)
+            //{
+            //    animator.SetBool("isPistolActive", true);
+            //    pistolMovementAnimations();
+
+            //}
+            //else
+            //{
+            //    generalMovementAnimations();
+            //}
         }
     }
 

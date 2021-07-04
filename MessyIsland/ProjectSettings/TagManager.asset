@@ -11,6 +11,8 @@ TagManager:
   - SwatBullet
   - SwatGrenade
   - Dead
+  - NinjaBullet
+  - NinjaGrenade
   layers:
   - Default
   - TransparentFX

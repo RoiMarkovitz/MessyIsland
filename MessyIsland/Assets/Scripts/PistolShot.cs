@@ -14,7 +14,8 @@ public class PistolShot : MonoBehaviour
     AudioSource bulletSound;
     Animator animator;
 
-    Player playerScript;
+    //  Player playerScript;
+    Humanoid humanoidScript;
 
     bool isShootingAllowed;
     
@@ -23,8 +24,17 @@ public class PistolShot : MonoBehaviour
     {
         bulletSound = GetComponent<AudioSource>();
         bullet = this.transform.GetChild(2).gameObject;
-        muzzleFlashParticles = this.transform.GetChild(3).GetComponent<ParticleSystem>(); 
-        playerScript = player.GetComponent<Player>();
+        muzzleFlashParticles = this.transform.GetChild(3).GetComponent<ParticleSystem>();
+        humanoidScript = player.GetComponent<Humanoid>();
+        if (humanoidScript.getIsNPC())
+        {
+            humanoidScript = player.GetComponent<NPC>();
+        }
+        else
+        {
+            humanoidScript = player.GetComponent<Player>();
+        }
+
         animator = player.GetComponent<Animator>();
         isShootingAllowed = true;
     }
@@ -37,12 +47,16 @@ public class PistolShot : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0) && this.gameObject.activeSelf
-          && isShootingAllowed && playerScript.getHasPistol()
-          && animator.GetInteger("status") != (int)PlayerMotion.PlayerAnimStatus.GrenadeThrow)
+        if (!humanoidScript.getIsNPC())
         {
-            StartCoroutine(shoot());
+            if (Input.GetMouseButtonDown(0) && this.gameObject.activeSelf
+                     && isShootingAllowed && humanoidScript.getHasPistol()
+                     && animator.GetInteger("status") != (int)PlayerMotion.PlayerAnimStatus.GrenadeThrow)
+            {
+                StartCoroutine(shoot());
+            }
         }
+       
     }
     
     IEnumerator shoot()
@@ -51,7 +65,7 @@ public class PistolShot : MonoBehaviour
         bulletSound.Play();
         GameObject clonedBullet = Instantiate(bullet, bullet.transform.position, bullet.transform.rotation);
         clonedBullet.SetActive(true);
-        clonedBullet.GetComponent<PistolBullet>().setOwner(playerScript.getNickname());
+        clonedBullet.GetComponent<PistolBullet>().setOwner(humanoidScript.getNickname());
 
         Vector3 velocity = (transform.forward * BULLET_SPEED) * -1;
 
