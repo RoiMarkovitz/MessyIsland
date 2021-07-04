@@ -7,36 +7,36 @@ public class PistolShot : MonoBehaviour
     const float SHOOT_DELAY = 0.5f;
     const float BULLET_SPEED = 400.0f;
 
-    [SerializeField] GameObject player;
+    bool isShootingAllowed;
+    bool isNPC;
+
+    [SerializeField] GameObject user;
     GameObject bullet;
     ParticleSystem muzzleFlashParticles;
 
     AudioSource bulletSound;
     Animator animator;
 
-    //  Player playerScript;
-    Humanoid humanoidScript;
+    Humanoid userScript;
+    NPC npcScript;
+    
 
-    bool isShootingAllowed;
-    
-    
     void Start()
     {
+        isShootingAllowed = true;
         bulletSound = GetComponent<AudioSource>();
         bullet = this.transform.GetChild(2).gameObject;
         muzzleFlashParticles = this.transform.GetChild(3).GetComponent<ParticleSystem>();
-        humanoidScript = player.GetComponent<Humanoid>();
-        if (humanoidScript.getIsNPC())
+
+        userScript = user.GetComponent<Humanoid>();
+        isNPC = userScript.getIsNPC();
+
+        if (isNPC)
         {
-            humanoidScript = player.GetComponent<NPC>();
-        }
-        else
-        {
-            humanoidScript = player.GetComponent<Player>();
+            npcScript = user.GetComponent<NPC>();
         }
 
-        animator = player.GetComponent<Animator>();
-        isShootingAllowed = true;
+        animator = user.GetComponent<Animator>();      
     }
 
     
@@ -47,16 +47,22 @@ public class PistolShot : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!humanoidScript.getIsNPC())
+        if (isShootingAllowed && userScript.getHasPistol() && this.gameObject.activeSelf)
         {
-            if (Input.GetMouseButtonDown(0) && this.gameObject.activeSelf
-                     && isShootingAllowed && humanoidScript.getHasPistol()
-                     && animator.GetInteger("status") != (int)Player.PlayerAnimStatus.GrenadeThrow)
+            if (isNPC)
+            {
+                if (npcScript.getIsShooting() && animator.GetInteger("status") != (int)NPC.NPCAnimStatus.GrenadeThrow)
+                {
+                    StartCoroutine(shoot());
+                }
+               
+            }
+            else if (Input.GetMouseButtonDown(0) && animator.GetInteger("status") != (int)Player.PlayerAnimStatus.GrenadeThrow)
             {
                 StartCoroutine(shoot());
             }
         }
-       
+                    
     }
     
     IEnumerator shoot()
@@ -65,7 +71,7 @@ public class PistolShot : MonoBehaviour
         bulletSound.Play();
         GameObject clonedBullet = Instantiate(bullet, bullet.transform.position, bullet.transform.rotation);
         clonedBullet.SetActive(true);
-        clonedBullet.GetComponent<PistolBullet>().setOwner(humanoidScript.getNickname());
+        clonedBullet.GetComponent<PistolBullet>().setOwner(userScript.getNickname());
 
         Vector3 velocity = (transform.forward * BULLET_SPEED) * -1;
 
@@ -79,5 +85,7 @@ public class PistolShot : MonoBehaviour
         isShootingAllowed = true;
         
     }
+
+    
 
 }

@@ -6,17 +6,17 @@ using UnityEngine.AI;
 public class NPC : Humanoid
 {
     public enum NPCAnimStatus { Idle, ForwardWalk, IdlePistol, ForwardPistolWalk, GrenadeThrow, Die };
-
-    bool isThrowingGrenade = false;
-    bool isWeaponTargetFound;
-
+ 
+    bool shoot;
+    bool throwGrenade;
+    
     NavMeshAgent agent;
 
     [SerializeField] bool isLeader;
 
     [SerializeField] GameObject randomTarget;
     Transform weaponTarget = null;
-    [SerializeField] GameObject pistol;
+  
     [SerializeField] GameObject round;
     RoundManager roundManagerScript;
     GameObject[] weapons;
@@ -156,7 +156,7 @@ public class NPC : Humanoid
 
     void movementAnimations()
     {
-        if (!isThrowingGrenade)
+        if (!isThrowingGrenadeAnim)
         {
             if (pistol.activeSelf)
             {                         
@@ -194,11 +194,6 @@ public class NPC : Humanoid
         }
     }
 
-    public void setIsThrowingGrenade(bool value)
-    {
-        isThrowingGrenade = value;
-    }
-
     public bool isTargetReachable(Vector3 targetPosition)
     {
         NavMeshPath path = new NavMeshPath();
@@ -228,8 +223,13 @@ public class NPC : Humanoid
         
     }
 
-    public void deactivatePistol()
+    public bool getIsShooting()
     {
-        pistol.SetActive(false);
+        return shoot;
+    }
+
+    public bool getIsThrowingGrenade()
+    {
+        return throwGrenade;
     }
 }

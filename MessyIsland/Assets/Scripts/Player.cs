@@ -16,13 +16,11 @@ public class Player : Humanoid
     [SerializeField] float angularSpeed;
     float rx = 0f, ry;
     [SerializeField] GameObject playerCamera;
-    [SerializeField] GameObject pistol;
+    
 
     AudioSource footStep;
 
-    bool isThrowingGrenade;
-
-
+    
     void Start()
     {
         isNPC = false;
@@ -79,7 +77,7 @@ public class Player : Humanoid
 
     void movementAnimations()
     {
-        if (!isThrowingGrenade)
+        if (!isThrowingGrenadeAnim)
         {
             generalMovementAnimations();
             //if (pistol.activeSelf)
@@ -150,8 +148,5 @@ public class Player : Humanoid
     //    }
     //}
 
-    public void setIsThrowingGrenade(bool value)
-    {
-        isThrowingGrenade = value;
-    }
+    
 }

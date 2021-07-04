@@ -8,36 +8,31 @@ public class GrenadeThrow : MonoBehaviour
     const float THROW_BEFORE_DELAY = 1.2f;
     const float THROW_SPEED = 27.5f;
     const float DAMAGE = 70.0f;
-    
 
-    [SerializeField] GameObject player;  
+    bool isThrowingAllowed;
+    bool isNPC;
+
+    [SerializeField] GameObject user;  
     AudioSource explosionSound;
     GameObject grenade;
     [SerializeField] GameObject pistol;
-    Humanoid humanoidScript;  
+    Humanoid userScript;  
     NPC npcScript;
-    Player playerScript;
-
-    bool isThrowingAllowed;
-
+    
     void Start()
     {
-        humanoidScript = player.GetComponent<Humanoid>();
         isThrowingAllowed = true;
         grenade = this.transform.GetChild(0).gameObject;
         explosionSound = GetComponent<AudioSource>();
-        if (humanoidScript.getIsNPC())
-        {
-            npcScript = player.GetComponent<NPC>();
-        }
-        else
-        {
-            playerScript = player.GetComponent<Player>();
-           
-        }
-      
-        
 
+        userScript = user.GetComponent<Humanoid>();
+        isNPC = userScript.getIsNPC();
+
+        if (isNPC)
+        {
+            npcScript = user.GetComponent<NPC>();
+        }
+                     
     }
 
     
@@ -48,29 +43,42 @@ public class GrenadeThrow : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!humanoidScript.getIsNPC())
+        if (isThrowingAllowed && userScript.getHasGrenade())
         {
-            if (Input.GetKey("q") && isThrowingAllowed && humanoidScript.getHasGrenade())
+            if (isNPC)
+            {
+                if (npcScript.getIsThrowingGrenade())
+                {
+                    StartCoroutine(throwGrenade());
+                }
+            } else if(Input.GetKey("q"))
             {
                 StartCoroutine(throwGrenade());
             }
-        }
-        
+        }          
     }
 
     IEnumerator throwGrenade()
     {
         isThrowingAllowed = false;
 
-        bool hasPistol = humanoidScript.getHasPistol();
+        bool hasPistol = userScript.getHasPistol();
         if (hasPistol)
         {
             pistol.SetActive(false);
         }
 
-        playerScript.setIsThrowingGrenade(true);      
-        Animator animator = player.GetComponent<Animator>();
-        animator.SetInteger("status", (int)Player.PlayerAnimStatus.GrenadeThrow);
+        userScript.setIsThrowingGrenadeAnim(true);      
+        Animator animator = user.GetComponent<Animator>();
+        if (isNPC)
+        {
+            animator.SetInteger("status", (int)NPC.NPCAnimStatus.GrenadeThrow);
+        }
+        else
+        {
+            animator.SetInteger("status", (int)Player.PlayerAnimStatus.GrenadeThrow);
+        }
+        
    
         Vector3 velocity = transform.forward * THROW_SPEED;
         
@@ -81,7 +89,7 @@ public class GrenadeThrow : MonoBehaviour
             pistol.SetActive(true);
         }
 
-        playerScript.setIsThrowingGrenade(false);
+        userScript.setIsThrowingGrenadeAnim(false);
 
         GameObject clonedGrenade = Instantiate(grenade, grenade.transform.position, grenade.transform.rotation);
         clonedGrenade.SetActive(true);
@@ -104,12 +112,11 @@ public class GrenadeThrow : MonoBehaviour
         for (int i = 0; i < objectsCollider.Length; i++)
         {
             if (objectsCollider[i] != null)
-            {                          
-                if (objectsCollider[i].tag == "Ninja" && this.tag == "SwatGrenade")
-                {                 
-                    npcScript = objectsCollider[i].gameObject.GetComponent<NPC>();      
-                    npcScript.takeDamage(DAMAGE, humanoidScript.getNickname());
-                                                     
+            {
+                if ((objectsCollider[i].tag == "Ninja" && this.tag == "SwatGrenade")
+                    || objectsCollider[i].tag == "Swat" && this.tag == "NinjaGrenade")
+                {
+                    damageEnemy(objectsCollider[i]);
                 }
                                      
                 //Rigidbody rbo = objectsCollider[i].GetComponent<Rigidbody>();
@@ -119,13 +126,18 @@ public class GrenadeThrow : MonoBehaviour
                 //}
             }
         }
-
-        
+      
         isThrowingAllowed = true;
         
         yield return new WaitForSeconds(2.0f);
         Destroy(clonedGrenade);
         
+    }
+
+    void damageEnemy(Collider enemy)
+    {
+        Humanoid enemyScript = enemy.gameObject.GetComponent<Humanoid>();
+        enemyScript.takeDamage(DAMAGE, userScript.getNickname());
     }
 
     void hideClonedGrenadeMeshParts(GameObject clonedGrenade)

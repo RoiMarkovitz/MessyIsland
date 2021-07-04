@@ -7313,8 +7313,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.12, y: 0.2, z: 0.2}
-  m_Center: {x: 0.05, y: 0.01, z: -0.03}
+  m_Size: {x: 0.08, y: 0.2, z: 0.2}
+  m_Center: {x: 0.01, y: 0.01, z: -0.03}
 --- !u!82 &1955513344013556730
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8453,6 +8453,10 @@ PrefabInstance:
       value: NinjaGrenade
       objectReference: {fileID: 0}
     - target: {fileID: 839878906060397207, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
+      propertyPath: user
+      value: 
+      objectReference: {fileID: 8522230115697836409}
+    - target: {fileID: 839878906060397207, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
       propertyPath: pistol
       value: 
       objectReference: {fileID: 5900489835237055394}
@@ -8480,6 +8484,10 @@ PrefabInstance:
       propertyPath: randomTarget
       value: 
       objectReference: {fileID: 2035078526}
+    - target: {fileID: 5001536484186930760, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
+      propertyPath: user
+      value: 
+      objectReference: {fileID: 8522230115697836409}
     - target: {fileID: 5001536484186930760, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
       propertyPath: player
       value: 
@@ -16512,9 +16520,17 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2893702955320083624, guid: a6c1a37c2e12d1d47b95906f789ba899, type: 3}
+      propertyPath: user
+      value: 
+      objectReference: {fileID: 1720947727170616579}
+    - target: {fileID: 2893702955320083624, guid: a6c1a37c2e12d1d47b95906f789ba899, type: 3}
       propertyPath: pistol
       value: 
       objectReference: {fileID: 1956199726778801919}
+    - target: {fileID: 2893702956384624608, guid: a6c1a37c2e12d1d47b95906f789ba899, type: 3}
+      propertyPath: user
+      value: 
+      objectReference: {fileID: 1720947727170616579}
     - target: {fileID: 2893702956579694271, guid: a6c1a37c2e12d1d47b95906f789ba899, type: 3}
       propertyPath: speed
       value: 20
@@ -16709,6 +16725,10 @@ PrefabInstance:
       value: NinjaGrenade
       objectReference: {fileID: 0}
     - target: {fileID: 839878906060397207, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
+      propertyPath: user
+      value: 
+      objectReference: {fileID: 1720947728271398578}
+    - target: {fileID: 839878906060397207, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
       propertyPath: pistol
       value: 
       objectReference: {fileID: 3478401560754785385}
@@ -16736,6 +16756,10 @@ PrefabInstance:
       propertyPath: randomTarget
       value: 
       objectReference: {fileID: 2035078526}
+    - target: {fileID: 5001536484186930760, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
+      propertyPath: user
+      value: 
+      objectReference: {fileID: 1720947728271398578}
     - target: {fileID: 5001536484186930760, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
       propertyPath: player
       value: 

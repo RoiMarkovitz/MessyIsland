@@ -15,7 +15,9 @@ public abstract class Humanoid : MonoBehaviour
     protected bool hasGrenade;
     protected bool isAlive;
     protected bool isNPC;
+    protected bool isThrowingGrenadeAnim;
 
+    [SerializeField] protected GameObject pistol;
     [SerializeField] Image healthBar;
 
     protected Animator animator;
@@ -93,6 +95,7 @@ public abstract class Humanoid : MonoBehaviour
                     {
                         healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
                         animator.SetInteger("status", (int)Player.PlayerAnimStatus.Die);
+                        pistol.SetActive(false);
                     }
                                               
                 }
@@ -111,7 +114,7 @@ public abstract class Humanoid : MonoBehaviour
         this.GetComponent<NPC>().getNavMeshAgent().enabled = false;
         if (hasPistol)
         {
-            this.GetComponent<NPC>().deactivatePistol();
+            pistol.SetActive(false);
         }
         healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
     }
@@ -139,5 +142,10 @@ public abstract class Humanoid : MonoBehaviour
     public bool getIsNPC()
     {
         return isNPC;
+    }
+
+    public void setIsThrowingGrenadeAnim(bool value)
+    {
+        isThrowingGrenadeAnim = value;
     }
 }
