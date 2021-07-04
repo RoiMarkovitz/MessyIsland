@@ -227,4 +227,9 @@ public class NPC : Humanoid
         Debug.Log(this.name + "has grenade " + getHasGrenade());
         
     }
+
+    public void deactivatePistol()
+    {
+        pistol.SetActive(false);
+    }
 }

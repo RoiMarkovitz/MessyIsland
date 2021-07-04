@@ -80,21 +80,19 @@ public abstract class Humanoid : MonoBehaviour
                 
                 if (this.tag == "Ninja")
                 {
-                    animator.SetInteger("status", (int)NPC.NPCAnimStatus.Die);                  
-                    this.GetComponent<NPC>().getNavMeshAgent().enabled = false;
+                    deactivateNPC();
                 }
                 else if (this.tag == "Swat")
                 {
                     Humanoid script = this.gameObject.GetComponent<Humanoid>();
                     if (script.getIsNPC())
                     {
-                        animator.SetInteger("status", (int)NPC.NPCAnimStatus.Die);
-                        this.GetComponent<NPC>().getNavMeshAgent().enabled = false;
+                        deactivateNPC();
                     }
                     else // its the player
                     {
                         healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
-                        animator.SetInteger("status", (int)PlayerMotion.PlayerAnimStatus.Die);
+                        animator.SetInteger("status", (int)Player.PlayerAnimStatus.Die);
                     }
                                               
                 }
@@ -107,11 +105,16 @@ public abstract class Humanoid : MonoBehaviour
 
     }
 
-    //void killNPC()
-    //{
-    //    animator.SetInteger("status", (int)NPC.NPCAnimStatus.Die);
-    //    this.GetComponent<NPC>().getNavMeshAgent().enabled = false;
-    //}
+    void deactivateNPC()
+    {
+        animator.SetInteger("status", (int)NPC.NPCAnimStatus.Die);
+        this.GetComponent<NPC>().getNavMeshAgent().enabled = false;
+        if (hasPistol)
+        {
+            this.GetComponent<NPC>().deactivatePistol();
+        }
+        healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
+    }
 
     public void setNickname(string newNickname)
     {

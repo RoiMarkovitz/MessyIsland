@@ -14,9 +14,9 @@ public class GrenadeThrow : MonoBehaviour
     AudioSource explosionSound;
     GameObject grenade;
     [SerializeField] GameObject pistol;
-    Humanoid humanoidScript;
-    PlayerMotion playerMotionScript;
+    Humanoid humanoidScript;  
     NPC npcScript;
+    Player playerScript;
 
     bool isThrowingAllowed;
 
@@ -28,12 +28,12 @@ public class GrenadeThrow : MonoBehaviour
         explosionSound = GetComponent<AudioSource>();
         if (humanoidScript.getIsNPC())
         {
-            humanoidScript = player.GetComponent<NPC>();
+            npcScript = player.GetComponent<NPC>();
         }
         else
         {
-            humanoidScript = player.GetComponent<Player>();
-            playerMotionScript = player.GetComponent<PlayerMotion>();
+            playerScript = player.GetComponent<Player>();
+           
         }
       
         
@@ -67,10 +67,10 @@ public class GrenadeThrow : MonoBehaviour
         {
             pistol.SetActive(false);
         }
-    
-        playerMotionScript.setIsThrowingGrenade(true);      
+
+        playerScript.setIsThrowingGrenade(true);      
         Animator animator = player.GetComponent<Animator>();
-        animator.SetInteger("status", (int)PlayerMotion.PlayerAnimStatus.GrenadeThrow);
+        animator.SetInteger("status", (int)Player.PlayerAnimStatus.GrenadeThrow);
    
         Vector3 velocity = transform.forward * THROW_SPEED;
         
@@ -80,8 +80,8 @@ public class GrenadeThrow : MonoBehaviour
         {
             pistol.SetActive(true);
         }
-      
-        playerMotionScript.setIsThrowingGrenade(false);
+
+        playerScript.setIsThrowingGrenade(false);
 
         GameObject clonedGrenade = Instantiate(grenade, grenade.transform.position, grenade.transform.rotation);
         clonedGrenade.SetActive(true);
@@ -104,9 +104,9 @@ public class GrenadeThrow : MonoBehaviour
         for (int i = 0; i < objectsCollider.Length; i++)
         {
             if (objectsCollider[i] != null)
-            {
+            {                          
                 if (objectsCollider[i].tag == "Ninja" && this.tag == "SwatGrenade")
-                {
+                {                 
                     npcScript = objectsCollider[i].gameObject.GetComponent<NPC>();      
                     npcScript.takeDamage(DAMAGE, humanoidScript.getNickname());
                                                      

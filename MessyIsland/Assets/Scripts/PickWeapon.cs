@@ -25,9 +25,8 @@ public class PickWeapon : MonoBehaviour
 
     void Start()
     {
-
+        
         gameCanvas = GameObject.Find("CanvasRound");
-
         isTriggerHit = false;
         fireCrosshair = gameCanvas.transform.GetChild(0).gameObject;
         actionCrosshair = gameCanvas.transform.GetChild(1).gameObject;
@@ -45,9 +44,10 @@ public class PickWeapon : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
+        
         // casts ray from camera in the forward direction and writes down to hit
         // the info of GameObject that was hit by the ray is written to hit
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 8, 1, QueryTriggerInteraction.Ignore))
         {
             //not allow player to pick more than one weapon of a type
             if (isWeaponAlreadyPickedByPlayer(hit) ||
@@ -57,7 +57,7 @@ public class PickWeapon : MonoBehaviour
             }
 
             // check if "this" is the GameObject that was hit
-            if (hit.transform.gameObject.name == this.gameObject.name && hit.distance < 10)
+            if (hit.transform.gameObject.name == this.gameObject.name && hit.distance < 8)
             {
                 if (!isTriggerHit)
                 {

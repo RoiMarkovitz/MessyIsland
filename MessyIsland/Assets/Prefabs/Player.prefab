@@ -596,7 +596,6 @@ GameObject:
   - component: {fileID: 2893702956579694266}
   - component: {fileID: 2893702956579694267}
   - component: {fileID: 2893702956579694271}
-  - component: {fileID: 2893702956579694264}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -769,22 +768,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nickname: Player
   healthBar: {fileID: 3678067086917152380}
---- !u!114 &2893702956579694264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2659681588733069876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 618164cc46dde63478956044e6a9f983, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   speed: 20
   angularSpeed: 60
-  playerCamera: {fileID: 2893702956054337387}
-  pistol: {fileID: 2895480097258351048}
+  playerCamera: {fileID: 0}
+  pistol: {fileID: 0}
 --- !u!1 &2707192209324786630
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,11 +2987,6 @@ PrefabInstance:
       objectReference: {fileID: 2893702956054337387}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2966ee57e0e2425459c17d1d415b3b81, type: 3}
---- !u!1 &2895480097258351048 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5454601768710327675, guid: 2966ee57e0e2425459c17d1d415b3b81, type: 3}
-  m_PrefabInstance: {fileID: 7177731366685926579}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2898173815993189124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5450495866892887991, guid: 2966ee57e0e2425459c17d1d415b3b81, type: 3}

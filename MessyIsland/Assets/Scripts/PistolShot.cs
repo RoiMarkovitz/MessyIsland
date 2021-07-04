@@ -51,7 +51,7 @@ public class PistolShot : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && this.gameObject.activeSelf
                      && isShootingAllowed && humanoidScript.getHasPistol()
-                     && animator.GetInteger("status") != (int)PlayerMotion.PlayerAnimStatus.GrenadeThrow)
+                     && animator.GetInteger("status") != (int)Player.PlayerAnimStatus.GrenadeThrow)
             {
                 StartCoroutine(shoot());
             }
