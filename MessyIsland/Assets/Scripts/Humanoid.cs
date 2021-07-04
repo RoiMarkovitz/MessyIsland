@@ -19,6 +19,7 @@ public abstract class Humanoid : MonoBehaviour
 
     [SerializeField] protected GameObject pistol;
     [SerializeField] Image healthBar;
+    
 
     protected Animator animator;
 
@@ -67,8 +68,8 @@ public abstract class Humanoid : MonoBehaviour
         return currentHealth;
     }
 
-    public void takeDamage(float reduction, string enemyNickname)
-    {
+    virtual public void takeDamage(float reduction, string enemyNickname)
+    {       
         if (MAX_HEALTH >= currentHealth && currentHealth > MIN_HEALTH)
         {
             currentHealth -= reduction;

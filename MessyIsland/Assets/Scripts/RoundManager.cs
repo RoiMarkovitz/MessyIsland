@@ -107,6 +107,7 @@ public class RoundManager : MonoBehaviour
         roundCanvas.transform.GetChild(4).gameObject.SetActive(false);
         roundCanvas.transform.GetChild(5).gameObject.SetActive(false);
         roundCanvas.transform.GetChild(8).gameObject.SetActive(false);
+        roundCanvas.transform.GetChild(10).gameObject.SetActive(false);
     }
 
     void scatterWeaponsRandomly(GameObject grenades, GameObject pistols)

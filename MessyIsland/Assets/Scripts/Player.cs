@@ -16,7 +16,7 @@ public class Player : Humanoid
     [SerializeField] float angularSpeed;
     float rx = 0f, ry;
     [SerializeField] GameObject playerCamera;
-    
+    [SerializeField] GameObject takeDamagePanel;
 
     AudioSource footStep;
 
@@ -73,6 +73,17 @@ public class Player : Humanoid
         {
             footStep.Play();
         }
+    }
+
+    public override void takeDamage(float reduction, string enemyNickname)
+    {
+        takeDamagePanel.SetActive(true);
+        Invoke("endTakeDamageEffect", 1.0f);
+    }
+
+    void endTakeDamageEffect()
+    {
+        takeDamagePanel.SetActive(false);
     }
 
     void movementAnimations()
