@@ -6,7 +6,7 @@ public class GrenadeThrow : MonoBehaviour
 {
     const float THROW_AFTER_DELAY = 3.0f;
     const float THROW_BEFORE_DELAY = 1.2f;
-    const float THROW_SPEED = 27.5f;
+    const float THROW_SPEED = 20.0f;
     const float DAMAGE = 70.0f;
 
     bool isThrowingAllowed;
@@ -20,7 +20,7 @@ public class GrenadeThrow : MonoBehaviour
     NPC npcScript;
     
     void Start()
-    {
+    {       
         isThrowingAllowed = true;
         grenade = this.transform.GetChild(0).gameObject;
         
@@ -95,6 +95,7 @@ public class GrenadeThrow : MonoBehaviour
 
         Rigidbody rbClonedGrenade = clonedGrenade.GetComponent<Rigidbody>();
         rbClonedGrenade.useGravity = true;
+       
         rbClonedGrenade.AddForce(velocity, ForceMode.Impulse);
         
         yield return new WaitForSeconds(THROW_AFTER_DELAY);

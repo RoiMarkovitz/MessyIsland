@@ -37,6 +37,8 @@ public class Player : Humanoid
         // mouse input
         rx -= Input.GetAxis("Mouse Y") * angularSpeed * Time.deltaTime; // vertical rotation
         // use Clampf to limit the sight angles
+        rx = Mathf.Clamp(rx, -45f, 45f);
+
         playerCamera.transform.localEulerAngles = new Vector3(rx, 0, 0);
 
         ry = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * angularSpeed * Time.deltaTime;
