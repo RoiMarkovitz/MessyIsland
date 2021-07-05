@@ -169,6 +169,7 @@ public class RoundManager : MonoBehaviour
         }
     }
 
+    // TODO: make case for Swat
     public bool teamHasMissingWeapons(TeamName name)
     {
         if (name == TeamName.Ninja)
@@ -194,6 +195,7 @@ public class RoundManager : MonoBehaviour
         return weapons;
     }
 
+    // TODO: make it more general later
     public GameObject getNinjaLeader()
     {
         if (ninjaTeam[0].tag == "Dead")

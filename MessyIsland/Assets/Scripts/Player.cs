@@ -49,7 +49,7 @@ public class Player : Humanoid
         motion = transform.TransformDirection(motion); // in Global coordinates
         controller.Move(motion);
 
-        playFootStepSound();
+        
         movementAnimations();
     }
 
@@ -60,8 +60,7 @@ public class Player : Humanoid
         {
             if (other.tag == "NinjaBullet")
             {
-                takeDamage(PistolBullet.DAMAGE, other.GetComponent<PistolBullet>().getOwner());
-                // red canvas
+                takeDamage(PistolBullet.DAMAGE, other.GetComponent<PistolBullet>().getOwner());               
             }
         }
 
@@ -88,6 +87,8 @@ public class Player : Humanoid
 
     void movementAnimations()
     {
+        playFootStepSound();
+
         if (!isThrowingGrenadeAnim)
         {
             generalMovementAnimations();

@@ -13,7 +13,7 @@ public class GrenadeThrow : MonoBehaviour
     bool isNPC;
 
     [SerializeField] GameObject user;  
-    AudioSource explosionSound;
+    
     GameObject grenade;
     [SerializeField] GameObject pistol;
     Humanoid userScript;  
@@ -23,8 +23,7 @@ public class GrenadeThrow : MonoBehaviour
     {
         isThrowingAllowed = true;
         grenade = this.transform.GetChild(0).gameObject;
-        explosionSound = GetComponent<AudioSource>();
-
+        
         userScript = user.GetComponent<Humanoid>();
         isNPC = userScript.getIsNPC();
 
@@ -100,6 +99,7 @@ public class GrenadeThrow : MonoBehaviour
         
         yield return new WaitForSeconds(THROW_AFTER_DELAY);
 
+        AudioSource explosionSound = rbClonedGrenade.GetComponent<AudioSource>();
         explosionSound.Play();
 
         hideClonedGrenadeMeshParts(clonedGrenade);

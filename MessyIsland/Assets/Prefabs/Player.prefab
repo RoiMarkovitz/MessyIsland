@@ -659,10 +659,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 45
+  MaxDistance: 60
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -695,7 +695,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -767,11 +767,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickname: Player
+  pistol: {fileID: 0}
   healthBar: {fileID: 3678067086917152380}
   speed: 20
   angularSpeed: 60
   playerCamera: {fileID: 0}
-  pistol: {fileID: 0}
+  takeDamagePanel: {fileID: 0}
 --- !u!1 &2707192209324786630
 GameObject:
   m_ObjectHideFlags: 0

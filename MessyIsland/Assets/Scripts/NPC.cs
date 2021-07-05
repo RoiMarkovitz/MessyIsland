@@ -50,7 +50,7 @@ public class NPC : Humanoid
             findNearestWeapon();
             findEnemy();
             
-            // playFootStepSound();
+            
                  
         }
 
@@ -156,6 +156,8 @@ public class NPC : Humanoid
 
     void movementAnimations()
     {
+        playFootStepSound();
+
         if (!isThrowingGrenadeAnim)
         {
             if (pistol.activeSelf)

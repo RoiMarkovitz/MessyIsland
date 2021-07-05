@@ -2214,10 +2214,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickname: Ninja Leader
+  pistol: {fileID: 0}
   healthBar: {fileID: 701003991526694340}
   isLeader: 0
   randomTarget: {fileID: 0}
-  pistol: {fileID: 0}
   round: {fileID: 1955513343959141439, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
 --- !u!82 &2348613302346403352
 AudioSource:
@@ -2239,10 +2239,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 45
+  MaxDistance: 60
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2275,7 +2275,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2694,6 +2694,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7603110880640370689}
     m_Modifications:
+    - target: {fileID: 1064579480374601345, guid: fbff7098faf608141ac008dd66774bef, type: 3}
+      propertyPath: MaxDistance
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 6753489732312781366, guid: fbff7098faf608141ac008dd66774bef, type: 3}
       propertyPath: m_RootOrder
       value: 4

@@ -47,7 +47,7 @@ public class PickWeapon : MonoBehaviour
         
         // casts ray from camera in the forward direction and writes down to hit
         // the info of GameObject that was hit by the ray is written to hit
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 8, 1, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit))
         {
             //not allow player to pick more than one weapon of a type
             if (isWeaponAlreadyPickedByPlayer(hit) ||
