@@ -117,7 +117,7 @@ public class GrenadeThrow : MonoBehaviour
                 if ((objectsCollider[i].tag == "Ninja" && this.tag == "SwatGrenade")
                     || objectsCollider[i].tag == "Swat" && this.tag == "NinjaGrenade")
                 {
-                    damageEnemy(objectsCollider[i]);
+                    damageEnemy(objectsCollider[i]);                
                 }
                                      
                 //Rigidbody rbo = objectsCollider[i].GetComponent<Rigidbody>();
@@ -138,7 +138,16 @@ public class GrenadeThrow : MonoBehaviour
     void damageEnemy(Collider enemy)
     {
         Humanoid enemyScript = enemy.gameObject.GetComponent<Humanoid>();
-        enemyScript.takeDamage(DAMAGE, userScript.getNickname());
+        if (!enemyScript.getIsNPC())
+        {
+            Player playerScript = enemy.gameObject.GetComponent<Player>();
+            playerScript.takeDamage(DAMAGE, userScript.getNickname());        
+        }
+        else
+        {
+            enemyScript.takeDamage(DAMAGE, userScript.getNickname());
+        }
+        
     }
 
     void hideClonedGrenadeMeshParts(GameObject clonedGrenade)

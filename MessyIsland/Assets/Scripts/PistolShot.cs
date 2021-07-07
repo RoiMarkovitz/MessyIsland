@@ -50,9 +50,10 @@ public class PistolShot : MonoBehaviour
         if (isShootingAllowed && userScript.getHasPistol() && this.gameObject.activeSelf)
         {
             if (isNPC)
-            {
+            {        
                 if (npcScript.getIsShooting() && animator.GetInteger("status") != (int)NPC.NPCAnimStatus.GrenadeThrow)
                 {
+                    
                     StartCoroutine(shoot());
                 }
                

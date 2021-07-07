@@ -33,7 +33,7 @@ public class NPCPickWeapon : MonoBehaviour
                     NPC npcScript = other.gameObject.GetComponent<NPC>();
                     if (weapon.gameObject.tag == "Grenade" && !npcScript.getHasGrenade())
                     {
-                        Debug.Log("here grenade for " + other.name);
+                     //   Debug.Log("here grenade for " + other.name);
                         isWeaponPicked = true;
                         weapon.SetActive(false);
                         npcScript.pickGrenade();
@@ -41,7 +41,7 @@ public class NPCPickWeapon : MonoBehaviour
                     }
                     else if (weapon.gameObject.tag == "Pistol" && !npcScript.getHasPistol())
                     {
-                        Debug.Log("here pistol for " + other.name);
+                      //  Debug.Log("here pistol for " + other.name);
                         isWeaponPicked = true;
                         weapon.SetActive(false);
                         npcScript.pickPistol();

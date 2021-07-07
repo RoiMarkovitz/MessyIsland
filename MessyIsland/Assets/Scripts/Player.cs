@@ -24,8 +24,7 @@ public class Player : Humanoid
     void Start()
     {
         isNPC = false;
-        controller = GetComponent<CharacterController>();
-       
+        controller = GetComponent<CharacterController>();     
         footStep = GetComponent<AudioSource>();
     }
 
@@ -37,7 +36,7 @@ public class Player : Humanoid
         // mouse input
         rx -= Input.GetAxis("Mouse Y") * angularSpeed * Time.deltaTime; // vertical rotation
         // use Clampf to limit the sight angles
-        rx = Mathf.Clamp(rx, -45f, 45f);
+        rx = Mathf.Clamp(rx, -60f, 60f);
 
         playerCamera.transform.localEulerAngles = new Vector3(rx, 0, 0);
 
@@ -56,12 +55,11 @@ public class Player : Humanoid
     }
 
     void OnTriggerEnter(Collider other)
-    {
-
+    {   
         if (this.tag == "Swat" && isAlive)
-        {
+        {         
             if (other.tag == "NinjaBullet")
-            {
+            {             
                 takeDamage(PistolBullet.DAMAGE, other.GetComponent<PistolBullet>().getOwner());               
             }
         }
@@ -77,7 +75,8 @@ public class Player : Humanoid
     }
 
     public override void takeDamage(float reduction, string enemyNickname)
-    {
+    {    
+        base.takeDamage(reduction, enemyNickname);
         takeDamagePanel.SetActive(true);
         Invoke("endTakeDamageEffect", 1.0f);
     }

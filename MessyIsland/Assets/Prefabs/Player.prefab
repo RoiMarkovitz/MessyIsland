@@ -62,6 +62,36 @@ Transform:
   m_Father: {fileID: 3127524585645602492}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &126120084197047022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1344280440798924385}
+  m_Layer: 0
+  m_Name: RayOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1344280440798924385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126120084197047022}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.021, y: 1.91, z: 0.002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3432524654372491406}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &274551945861750125
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,6 +648,7 @@ Transform:
   - {fileID: 1452424755751118400}
   - {fileID: 2893702956054337390}
   - {fileID: 3678067086308526283}
+  - {fileID: 1344280440798924385}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2978,6 +3009,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 5454601768710327675, guid: 2966ee57e0e2425459c17d1d415b3b81, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5455006110982601555, guid: 2966ee57e0e2425459c17d1d415b3b81, type: 3}
       propertyPath: player
       value: 
@@ -3000,6 +3035,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2893702956054337390}
     m_Modifications:
+    - target: {fileID: 1966295032, guid: fbff7098faf608141ac008dd66774bef, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6753489732312781365, guid: fbff7098faf608141ac008dd66774bef, type: 3}
       propertyPath: player
       value: 

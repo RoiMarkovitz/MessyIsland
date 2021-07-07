@@ -169,7 +169,6 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    // TODO: make case for Swat
     public bool teamHasMissingWeapons(TeamName name)
     {
         if (name == TeamName.Ninja)
@@ -185,7 +184,19 @@ public class RoundManager : MonoBehaviour
                     }
                 }              
             }
-        }
+        } else if (name == TeamName.Swat)
+                {
+            
+                if (swatTeam[1].tag != "Dead")
+                {
+                    NPC npcScript = swatTeam[1].GetComponent<NPC>();
+                    if (!npcScript.getHasGrenade() || !npcScript.getHasPistol())
+                    {
+                        return true;
+                    }
+                }
+            
+                 }
 
         return false; // no missing weapons
     }
@@ -195,18 +206,30 @@ public class RoundManager : MonoBehaviour
         return weapons;
     }
 
-    // TODO: make it more general later
-    public GameObject getNinjaLeader()
+    public GameObject teamLeader(TeamName name)
     {
-        if (ninjaTeam[0].tag == "Dead")
+        if (name == TeamName.Ninja && ninjaTeam[0].tag != "Dead")
         {
-            return null;
+            return ninjaTeam[0];
+            
+        } else if (name == TeamName.Swat && swatTeam[0].tag != "Dead")
+        {
+            return swatTeam[0];
         }
         else
         {
-            return ninjaTeam[0];
-        }
-       
+            return null;
+        }            
+    }
+
+    public GameObject[] getNinjaTeam()
+    {     
+        return ninjaTeam;
+    }
+
+    public GameObject[] getSwatTeam()
+    {
+        return swatTeam;
     }
 
 
