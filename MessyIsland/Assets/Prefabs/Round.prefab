@@ -8980,6 +8980,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1955513343959141438}
     m_Modifications:
+    - target: {fileID: -4676044811642062685, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
+      propertyPath: m_Speed
+      value: 6.5
+      objectReference: {fileID: 0}
     - target: {fileID: 839878906060397205, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
       propertyPath: m_TagString
       value: NinjaGrenade
@@ -9010,7 +9014,7 @@ PrefabInstance:
       objectReference: {fileID: 1720947728271398578}
     - target: {fileID: 1340127019097989589, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
       propertyPath: nickname
-      value: Ninja Follower
+      value: NinjaNPC
       objectReference: {fileID: 0}
     - target: {fileID: 1340127019097989589, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
       propertyPath: randomTarget
@@ -17324,7 +17328,7 @@ PrefabInstance:
       objectReference: {fileID: 1955513343959141439}
     - target: {fileID: 2893702956579694271, guid: a6c1a37c2e12d1d47b95906f789ba899, type: 3}
       propertyPath: speed
-      value: 8.5
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 2893702956579694271, guid: a6c1a37c2e12d1d47b95906f789ba899, type: 3}
       propertyPath: pistol
@@ -17448,6 +17452,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: eac22eccdd1cf3a4085bbefc66977487, type: 2}
+    - target: {fileID: 2005840049758313817, guid: b8d072b0454b65d499d6caac9eca8058, type: 3}
+      propertyPath: m_Speed
+      value: 6.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8163489846030342034, guid: b8d072b0454b65d499d6caac9eca8058, type: 3}
       propertyPath: round
       value: 
@@ -17456,6 +17464,10 @@ PrefabInstance:
       propertyPath: pistol
       value: 
       objectReference: {fileID: 5805635174009525082}
+    - target: {fileID: 8163489846030342034, guid: b8d072b0454b65d499d6caac9eca8058, type: 3}
+      propertyPath: nickname
+      value: SwatNPC
+      objectReference: {fileID: 0}
     - target: {fileID: 8163489846030342034, guid: b8d072b0454b65d499d6caac9eca8058, type: 3}
       propertyPath: healthBar
       value: 
@@ -17535,6 +17547,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1955513343959141438}
     m_Modifications:
+    - target: {fileID: -4676044811642062685, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
+      propertyPath: m_Speed
+      value: 6.5
+      objectReference: {fileID: 0}
     - target: {fileID: 839878906060397204, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.398
@@ -17578,6 +17594,10 @@ PrefabInstance:
     - target: {fileID: 1340127019097989589, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
       propertyPath: isLeader
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1340127019097989589, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
+      propertyPath: nickname
+      value: NinjaLeaderNPC
       objectReference: {fileID: 0}
     - target: {fileID: 1340127019097989589, guid: 46a3ab90d0911644a84fa943b63e7d49, type: 3}
       propertyPath: randomTarget
