@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PickWeapon : MonoBehaviour
-{   
+{
     [SerializeField] GameObject playerCamera;
     [SerializeField] GameObject playerPistol;
     [SerializeField] GameObject playerGrenade;
@@ -20,12 +20,12 @@ public class PickWeapon : MonoBehaviour
 
     [SerializeField] GameObject player;
     Player playerScript;
-    
+
     bool isTriggerHit;
 
     void Start()
     {
-        
+
         gameCanvas = GameObject.Find("CanvasRound");
         isTriggerHit = false;
         fireCrosshair = gameCanvas.transform.GetChild(0).gameObject;
@@ -34,17 +34,17 @@ public class PickWeapon : MonoBehaviour
         pistolPlaceholderImage = gameCanvas.transform.GetChild(3).gameObject;
         activePistolImage = gameCanvas.transform.GetChild(4).gameObject;
         activeGrenadeImage = gameCanvas.transform.GetChild(5).gameObject;
-        
+
         playerScript = player.GetComponent<Player>();
         pickupSound = GetComponent<AudioSource>();
-        
+
     }
 
-    
+
     void Update()
     {
         RaycastHit hit;
-        
+
         // casts ray from camera in the forward direction and writes down to hit
         // the info of GameObject that was hit by the ray is written to hit
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit))
@@ -63,32 +63,32 @@ public class PickWeapon : MonoBehaviour
                 {
                     isTriggerHit = true;
                     fireCrosshair.SetActive(false);
-                    actionCrosshair.SetActive(true);                   
+                    actionCrosshair.SetActive(true);
                 }
 
                 if (Input.GetButtonDown("Action"))
                 {
-                    
+
                     pickupSound.Play();
 
                     if (this.gameObject.tag == playerPistol.tag)
                     {
-                        Invoke("pickPistol", 0.5f);                                            
+                        Invoke("pickPistol", 0.5f);
                     }
                     else // its the grenade
-                    {                       
-                        Invoke("pickGrenade", 0.5f);                                           
+                    {
+                        Invoke("pickGrenade", 0.5f);
                     }
 
-                    Invoke("hideWeapon", 0.5f);                 
+                    Invoke("hideWeapon", 0.5f);
                 }
-                
+
             }
             else // trigger not hit
             {
                 if (isTriggerHit)
                 {
-                    isTriggerHit = false;              
+                    isTriggerHit = false;
                     fireCrosshair.SetActive(true);
                     actionCrosshair.SetActive(false);
                 }
@@ -110,7 +110,7 @@ public class PickWeapon : MonoBehaviour
         }
 
         return false;
-        
+
     }
 
     void pickPistol()
@@ -118,7 +118,7 @@ public class PickWeapon : MonoBehaviour
         playerPistol.SetActive(true);
         pistolPlaceholderImage.SetActive(false);
         activePistolImage.SetActive(true);
-        playerScript.setHasPistol(true);    
+        playerScript.setHasPistol(true);
     }
 
     void pickGrenade()
@@ -126,7 +126,7 @@ public class PickWeapon : MonoBehaviour
         playerScript.setHasGrenade(true);
         grenadePlaceholderImage.SetActive(false);
         activeGrenadeImage.SetActive(true);
-        
+
     }
 
     void hideWeapon()

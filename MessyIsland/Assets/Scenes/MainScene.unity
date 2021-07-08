@@ -6632,6 +6632,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 438081664275001879, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
+      propertyPath: nickname
+      value: NinjaNPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 1347169226593140044, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
+      propertyPath: nickname
+      value: SwatNPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720947729187462412, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1865001503815504303, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
       propertyPath: LightsModule.light
       value: 
@@ -6687,6 +6699,26 @@ PrefabInstance:
     - target: {fileID: 1955513343959141439, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
       propertyPath: m_Name
       value: Round
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140746836294249313, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
+      propertyPath: m_Speed
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5346106386490047658, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
+      propertyPath: m_Speed
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472425091361842652, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
+      propertyPath: nickname
+      value: NinjaLeaderNPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522230115697836409, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660067356335601543, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
+      propertyPath: m_Speed
+      value: 6.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f41422055a5761428c885186cde4a1a, type: 3}

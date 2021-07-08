@@ -19,7 +19,7 @@ public class PistolShot : MonoBehaviour
 
     Humanoid userScript;
     NPC npcScript;
-    
+
 
     void Start()
     {
@@ -36,13 +36,13 @@ public class PistolShot : MonoBehaviour
             npcScript = user.GetComponent<NPC>();
         }
 
-        animator = user.GetComponent<Animator>();      
+        animator = user.GetComponent<Animator>();
     }
 
-    
+
     void Update()
     {
-      
+
     }
 
     void FixedUpdate()
@@ -50,22 +50,22 @@ public class PistolShot : MonoBehaviour
         if (isShootingAllowed && userScript.getHasPistol() && this.gameObject.activeSelf)
         {
             if (isNPC)
-            {        
+            {
                 if (npcScript.getIsShooting() && animator.GetInteger("status") != (int)NPC.NPCAnimStatus.GrenadeThrow)
                 {
-                    
+
                     StartCoroutine(shoot());
                 }
-               
+
             }
             else if (Input.GetMouseButtonDown(0) && animator.GetInteger("status") != (int)Player.PlayerAnimStatus.GrenadeThrow)
             {
                 StartCoroutine(shoot());
             }
         }
-                    
+
     }
-    
+
     IEnumerator shoot()
     {
         isShootingAllowed = false;
@@ -80,13 +80,11 @@ public class PistolShot : MonoBehaviour
         rbClonedBullet.AddForce(velocity, ForceMode.Impulse);
 
         muzzleFlashParticles.Play();
-       
+
         yield return new WaitForSeconds(SHOOT_DELAY);
 
         isShootingAllowed = true;
-        
-    }
 
-    
+    }
 
 }

@@ -8,32 +8,32 @@ public class RandomTarget : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
-   
+
     void Update()
     {
-        
+
     }
 
     void OnTriggerEnter(Collider other)
-    {       
+    {
         if (other.gameObject.tag == "Swat" || other.gameObject.tag == "Ninja")
         {
             Humanoid script = other.gameObject.GetComponent<Humanoid>();
             if (script.getIsNPC())
             {
                 NPC npcScript = other.gameObject.GetComponent<NPC>();
-                Vector3 targetPosition; 
-               
+                Vector3 targetPosition;
+
                 do
                 {
-                    targetPosition = setRandomPosition();                                   
+                    targetPosition = setRandomPosition();
                     this.transform.position = targetPosition;
-                } while (!npcScript.isTargetReachable(targetPosition));            
+                } while (!npcScript.isTargetReachable(targetPosition));
             }
-                      
+
         }
     }
 
@@ -42,6 +42,6 @@ public class RandomTarget : MonoBehaviour
         x = Random.Range(1, 119);
         z = Random.Range(1, 349);
         y = Terrain.activeTerrain.SampleHeight(new Vector3(x, 0, z));
-        return new Vector3(x, y, z);       
+        return new Vector3(x, y, z);
     }
 }

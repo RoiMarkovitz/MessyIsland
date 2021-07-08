@@ -32,14 +32,14 @@ public class RoundsSlider : MonoBehaviour
     void Start()
     {
         slider = GetComponent<Slider>();
-          
+
     }
 
-    
+
     void Update()
     {
-        
+
     }
 
-    
+
 }

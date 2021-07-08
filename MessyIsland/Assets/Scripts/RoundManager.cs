@@ -32,8 +32,8 @@ public class RoundManager : MonoBehaviour
     [SerializeField] GameObject roundCamera;
 
     void Start()
-    {      
-       
+    {
+
         scatterWeaponsRandomly(grenades, pistols);
 
         audioPlayer = GetComponent<AudioSource>();
@@ -43,19 +43,19 @@ public class RoundManager : MonoBehaviour
         roundEndMessage = roundCanvas.transform.GetChild(8).gameObject.GetComponent<Text>();
 
         playerScript = swatTeam[0].GetComponent<Player>();
-        playerScript.setNickname(GameManager.instance.getNickname());         
+        playerScript.setNickname(GameManager.instance.getNickname());
     }
 
     void Update()
     {
-        healthText.text = playerScript.getCurrentHealth().ToString();      
+        healthText.text = playerScript.getCurrentHealth().ToString();
         isRoundFinished();
     }
 
     void isRoundFinished()
     {
         if (!hasTeamWonTheRound)
-        { 
+        {
             isAllTeamDead(ninjaTeam, SWAT_WON_ROUND, true);
             isAllTeamDead(swatTeam, NINJAS_WON_ROUND, false);
         }
@@ -86,12 +86,12 @@ public class RoundManager : MonoBehaviour
             else
             {
                 GameManager.instance.givePointToNinjaTeam();
-                audioPlayer.PlayOneShot(ninjasWonRoundSound);         
+                audioPlayer.PlayOneShot(ninjasWonRoundSound);
             }
 
             roundEndMessage.text = winMessage;
             roundEndMessage.gameObject.SetActive(true);
-       
+
             Invoke("isGameFinished", 4.0f);
         }
     }
@@ -99,7 +99,7 @@ public class RoundManager : MonoBehaviour
     void isGameFinished()
     {
         setRoundCanvasToDefault();
-        GameManager.instance.isGameFinished(this.gameObject);      
+        GameManager.instance.isGameFinished(this.gameObject);
     }
 
     public void setRoundCanvasToDefault()
@@ -120,7 +120,7 @@ public class RoundManager : MonoBehaviour
 
         GameObject[] grenadesArray = new GameObject[grenades.transform.childCount];
         for (int i = 0; i < grenadesArray.Length; i++)
-        { 
+        {
             grenadesArray[i] = grenades.transform.GetChild(i).gameObject;
             weapons[k] = grenadesArray[i];
             k++;
@@ -128,7 +128,7 @@ public class RoundManager : MonoBehaviour
 
         GameObject[] pistolsArray = new GameObject[pistols.transform.childCount];
         for (int i = 0; i < pistolsArray.Length; i++)
-        { 
+        {
             pistolsArray[i] = pistols.transform.GetChild(i).gameObject;
             weapons[k] = pistolsArray[i];
             k++;
@@ -175,9 +175,9 @@ public class RoundManager : MonoBehaviour
     public bool teamHasMissingWeapons(TeamName name)
     {
         if (name == TeamName.Ninja)
-        { 
+        {
             for (int i = 0; i < ninjaTeam.Length; i++)
-            {    
+            {
                 if (ninjaTeam[i].tag != "Dead")
                 {
                     NPC npcScript = ninjaTeam[i].GetComponent<NPC>();
@@ -185,27 +185,28 @@ public class RoundManager : MonoBehaviour
                     {
                         return true;
                     }
-                }              
-            }
-        } else if (name == TeamName.Swat)
-                {
-            
-                if (swatTeam[1].tag != "Dead")
-                {
-                    NPC npcScript = swatTeam[1].GetComponent<NPC>();
-                    if (!npcScript.getHasGrenade() || !npcScript.getHasPistol())
-                    {
-                        return true;
-                    }
                 }
-            
-                 }
+            }
+        }
+        else if (name == TeamName.Swat)
+        {
+
+            if (swatTeam[1].tag != "Dead")
+            {
+                NPC npcScript = swatTeam[1].GetComponent<NPC>();
+                if (!npcScript.getHasGrenade() || !npcScript.getHasPistol())
+                {
+                    return true;
+                }
+            }
+
+        }
 
         return false; // no missing weapons
     }
 
     public GameObject[] getWeapons()
-    {     
+    {
         return weapons;
     }
 
@@ -214,19 +215,20 @@ public class RoundManager : MonoBehaviour
         if (name == TeamName.Ninja && ninjaTeam[0].tag != "Dead")
         {
             return ninjaTeam[0];
-            
-        } else if (name == TeamName.Swat && swatTeam[0].tag != "Dead")
+
+        }
+        else if (name == TeamName.Swat && swatTeam[0].tag != "Dead")
         {
             return swatTeam[0];
         }
         else
         {
             return null;
-        }            
+        }
     }
 
     public GameObject[] getNinjaTeam()
-    {     
+    {
         return ninjaTeam;
     }
 
@@ -242,7 +244,7 @@ public class RoundManager : MonoBehaviour
         roundCanvas.transform.GetChild(2).gameObject.SetActive(false);
         roundCanvas.transform.GetChild(3).gameObject.SetActive(false);
         roundCanvas.transform.GetChild(4).gameObject.SetActive(false);
-        roundCanvas.transform.GetChild(5).gameObject.SetActive(false);    
+        roundCanvas.transform.GetChild(5).gameObject.SetActive(false);
     }
 
     public GameObject getRoundCanvas()

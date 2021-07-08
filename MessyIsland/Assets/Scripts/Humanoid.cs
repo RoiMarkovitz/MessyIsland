@@ -38,12 +38,12 @@ public abstract class Humanoid : MonoBehaviour
 
     void Start()
     {
-       
+
     }
 
     void Update()
     {
-        
+
     }
 
     public void setHasPistol(bool value)
@@ -72,7 +72,7 @@ public abstract class Humanoid : MonoBehaviour
     }
 
     virtual public void takeDamage(float reduction, string enemyNickname)
-    {     
+    {
         if (MAX_HEALTH >= currentHealth && currentHealth > MIN_HEALTH)
         {
             currentHealth -= reduction;
@@ -81,7 +81,7 @@ public abstract class Humanoid : MonoBehaviour
             if (currentHealth <= 0)
             {
                 currentHealth = MIN_HEALTH;
-                
+
                 GameManager.instance.showKillText(enemyNickname, this.nickname);
                 healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
                 this.gameObject.tag = "Dead";
@@ -90,7 +90,7 @@ public abstract class Humanoid : MonoBehaviour
                 if (hasPistol)
                 {
                     pistol.SetActive(false);
-                }                     
+                }
             }
         }
     }

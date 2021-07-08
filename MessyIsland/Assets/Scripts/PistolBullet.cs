@@ -7,15 +7,15 @@ public class PistolBullet : MonoBehaviour
     public const float DAMAGE = 20.0f;
 
     string owner;
-    
+
     void Start()
     {
-        
+
     }
- 
+
     void Update()
     {
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class GameManager : MonoBehaviour
-{   
+{
     const string NINJAS_WON_GAME = "Ninjas Won The Game";
     const string SWAT_WON_GAME = "Swat Won The Game";
 
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
     int currentRound = 1;
     int ninjaTeamRoundsWon = 0;
     int swatTeamRoundsWon = 0;
-          
+
     public static GameManager instance = null;
 
     [SerializeField] GameObject round;
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
     Text winsCountText;
 
     [SerializeField] GameObject gameEndScreen;
-    
+
     [SerializeField] TMPro.TextMeshProUGUI gameEndMessageText;
     [SerializeField] TMPro.TextMeshProUGUI ninjaScoreText;
     [SerializeField] TMPro.TextMeshProUGUI swatScoreText;
@@ -39,33 +40,33 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip ninjasWonGameSound;
     [SerializeField] AudioClip swatWonGameSound;
 
-   
+
     void Awake()
     {
         if (instance == null)
         {
             instance = this; // assign instance to this instance of the class
         }
-        else if(instance != this) // Determine if instance is alerady assigned to something else
+        else if (instance != this) // Determine if instance is alerady assigned to something else
         {
             Destroy(gameObject); // do not allow duplicates
         }
-       
+
     }
 
     void Start()
-    {      
+    {
         audioPlayer = GetComponent<AudioSource>();
 
         roundCounterText = gameCanvas.transform.GetChild(0).gameObject.GetComponent<Text>();
-        winsCountText = gameCanvas.transform.GetChild(1).gameObject.GetComponent<Text>();   
+        winsCountText = gameCanvas.transform.GetChild(1).gameObject.GetComponent<Text>();
     }
 
-   
+
     void Update()
     {
         roundCounterText.text = "Round " + currentRound + " / " + numberOfRounds;
-        winsCountText.text = "Rounds Won: " + swatTeamRoundsWon;       
+        winsCountText.text = "Rounds Won: " + swatTeamRoundsWon;
     }
 
     public void setNickname(string newNickname)
@@ -90,7 +91,7 @@ public class GameManager : MonoBehaviour
 
     public void givePointToSwatTeam()
     {
-        swatTeamRoundsWon++;      
+        swatTeamRoundsWon++;
     }
 
     public void givePointToNinjaTeam()
@@ -99,15 +100,15 @@ public class GameManager : MonoBehaviour
     }
 
     public void showKillText(string killer, string victim)
-    {      
-        StartCoroutine(playkillText(killer, victim)); 
+    {
+        StartCoroutine(playkillText(killer, victim));
     }
 
     public void isGameFinished(GameObject roundObject)
     {
-        
+
         if (currentRound == numberOfRounds)
-        {         
+        {
             gameCanvas.SetActive(false);
             gameEndScreen.SetActive(true);
             if (ninjaTeamRoundsWon > swatTeamRoundsWon)
@@ -122,17 +123,17 @@ public class GameManager : MonoBehaviour
             }
             ninjaScoreText.text = "Ninja Score: " + ninjaTeamRoundsWon;
             swatScoreText.text = "Swat Score: " + swatTeamRoundsWon;
-              
-            Invoke("reloadScene", 4.0f);         
+
+            Invoke("reloadScene", 4.0f);
         }
         else
         {
-            currentRound++;          
+            currentRound++;
             GameObject newRound = Instantiate(round, round.transform.position, round.transform.rotation);
             newRound.SetActive(true);
             Destroy(roundObject);
         }
-        
+
     }
 
     void reloadScene()
@@ -148,7 +149,7 @@ public class GameManager : MonoBehaviour
         {
             cloneKillMessageText = Instantiate(killMessageText, killMessageText.transform.position, killMessageText.transform.rotation);
         }
-                  
+
         if (killMessagesQueue.Count > 0)
         {
             Vector3 newPosition = new Vector3(lastItemInQueue.transform.position.x, lastItemInQueue.transform.position.y - 100.0f, lastItemInQueue.transform.position.z);
@@ -159,13 +160,13 @@ public class GameManager : MonoBehaviour
         cloneKillMessageText.transform.SetParent(gameCanvas.transform);
 
         killMessagesQueue.Enqueue(cloneKillMessageText);
-        lastItemInQueue = cloneKillMessageText; // better be a copy maybe (lastItemInQueue) in-case destroyed
+        lastItemInQueue = cloneKillMessageText; 
 
         cloneKillMessageText.gameObject.SetActive(true);
         cloneKillMessageText.text = killer + " Killed " + victim;
 
         yield return new WaitForSeconds(3.0f);
-        // destroy the highest message onscreen
+        // destroys the highest message onscreen
         Destroy(killMessagesQueue.Dequeue().gameObject);
     }
 

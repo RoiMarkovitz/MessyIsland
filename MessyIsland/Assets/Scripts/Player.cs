@@ -11,7 +11,7 @@ public class Player : Humanoid
     }
 
     CharacterController controller;
-    
+
     [SerializeField] float speed;
     [SerializeField] float angularSpeed;
     float rx = 0f, ry;
@@ -20,54 +20,52 @@ public class Player : Humanoid
 
     AudioSource footStep;
 
-    
+
     void Start()
     {
         isNPC = false;
-        controller = GetComponent<CharacterController>();     
+        controller = GetComponent<CharacterController>();
         footStep = GetComponent<AudioSource>();
         takeDamagePanel = roundManagerScript.getRoundCanvas().transform.GetChild(10).gameObject;
     }
 
-    
+
     void Update()
     {
         if (isAlive)
-        { 
-        float dx, dz;
+        {
+            float dx, dz;
 
-        // mouse input
-        rx -= Input.GetAxis("Mouse Y") * angularSpeed * Time.deltaTime; // vertical rotation
-        // use Clampf to limit the sight angles
-        rx = Mathf.Clamp(rx, -60f, 60f);
+            // mouse input
+            rx -= Input.GetAxis("Mouse Y") * angularSpeed * Time.deltaTime; // vertical rotation
+                                                                            // use Clampf to limit the sight angles
+            rx = Mathf.Clamp(rx, -60f, 60f);
 
-        playerCamera.transform.localEulerAngles = new Vector3(rx, 0, 0);
+            playerCamera.transform.localEulerAngles = new Vector3(rx, 0, 0);
 
-        ry = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * angularSpeed * Time.deltaTime;
+            ry = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * angularSpeed * Time.deltaTime;
 
-        transform.localEulerAngles = new Vector3(0, ry, 0); // runs on this (Player)
-        // keyboard input
-        dx = Input.GetAxis("Horizontal") * speed * Time.deltaTime; // Horizontal means 'A' or 'D'
-        dz = Input.GetAxis("Vertical") * speed * Time.deltaTime; // Verticalal means 'W' or 'S'
-        Vector3 motion = new Vector3(dx, -1, dz); // in local coordinates
-        motion = transform.TransformDirection(motion); // in Global coordinates
-        
-        //if (controller.enabled)
-        //{
+            transform.localEulerAngles = new Vector3(0, ry, 0); // runs on this (Player)
+                                                                // keyboard input
+            dx = Input.GetAxis("Horizontal") * speed * Time.deltaTime; // Horizontal means 'A' or 'D'
+            dz = Input.GetAxis("Vertical") * speed * Time.deltaTime; // Verticalal means 'W' or 'S'
+            Vector3 motion = new Vector3(dx, -1, dz); // in local coordinates
+            motion = transform.TransformDirection(motion); // in Global coordinates
+
             controller.Move(motion);
             movementAnimations();
-        //}
+
         }
 
     }
 
     void OnTriggerEnter(Collider other)
-    {   
+    {
         if (this.tag == "Swat" && isAlive)
-        {         
+        {
             if (other.tag == "NinjaBullet")
-            {             
-                takeDamage(PistolBullet.DAMAGE, other.GetComponent<PistolBullet>().getOwner());               
+            {
+                takeDamage(PistolBullet.DAMAGE, other.GetComponent<PistolBullet>().getOwner());
             }
         }
 
@@ -82,12 +80,11 @@ public class Player : Humanoid
     }
 
     public override void takeDamage(float reduction, string enemyNickname)
-    {    
+    {
         base.takeDamage(reduction, enemyNickname);
 
         if (!isAlive)
         {
-            // controller.enabled = false;
             animator.SetInteger("status", (int)Player.PlayerAnimStatus.Die);
             playerCamera.SetActive(false);
             roundManagerScript.activateRoundCamera();
@@ -177,5 +174,4 @@ public class Player : Humanoid
     //    }
     //}
 
-    
 }
