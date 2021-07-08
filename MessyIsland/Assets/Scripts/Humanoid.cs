@@ -19,7 +19,10 @@ public abstract class Humanoid : MonoBehaviour
 
     [SerializeField] protected GameObject pistol;
     [SerializeField] Image healthBar;
-    
+
+    [SerializeField] protected GameObject round;
+    protected RoundManager roundManagerScript;
+
     protected Animator animator;
 
     void Awake()
@@ -30,6 +33,7 @@ public abstract class Humanoid : MonoBehaviour
         hasGrenade = false;
         isAlive = true;
         animator = GetComponent<Animator>();
+        roundManagerScript = round.GetComponent<RoundManager>();
     }
 
     void Start()
@@ -76,47 +80,19 @@ public abstract class Humanoid : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-                currentHealth = MIN_HEALTH;          
+                currentHealth = MIN_HEALTH;
                 
                 GameManager.instance.showKillText(enemyNickname, this.nickname);
-                
-                if (this.tag == "Ninja")
-                {
-                    deactivateNPC();
-                }
-                else if (this.tag == "Swat")
-                {
-                    Humanoid script = this.gameObject.GetComponent<Humanoid>();
-                    if (script.getIsNPC())
-                    {
-                        deactivateNPC();
-                    }
-                    else // its the player
-                    {
-                        healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
-                        animator.SetInteger("status", (int)Player.PlayerAnimStatus.Die);
-                        pistol.SetActive(false);
-                    }
-                                              
-                }
-
+                healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
                 this.gameObject.tag = "Dead";
                 isAlive = false;
 
+                if (hasPistol)
+                {
+                    pistol.SetActive(false);
+                }                     
             }
         }
-
-    }
-
-    void deactivateNPC()
-    {
-        animator.SetInteger("status", (int)NPC.NPCAnimStatus.Die);
-        this.GetComponent<NPC>().getNavMeshAgent().enabled = false;
-        if (hasPistol)
-        {
-            pistol.SetActive(false);
-        }
-        healthBar.GetComponentInParent<Image>().GetComponentInParent<Canvas>().gameObject.SetActive(false);
     }
 
     public void setNickname(string newNickname)

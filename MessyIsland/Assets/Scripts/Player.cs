@@ -16,7 +16,7 @@ public class Player : Humanoid
     [SerializeField] float angularSpeed;
     float rx = 0f, ry;
     [SerializeField] GameObject playerCamera;
-    [SerializeField] GameObject takeDamagePanel;
+    GameObject takeDamagePanel;
 
     AudioSource footStep;
 
@@ -26,11 +26,14 @@ public class Player : Humanoid
         isNPC = false;
         controller = GetComponent<CharacterController>();     
         footStep = GetComponent<AudioSource>();
+        takeDamagePanel = roundManagerScript.getRoundCanvas().transform.GetChild(10).gameObject;
     }
 
     
     void Update()
     {
+        if (isAlive)
+        { 
         float dx, dz;
 
         // mouse input
@@ -48,10 +51,14 @@ public class Player : Humanoid
         dz = Input.GetAxis("Vertical") * speed * Time.deltaTime; // Verticalal means 'W' or 'S'
         Vector3 motion = new Vector3(dx, -1, dz); // in local coordinates
         motion = transform.TransformDirection(motion); // in Global coordinates
-        controller.Move(motion);
-
         
-        movementAnimations();
+        //if (controller.enabled)
+        //{
+            controller.Move(motion);
+            movementAnimations();
+        //}
+        }
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -77,6 +84,15 @@ public class Player : Humanoid
     public override void takeDamage(float reduction, string enemyNickname)
     {    
         base.takeDamage(reduction, enemyNickname);
+
+        if (!isAlive)
+        {
+            // controller.enabled = false;
+            animator.SetInteger("status", (int)Player.PlayerAnimStatus.Die);
+            playerCamera.SetActive(false);
+            roundManagerScript.activateRoundCamera();
+        }
+
         takeDamagePanel.SetActive(true);
         Invoke("endTakeDamageEffect", 1.0f);
     }

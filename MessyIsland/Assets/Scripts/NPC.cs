@@ -10,8 +10,7 @@ public class NPC : Humanoid
     const float MAX_GRENADE_DISTANCE = 30.0f;
     const float MIN_GRENADE_DISTANCE = 10.0f;
     const float SPOT_DELAY = 1.5f;
-    // TODO increase turning speed for npc thorugh unity
-
+    
     bool shoot;
     bool throwGrenade;
     bool isEnemySpotted;
@@ -24,13 +23,11 @@ public class NPC : Humanoid
     [SerializeField] GameObject randomTarget;
     Transform weaponTarget = null;
 
-    [SerializeField] GameObject[] enemyTeam;
+    GameObject[] enemyTeam;
     GameObject spottedEnemy;
 
     GameObject rayOrigin;
-    
-    [SerializeField] GameObject round;
-    RoundManager roundManagerScript;
+      
     GameObject[] weapons;
     bool[] isWeaponTargeted;
   
@@ -39,22 +36,21 @@ public class NPC : Humanoid
     void Start()
     {
         isNPC = true;
-
-        roundManagerScript = round.GetComponent<RoundManager>();
+       
         weapons = roundManagerScript.getWeapons();
         
         isWeaponTargeted = new bool[weapons.Length];
         
         if (this.gameObject.tag == "Ninja")
         {
-            enemyTeam = roundManagerScript.getSwatTeam();
-            rayOrigin = transform.GetChild(5).gameObject;
+            enemyTeam = roundManagerScript.getSwatTeam();          
         }
         else 
         {
-            enemyTeam = roundManagerScript.getNinjaTeam();
-            // TODO: rayOrigin for NPC swat
+            enemyTeam = roundManagerScript.getNinjaTeam();        
         }
+
+        rayOrigin = transform.GetChild(5).gameObject;
 
         agent = GetComponent<NavMeshAgent>();
         footStep = GetComponent<AudioSource>();   
@@ -72,12 +68,10 @@ public class NPC : Humanoid
     }
 
     void rayToEnemy()
-    {       
-        // if raycast wont work, remove rigidbody from npc and put it on pickedweapon
-        
-        for (int i = 0; i < 1; i++)
+    {              
+        for (int i = 0; i < enemyTeam.Length; i++)
         {
-            if (enemyTeam[i] != null)
+            if (enemyTeam[i] != null && enemyTeam[i].tag != "Dead")
             {                                      
                 RaycastHit hit;
                 float offset = 5.0f;
@@ -94,8 +88,12 @@ public class NPC : Humanoid
                         Vector3 pistolDirection = Vector3.RotateTowards(pistol.transform.forward, direction, singleStep, 0.0f) * -1;
                         pistol.transform.rotation = Quaternion.LookRotation(pistolDirection);
                       
-                        if (!attacking)
+                        if (!attacking && enemyTeam[i].tag != "Dead")
                         {
+                            //if (this.gameObject.tag == "Swat")
+                            //{
+                            //    Debug.Log("attacking");
+                            //}
                             spottedEnemy = enemyTeam[i];
                             attack();
                         }                                                          
@@ -111,7 +109,7 @@ public class NPC : Humanoid
                         if ((this.gameObject.tag == "Ninja" && !roundManagerScript.teamHasMissingWeapons(RoundManager.TeamName.Ninja))
                             || (this.gameObject.tag == "Swat" && !roundManagerScript.teamHasMissingWeapons(RoundManager.TeamName.Swat)))
                         {
-                            Debug.Log("Random Walk");                     
+                        //    Debug.Log("Random Walk");                     
                             randomWalk();
                         }
                         else
@@ -165,9 +163,9 @@ public class NPC : Humanoid
             }
             
             if (teamLeader != null)
-            {
-                agent.stoppingDistance = 5;
+            {              
                 agent.SetDestination(teamLeader.transform.position);
+                agent.stoppingDistance = 10;
             }
             else
             {
@@ -185,7 +183,7 @@ public class NPC : Humanoid
             if ((this.gameObject.tag == "Ninja" && roundManagerScript.teamHasMissingWeapons(RoundManager.TeamName.Ninja) && weaponTarget == null)
                 || (this.gameObject.tag == "Swat" && roundManagerScript.teamHasMissingWeapons(RoundManager.TeamName.Swat) && weaponTarget == null))
             {
-                Debug.Log("Searching for weapon");
+             //   Debug.Log("Searching for weapon");
                 int targetIndex = -1;
                 float currentMinDistance = 10000.0f;
                 for (int i = 0; i< weapons.Length; i++)
@@ -324,14 +322,15 @@ public class NPC : Humanoid
         {
             if (hasPistol || hasGrenade)
             {
-                Debug.Log("Attacking");
+               // Debug.Log("Attacking");
                 attacking = true;
                 agent.SetDestination(spottedEnemy.transform.position);
                 agent.stoppingDistance = 10;             
                 float distanceToEnemy = Vector3.Distance(transform.position, spottedEnemy.transform.position);
                 if (hasPistol)
                 {   
-                    if (distanceToEnemy > MAX_GRENADE_DISTANCE || distanceToEnemy < MIN_GRENADE_DISTANCE)
+                    if (distanceToEnemy > MAX_GRENADE_DISTANCE || distanceToEnemy < MIN_GRENADE_DISTANCE
+                        || !hasGrenade && distanceToEnemy <= MAX_GRENADE_DISTANCE && MIN_GRENADE_DISTANCE <= distanceToEnemy)
                     {
                         shoot = true;
                         throwGrenade = false;
@@ -361,6 +360,21 @@ public class NPC : Humanoid
     void spotDelay()
     {
         isEnemySpotted = true;
+    }
+
+    public override void takeDamage(float reduction, string enemyNickname)
+    {
+        base.takeDamage(reduction, enemyNickname);
+
+        if (!isAlive)
+        {
+            isEnemySpotted = false;
+            shoot = false;
+            throwGrenade = false;
+            attacking = false;
+            animator.SetInteger("status", (int)NPC.NPCAnimStatus.Die);
+            agent.enabled = false;
+        }     
     }
 
 }

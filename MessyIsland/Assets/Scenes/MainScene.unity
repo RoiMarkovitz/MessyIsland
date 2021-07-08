@@ -6688,10 +6688,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round
       objectReference: {fileID: 0}
-    - target: {fileID: 1955513345222103432, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
-      propertyPath: takeDamagePanel
-      value: 
-      objectReference: {fileID: 1676716609}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
 --- !u!222 &2076855506633573506

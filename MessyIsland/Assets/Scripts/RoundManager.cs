@@ -28,7 +28,9 @@ public class RoundManager : MonoBehaviour
     AudioSource audioPlayer;
     [SerializeField] AudioClip ninjasWonRoundSound;
     [SerializeField] AudioClip swatWonRoundSound;
-     
+
+    [SerializeField] GameObject roundCamera;
+
     void Start()
     {      
        
@@ -101,7 +103,8 @@ public class RoundManager : MonoBehaviour
     }
 
     public void setRoundCanvasToDefault()
-    {      
+    {
+        roundCanvas.transform.GetChild(0).gameObject.SetActive(true);
         roundCanvas.transform.GetChild(2).gameObject.SetActive(true);
         roundCanvas.transform.GetChild(3).gameObject.SetActive(true);
         roundCanvas.transform.GetChild(4).gameObject.SetActive(false);
@@ -230,6 +233,21 @@ public class RoundManager : MonoBehaviour
     public GameObject[] getSwatTeam()
     {
         return swatTeam;
+    }
+
+    public void activateRoundCamera()
+    {
+        roundCamera.SetActive(true);
+        roundCanvas.transform.GetChild(0).gameObject.SetActive(false);
+        roundCanvas.transform.GetChild(2).gameObject.SetActive(false);
+        roundCanvas.transform.GetChild(3).gameObject.SetActive(false);
+        roundCanvas.transform.GetChild(4).gameObject.SetActive(false);
+        roundCanvas.transform.GetChild(5).gameObject.SetActive(false);    
+    }
+
+    public GameObject getRoundCanvas()
+    {
+        return roundCanvas;
     }
 
 

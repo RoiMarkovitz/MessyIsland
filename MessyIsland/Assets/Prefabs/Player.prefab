@@ -800,9 +800,10 @@ MonoBehaviour:
   nickname: Player
   pistol: {fileID: 0}
   healthBar: {fileID: 3678067086917152380}
-  speed: 20
+  round: {fileID: 0}
+  speed: 8.5
   angularSpeed: 60
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 2893702956054337387}
   takeDamagePanel: {fileID: 0}
 --- !u!1 &2707192209324786630
 GameObject:
@@ -2964,6 +2965,18 @@ PrefabInstance:
     - target: {fileID: 5450495866892887991, guid: 2966ee57e0e2425459c17d1d415b3b81, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450495866892887991, guid: 2966ee57e0e2425459c17d1d415b3b81, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450495866892887991, guid: 2966ee57e0e2425459c17d1d415b3b81, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450495866892887991, guid: 2966ee57e0e2425459c17d1d415b3b81, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5450495866892887991, guid: 2966ee57e0e2425459c17d1d415b3b81, type: 3}
       propertyPath: m_LocalPosition.x

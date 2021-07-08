@@ -7,7 +7,7 @@ public class GrenadeThrow : MonoBehaviour
     const float THROW_AFTER_DELAY = 3.0f;
     const float THROW_BEFORE_DELAY = 1.2f;
     const float THROW_SPEED = 20.0f;
-    const float DAMAGE = 70.0f;
+    const float DAMAGE = 80.0f;
 
     bool isThrowingAllowed;
     bool isNPC;
@@ -145,9 +145,9 @@ public class GrenadeThrow : MonoBehaviour
         }
         else
         {
-            enemyScript.takeDamage(DAMAGE, userScript.getNickname());
-        }
-        
+            NPC npcScript = enemy.gameObject.GetComponent<NPC>();
+            npcScript.takeDamage(DAMAGE, userScript.getNickname());
+        }       
     }
 
     void hideClonedGrenadeMeshParts(GameObject clonedGrenade)
