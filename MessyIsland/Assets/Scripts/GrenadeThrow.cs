@@ -18,12 +18,14 @@ public class GrenadeThrow : MonoBehaviour
     [SerializeField] GameObject pistol;
     Humanoid userScript;
     NPC npcScript;
+    PistolShot pistolShotScript;
 
     void Start()
     {
         isThrowingAllowed = true;
         grenade = this.transform.GetChild(0).gameObject;
 
+        pistolShotScript = pistol.GetComponent<PistolShot>();
         userScript = user.GetComponent<Humanoid>();
         isNPC = userScript.getIsNPC();
 
@@ -61,6 +63,7 @@ public class GrenadeThrow : MonoBehaviour
     IEnumerator throwGrenade()
     {
         isThrowingAllowed = false;
+        pistolShotScript.setIsShootingAllowed(false);
 
         bool hasPistol = userScript.getHasPistol();
         if (hasPistol)
@@ -130,6 +133,7 @@ public class GrenadeThrow : MonoBehaviour
         }
 
         isThrowingAllowed = true;
+        pistolShotScript.setIsShootingAllowed(true);
 
         yield return new WaitForSeconds(2.0f);
         Destroy(clonedGrenade);

@@ -955,7 +955,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2980906385148491630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0597, y: 1.744, z: 0.158}
+  m_LocalPosition: {x: 0.0597, y: 1.655, z: 0.181}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7603110880640370689}
@@ -2234,10 +2234,9 @@ MonoBehaviour:
   nickname: Ninja Leader
   pistol: {fileID: 0}
   healthBar: {fileID: 701003991526694340}
+  round: {fileID: 1955513343959141439, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
   isLeader: 0
   randomTarget: {fileID: 0}
-  enemyTeam: []
-  round: {fileID: 1955513343959141439, guid: 0f41422055a5761428c885186cde4a1a, type: 3}
 --- !u!82 &2348613302346403352
 AudioSource:
   m_ObjectHideFlags: 0

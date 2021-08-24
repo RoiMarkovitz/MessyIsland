@@ -11,8 +11,9 @@ public class PistolShot : MonoBehaviour
     bool isNPC;
 
     [SerializeField] GameObject user;
-    GameObject bullet;
-    ParticleSystem muzzleFlashParticles;
+    [SerializeField] GameObject shootingPoint;
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] ParticleSystem muzzleFlashParticles;
 
     AudioSource bulletSound;
     Animator animator;
@@ -25,8 +26,6 @@ public class PistolShot : MonoBehaviour
     {
         isShootingAllowed = true;
         bulletSound = GetComponent<AudioSource>();
-        bullet = this.transform.GetChild(2).gameObject;
-        muzzleFlashParticles = this.transform.GetChild(3).GetComponent<ParticleSystem>();
 
         userScript = user.GetComponent<Humanoid>();
         isNPC = userScript.getIsNPC();
@@ -37,12 +36,6 @@ public class PistolShot : MonoBehaviour
         }
 
         animator = user.GetComponent<Animator>();
-    }
-
-
-    void Update()
-    {
-
     }
 
     void FixedUpdate()
@@ -70,21 +63,22 @@ public class PistolShot : MonoBehaviour
     {
         isShootingAllowed = false;
         bulletSound.Play();
-        GameObject clonedBullet = Instantiate(bullet, bullet.transform.position, bullet.transform.rotation);
+        GameObject clonedBullet = Instantiate(bulletPrefab, shootingPoint.transform.position, shootingPoint.transform.rotation);
         clonedBullet.SetActive(true);
         clonedBullet.GetComponent<PistolBullet>().setOwner(userScript.getNickname());
-
-        Vector3 velocity = (transform.forward * BULLET_SPEED) * -1;
-
+        clonedBullet.tag = userScript.getNickname().Contains("Ninja") ? "NinjaBullet" : "SwatBullet";
+        Vector3 velocity = transform.forward * BULLET_SPEED;
         Rigidbody rbClonedBullet = clonedBullet.GetComponent<Rigidbody>();
         rbClonedBullet.AddForce(velocity, ForceMode.Impulse);
 
         muzzleFlashParticles.Play();
 
         yield return new WaitForSeconds(SHOOT_DELAY);
-
         isShootingAllowed = true;
-
     }
 
+    public void setIsShootingAllowed(bool val)
+    {
+        isShootingAllowed = val;
+    }
 }

@@ -27,6 +27,8 @@ public class Player : Humanoid
         controller = GetComponent<CharacterController>();
         footStep = GetComponent<AudioSource>();
         takeDamagePanel = roundManagerScript.getRoundCanvas().transform.GetChild(10).gameObject;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
     }
 
 

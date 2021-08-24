@@ -7,8 +7,8 @@ public class NPC : Humanoid
 {
     public enum NPCAnimStatus { Idle, ForwardWalk, IdlePistol, ForwardPistolWalk, GrenadeThrow, Die };
 
-    const float MAX_GRENADE_DISTANCE = 35.0f;
-    const float MIN_GRENADE_DISTANCE = 25.0f;
+    const float MAX_GRENADE_DISTANCE = 60.0f;
+    const float MIN_GRENADE_DISTANCE = 30.0f;
 
     bool shoot;
     bool throwGrenade;
@@ -17,6 +17,7 @@ public class NPC : Humanoid
 
     NavMeshAgent agent;
 
+    [SerializeField] private LayerMask enemyMask;
     [SerializeField] bool isLeader;
 
     [SerializeField] GameObject randomTarget;
@@ -24,6 +25,7 @@ public class NPC : Humanoid
 
     GameObject[] enemyTeam;
     GameObject spottedEnemy;
+    GameObject current_enemy;
 
     GameObject rayOrigin;
 
@@ -74,29 +76,43 @@ public class NPC : Humanoid
         {
             if (enemyTeam[i] != null && enemyTeam[i].tag != "Dead")
             {
+                if (currentEnemy)
+                {
+                    current_enemy = spottedEnemy;
+                }
+                else
+                {
+                    current_enemy = enemyTeam[i];
+                }
+                
                 RaycastHit hit;
                 float offset = 5.0f;
-                Vector3 enemyPosition = new Vector3(enemyTeam[i].transform.position.x, enemyTeam[i].transform.position.y + offset, enemyTeam[i].transform.position.z);
+                Vector3 enemyPosition = new Vector3(current_enemy.transform.position.x, current_enemy.transform.position.y + offset, current_enemy.transform.position.z);
                 Vector3 direction = (enemyPosition - rayOrigin.transform.position).normalized;
 
-                if (Physics.Raycast(rayOrigin.transform.position, direction, out hit))
+                if (Physics.Raycast(rayOrigin.transform.position, direction, out hit, Mathf.Infinity, enemyMask.value))
                 {
                     Debug.DrawRay(rayOrigin.transform.position, direction * hit.distance, Color.yellow);
-                    if (hit.transform.gameObject.name == enemyTeam[i].gameObject.name && enemyTeam[i].tag != "Dead")
+              
+                    if (hit.transform.gameObject.name == current_enemy.gameObject.name && current_enemy.tag != "Dead")
                     {
-                        float singleStep = 100.0f * Time.deltaTime;
+                        float singleStep = 90.0f * Time.deltaTime * Mathf.Deg2Rad;
                         if (hasPistol)
                         {
-                            Vector3 pistolDirection = Vector3.RotateTowards(pistol.transform.forward, direction, singleStep, 0.0f) * -1;
+                            Vector3 pistolDirection = Vector3.RotateTowards(pistol.transform.forward, direction, singleStep, 0.0f);
                             pistol.transform.rotation = Quaternion.LookRotation(pistolDirection);
                         }
                         if (hasPistol || hasGrenade)
                         {
-                            spottedEnemy = enemyTeam[i];
+                            spottedEnemy = current_enemy;
+                            agent.SetDestination(spottedEnemy.transform.position);
                             currentEnemy = true;
                             attack();
                         }
-
+                        else
+                        {
+                            followerLeader();
+                        }
                     }
                     else
                     {
@@ -106,19 +122,18 @@ public class NPC : Humanoid
                         attacking = false;
                         currentEnemy = false;
 
-                        if ((this.gameObject.tag == "Ninja" && !roundManagerScript.teamHasMissingWeapons(RoundManager.TeamName.Ninja))
-                            || (this.gameObject.tag == "Swat" && !roundManagerScript.teamHasMissingWeapons(RoundManager.TeamName.Swat)))
+                        if (gameObject.CompareTag("Ninja") && !roundManagerScript.teamHasMissingWeapons(RoundManager.TeamName.Ninja)
+                            || gameObject.CompareTag("Swat") && !roundManagerScript.teamHasMissingWeapons(RoundManager.TeamName.Swat))
                         {
                             randomWalk();
                         }
                         else
                         {
-                            if (weaponTarget != null)
+                            if (weaponTarget)
                             {
                                 if (isLeader)
                                 {
                                     agent.SetDestination(weaponTarget.position);
-                                    agent.stoppingDistance = 0;
                                 }
                             }
                         }
@@ -331,19 +346,20 @@ public class NPC : Humanoid
             if (spottedEnemy.tag != "Dead")
             {
                 attacking = true;
-                agent.SetDestination(spottedEnemy.transform.position);
                 float distanceToEnemy = Vector3.Distance(transform.position, spottedEnemy.transform.position);
+                
                 if (hasPistol && !hasGrenade)
                 {
-                    shoot = true;
                     throwGrenade = false;
-                    agent.stoppingDistance = 15;
+                    shoot = true;              
                 }
+                
                 if (hasGrenade && !hasPistol)
                 {
-                    if (distanceToEnemy <= MAX_GRENADE_DISTANCE && MIN_GRENADE_DISTANCE <= distanceToEnemy)
+                    if (distanceToEnemy <= MAX_GRENADE_DISTANCE)
                     {
                         throwGrenade = true;
+                        shoot = false;
                     }
                 }
                 if (hasPistol && hasGrenade)
@@ -351,14 +367,16 @@ public class NPC : Humanoid
                     if (distanceToEnemy <= MAX_GRENADE_DISTANCE && MIN_GRENADE_DISTANCE <= distanceToEnemy)
                     {
                         throwGrenade = true;
+                        shoot = false;
                     }
                     else
                     {
                         shoot = true;
                         throwGrenade = false;
-                        agent.stoppingDistance = 15;
+
                     }
                 }
+                
             }
         }
     }
