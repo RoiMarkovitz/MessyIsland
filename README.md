@@ -32,11 +32,37 @@ The game was created as my idea for a project in the course "Game Development" a
 6. In the event of a shooting in the direction of the leader / follower and the enemy is not in their field of vision, they will turn around in order to locate the source of the shooting.
 7. If the leader dies and the follower is still alive, then the follower becomes the leader.
 
-[Click to view my accompanying document for the project](/Accompanying document for the project.pdf)
+[Click to view my accompanying document for the project](/Accompanying%20document%20for%20the%20project.pdf)
 
 
-### Some pictures from the game
+### Some images from the game
 
 
+Main Menu         
+:-------------------------:
+<img src="https://github.com/roi-c/MessyIsland/blob/main/game_images/MainMenu.png" alt="drawing" width="800"/>  
 
+Game Options      
+:-------------------------:
+<img src="https://github.com/roi-c/MessyIsland/blob/main/game_images/Options.png" alt="drawing" width="800"/>  
+
+Fight   
+:-------------------------:
+<img src="https://github.com/roi-c/MessyIsland/blob/main/game_images/Fight1.png" alt="drawing" width="800"/> 
+
+Another Fight   
+:-------------------------:
+<img src="https://github.com/roi-c/MessyIsland/blob/main/game_images/Fight2.png" alt="drawing" width="800"/> 
+
+Player Death View
+:-------------------------:
+<img src="https://github.com/roi-c/MessyIsland/blob/main/game_images/PlayerDeath.png" alt="drawing" width="800"/>  
+
+World View  
+:-------------------------:
+<img src="https://github.com/roi-c/MessyIsland/blob/main/game_images/WorldView2.png" alt="drawing" width="800"/>  
+
+Game End
+:-------------------------:
+<img src="https://github.com/roi-c/MessyIsland/blob/main/game_images/EndGame.png" alt="drawing" width="800"/> 
 
